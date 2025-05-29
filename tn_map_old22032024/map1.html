@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert.min.css" />
+    <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css" />
+    <!-- general CSS --> 
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboardstyle.css">
+    <title>Tamilnilam</title>
+    <style type="text/css">
+        .font11 {
+          font-size: 11px !important;
+        }
+        .lbl-font {
+              color: #213e7a;
+              font-weight: 600;
+        }
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100 bg-login">
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black-view py-2">
+        <div class="container-fluid w-100 d-block text-center">
+          <div class="col-lg-12 banner-left1 d-flex">
+            <a href="#" class="text-white text-none px-2 font13">
+            <img src="assets/img/logo.png" class="img-fluid mainlogo" alt="logo">
+            </a>
+            <a href="#" class="text-white text-none px-2 font13 w-75">
+            <b> <span class="txt-orange d-block">Tamil Nilam</span>
+            <span class="d-block" style="font-size: 10px;">Click on the map to know land details</span>
+          </b> 
+            <span id="shop_code"></span>
+            </a>
+            <a data-bs-toggle="offcanvas" data-bs-target=".logout" class="cpointer text-white text-none px-2 icon-out">
+            </a>
+            <a href="#" class="cpointer text-white text-none px-2 icon-out">
+            <i class="bi bi-box-arrow-in-left"></i>
+          </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div id="preloader"></div>
+        <!-- Begin page content -->
+    <main class="flex-shrink-0 main-content mt-0">
+       <!-- filter starts -->
+     <!--  <div class="accordion accordion-flush showFilter" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed py-1 " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <i class="bi bi-funnel"></i> <span class="px-1">Apply Filter</span>
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="mb-2">
+                <label for="exampleInputEmail1" class="form-label">Select Date</label>
+                <input type="date" class="form-control" />
+              </div>
+
+              <div class="mb-2">
+                <div class="card bg-black-view text-center">
+                  <div class="card-body">
+                    <p class="mb-0 text-white">Verified Applicants</p>
+                    <p class="mb-0 text-white">123456</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+
+
+
+
+      <!-- filter ends -->
+
+
+      <div class="container-fluid pos-rel m-0 p-0">
+        <div id="map"></div>
+        <div class="infoStats d-none">
+          <span class="moreInfos actionBtn px-1 blob blue text-center text-white" data-bs-toggle="offcanvas"
+            data-bs-target=".offcanvasRight">Select Service</span>
+        </div>
+        <div class="right-container" id="numero5">
+        <button type="button" class="btn btn-primary icon-box d-flex" id="switch_layer">
+        <i class="bi bi-layers" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch Layers"></i>
+        </button>
+        
+      </div>
+
+        <!-- search bar starts -->
+      <div class="search-container" id="numero3"> 
+        <button type="button" class="btn btn-primary icon-box d-flex" id="zoomIn">
+        <i class="bi bi-plus-lg map_icons" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom In"></i>
+        </button>
+        <button type="button" class="btn btn-primary icon-box d-flex" id="zoomOut">
+        <i class="bi bi-dash map_icons" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom Out"></i></button>
+        <button type="button" class="btn btn-primary icon-box" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="TamilNadu Extent" onclick="zoom_extent = [8395626.451712506, 892078.6691354283, 9167334.689279644, 1557386.5633296024];map.getView().fit((zoom_extent), { duration: 2000});"><i class="bi bi-map map_icons" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom Out"></i>
+        </button>
+      </div>
+      <!-- search location starts -->
+
+     
+
+      <!-- bottom left starts -->
+      <div class="search-container1"> 
+        <button type="button" class="btn btn-primary icon-box d-flex" id="getLocation">
+        <i class="bi bi-broadcast" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Live Location"></i></button>
+      </div>
+      <!-- bottom left starts -->
+
+      <!-- bottom right starts -->
+      <!-- <div class="search-container2"> 
+        <a href="#" class="btn btn-primary icon-box d-flex d-none tnservices" id="a_register">
+        <i class="bi bi-bank" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="A-Register"></i></a>
+        <a href="#" class="btn btn-primary icon-box d-flex d-none tnservices" id="fmb_service" style="background-color: red!important;">
+        <i class="bi bi-rulers" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="FMB"></i></a> 
+        <a href="#" class="btn btn-primary icon-box d-flex d-none tnservices" id="patta_service" style="background-color: orange!important;">
+        <i class="bi bi-house" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Patta"></i></a> 
+        <a href="#" class="btn btn-primary icon-box d-flex d-none tnservices" id="patta_search_service" style="background-color: #9600ff!important;">
+        <i class="bi bi-card-checklist" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Search by Patta number"></i></a>
+      </div> -->
+      <!-- bottom right starts --> 
+
+      </div>
+      
+
+      <!-- <div class="search-location w-100">
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+           <input type="search" class="form-control" placeholder="Search by Location" aria-label="enter location" aria-describedby="basic-addon2" onkeypress="if(event.keyCode==13) {$('#search_query_text').trigger('input')}" id="search_query_text" oninput="this.value = this.value.replace(/[^0-9a-z ]/gi, '')" maxlength="20" autocomplete="off">
+        </div>
+        <ul class="d-none" id="result_search">
+            </ul>
+        </div> -->
+      <!-- search location ends -->
+      <!-- alert message starts -->
+      <!-- <div class="search-location1 w-100">
+        <div class="input-group mb-2">
+          <p class="mb-0 lg-txt-blue py-1"><i class="bi bi-hand-index"></i> Locate the Building and Click the photo and Proceed futher</p>
+        </div> 
+        </div> -->
+      <!-- alert message ends -->
+      <!-- search bar ends --> 
+      <!-- Icon Layer starts-->
+      
+      </div>
+      <!-- co-ordinates starts --> 
+      <div class="bottom-container text-center">
+        <a href="#" class="text-white text-none px-2 font13">
+          <img src="assets/img/tngis-logo.png" class="img-fluid mainlogo" alt="logo">
+        </a>  
+      </div> 
+      <!-- co-ordinates ends -->
+    </main>
+
+     <footer class="footer mt-auto text-center">
+      <div class="container-fluid">
+        <div class="text-center">   
+               <div class="mt-1 mb-0">
+                  <p class="info-icons mb-0 nomargin"><i class="bi bi-calendar-check font12"></i> <span id="showdate" class="font12">09/06/2023</span> <i class="bi bi-clock font12"></i><span id="showTime" class="mx-1 font12"></span><span id="user_lat" class="mx-1 font12"></span><span id="user_long" class=" font12"></span><span class="mx-1 font9" id="accuracy"></span></p>
+                  <p class="mb-0 d-none"><i class="bi bi-person-check-fill font9"></i><span id="user_name" class="mx-1 font9"></span><i class="bi bi-telephone-forward font9"></i><span id="mobile_number" class="mx-1 font9"></span>
+                    <span class="mx-1 font9" id="version_name">V1.0.1</span></p>
+               </div> 
+            </div>
+      </div>
+    </footer>
+    <!-- right canvas starts -->
+    <div class="offcanvas offcanvas-end offcanvasRight" id="list_of_faclities" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header px-2 py-2" x-data="transButtonComponent()">
+        <h6 class="offcanvas-title"><i class="bi bi-check2-circle"></i> <span  x-text="$t('nearest')" ></span></h6>
+        <button type="button" class="btn-close list_of_faclities_close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body px-2 py-2">
+        <div class="m-2" id="available_layers">
+            <div class="col-4 boxWrap-sm swapMap" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+              <div class="card text-center mb-2" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+                <div class="card-body px-2 py-2">
+                  <img src="assets/img/registration-office.png" alt="logo" class="depicons">
+                  <h6 class="mb-0 mt-1">Patta</h6>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-bottom profileView" id="land_info_canvas"  data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header py-2">
+        <b>Land detail</b>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body small pt-0" >
+        
+        <div class="row">
+          <div class="col-6">
+            <p class="mb-0 font11"><span class="lbl-font">District</span> <span class="d-block" id="district"></span></p>
+          </div>
+          <div class="col-6">
+            <p class="mb-0 font11"><span class="lbl-font">Taluk</span> <span class="d-block" id="taluk"></span></p>
+          </div>
+          <div class="clear-both"></div>
+          <div class="col-4" id="village_div">
+            <p class="mb-0 font11"><span class="lbl-font">Village</span> <span class="d-block" id="village"></span></p>
+          </div>
+          <div class="col-4">
+            <p class="mb-0 font11"><span class="lbl-font">Survey No</span> <span class="d-block" id="survey_txt"></span></p>
+          </div>
+          <div class="col-4">
+            <p class="mb-0 font11"><span class="lbl-font">Sub Division No</span> <span class="d-block" id="subdivision_txt"></span></p>
+          </div>
+        </div>
+
+        <p class="mb-0 font11 lbl-font">Click on the below menu</p>
+
+       
+
+            <div class="row"> 
+              <div class="col-3">
+        <a href="#" class="btn btn-primary icon-box tnservices" id="a_register" style="background-color: blue!important;">
+        <i class="bi bi-bank text-white" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="A-Register" aria-label="A-Register"></i></a>
+        <span class="d-block">A Register</span>
+      </div>
+        <div class="col-3">
+        <a href="#" class="btn btn-primary icon-box tnservices" id="fmb_service" style="background-color: red!important;">
+        <i class="bi bi-rulers text-white" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="FMB" aria-label="FMB"></i></a>
+        <span class="d-block">FMB Sketch</span> 
+      </div>
+
+        <div class="col-3">
+        <a href="#" class="btn btn-primary icon-box tnservices" id="patta_service" style="background-color: orange!important;">
+        <i class="bi bi-house text-white" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Patta" aria-label="Patta"></i></a> 
+        <span class="d-block">View Patta Chitta</span> 
+      </div>
+
+        <div class="col-3">
+        <a href="#" class="btn btn-primary icon-box tnservices" id="patta_search_service" style="background-color: #9600ff!important;">
+        <i class="bi bi-card-checklist text-white" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="Search by Patta number" aria-label="Search by Patta number"></i></a>
+        <span class="d-block">Search by patta</span> 
+      </div>
+
+      </div>
+
+
+        
+
+        
+      </div>
+    </div>
+    <form id="post_tn_form" action="http://localhost/verification_f/post_data.php" method="post">
+      <input type='hidden' id='service_name' name='service_name' value=''>
+      <input type='hidden' id='latitude' name='latitude' value=''>
+      <input type='hidden' id='longitude' name='longitude' value=''>
+      <input type='hidden' id='district_code' name='district_code' value=''>
+      <input type='hidden' id='taluk_code' name='taluk_code' value=''>
+      <input type='hidden' id='village_code' name='village_code' value=''>
+      <input type='hidden' id='village_lgd' name='village_lgd' value=''>
+      <input type='hidden' id='survey' name='survey' value=''>
+      <input type='hidden' id='subdivision' name='subdivision' value=''>
+      <input type="submit" id="btnposttndata" name="btnposttndata" class="btn btn-success d-none" value="Submit data"> 
+    </form>
+    <!-- Modal Popup -->
+   <div class="modal fade" id="othersModalPopup" tabindex="-1" role="dialog" aria-labelledby="othersModalPopupTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="others-modal-title">Search by Patta Number</h5>
+            </div>
+            <div class="modal-body" id="others-modal-id">
+            </div>
+         </div>
+      </div>
+   </div>
+    <!-- right canvas ends -->
+    <!-- jQuery -->
+    <script src="assets/scripts/jquery/jquery.min.js"></script>
+    <!-- sweetalert -->
+    <script src="assets/vendor/sweetalert2/js/sweetalert.min.js"></script>
+    <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+    <!-- Bootstrap Bundle with Popper --> 
+    <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/scripts/global.js"></script> 
+    <script type="text/javascript" src="assets/vendor/openlayers/dist/ol.js"></script>
+   <script src="assets/vendor/ol-ext-master/dist/ol-ext.js"></script>
+   <script type="text/javascript" src="assets/scripts/map.js"></script> 
+   <script type="text/javascript" src="assets/scripts/main.js"></script> 
+   <!-- Turf JS -->
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    <!-- Date -->
+    <script type="text/javascript">
+      $(document).on({
+         ajaxStart: function() {
+           $('#preloader').show();
+         },
+         ajaxStop: function() {
+           $('#preloader').hide();
+         }
+       });
+      var latitude;
+      var longitude;
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var output = (('' + day).length < 2 ? '0' : '') + day + '/' +
+         (('' + month).length < 2 ? '0' : '') + month + '/' + d.getFullYear();
+      document.getElementById("showdate").innerHTML = output;
+      window.onload = () => {
+        getLocation();
+      };
+    </script>
+    <!-- End Date -->
+    <!-- Time -->
+    <script type="text/javascript">
+      $(document).ready(function () {
+         setInterval('updateClock()', 1000);
+      });
+      // HTML element where the time will be displayed
+      function updateClock() {
+         var currentTime = new Date();
+         var currentHours = currentTime.getHours();
+         var currentMinutes = currentTime.getMinutes();
+         var currentSeconds = currentTime.getSeconds();
+      
+         // Pad the minutes and seconds with leading zeros, if required
+         currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+         currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+      
+         // Choose either "AM" or "PM" as appropriate
+         var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+      
+         // Convert the hours component to 12-hour format if needed
+         currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+      
+         // Convert an hours component of "0" to "12"
+         currentHours = (currentHours == 0) ? 12 : currentHours;
+      
+         // Compose the string for display
+         var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+      
+      
+         $("#showTime").html(currentTimeString);
+      }
+    </script>
+    <!-- End Time -->
+    <script type="text/javascript">
+      /**
+      * Back to top button
+      */
+      const select = (el, all = false) => {
+      el = el.trim()
+      if (all) {
+      return [...document.querySelectorAll(el)]
+      } else {
+      return document.querySelector(el)
+      }
+      }
+      /**
+      * Easy on scroll event listener 
+      */
+      const onscroll = (el, listener) => {
+      el.addEventListener('scroll', listener)
+      }
+      let backtotop = select('.back-to-top')
+      if (backtotop) {
+      const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+      backtotop.classList.add('active')
+      } else {
+      backtotop.classList.remove('active')
+      }
+      }
+      window.addEventListener('load', toggleBacktotop)
+      onscroll(document, toggleBacktotop)
+      }
+    </script>
+    <script type="text/javascript">
+      /*if (window.localStorage.getItem("user_details_kmut_verification") === null) {
+        window.location.href = "index.html";
+      } 
+      else 
+      {
+        var user_details = JSON.parse(window.localStorage.getItem('user_details_kmut_verification'));
+        console.log(user_details);
+        var shop_code= user_details.shop_code;
+        $("#user_name").empty();
+        $("#mobile_number").empty();
+        $("#user_name").append(user_details.user_name);
+        $("#mobile_number").append(user_details.mobile_number);
+      }*/
+      $(document).ready(function () {
+        $('#show_date').html('On '+new Date().toUTCString().split(',')[1].slice(0,12));
+        $('#current_date').val(new Date().toISOString().split('T')[0]);
+        var date1 = new Date().toISOString().split('T')[0];
+        data2 = date1.replace("-", "");
+        date = data2.replace("-", "");
+        //getPoints(user_details.user_id,date,date);
+        $("#getLocation").click(function () {
+          getLocation();
+          var geolocation = JSON.parse(window.localStorage.getItem('geolocation'));
+          var latitude = geolocation.latitude;
+          var longitude = geolocation.longitude;
+          const currentLocation = ol.proj.fromLonLat([longitude.toFixed(6), latitude.toFixed(6)]);
+          view.animate({
+            center: currentLocation,
+            duration: 1000,
+            zoom: 17,
+          });
+        });
+        $(".btn-close").click(function () {
+          $('body').removeClass('showHalfMap');
+          /*map.invalidateSize()
+          setInterval(function () {
+            map.invalidateSize()
+          }, 100);*/
+        });
+      });
+
+      /*$('#current_date').on('change',function(){
+        var current_date = $('#current_date').val();
+          $('#show_date').html('On '+new Date(current_date).toUTCString().split(',')[1].slice(0,12));
+          data2 = $('#current_date').val().replace("-", "");
+          date = data2.replace("-", "");
+          getPoints(user_details.user_id,date,date);
+      });*/
+    </script>
+    <script>
+      // Setup Geolocation API options
+      const gpsOptions = {
+        enableHighAccuracy: true,
+        //timeout: 15000,
+        maximumAge: 0
+      };
+      function getLocation() {
+        if ("geolocation" in navigator) { //check geolocation available 
+          locationCapture();
+        } else {
+          console.log("Browser doesn't support geolocation!");
+          alert("Geolocation is not supported in your device");
+        }
+      }
+      // Location Capture Function
+      function locationCapture() {
+        const watchID = navigator.geolocation.watchPosition(gpsSuccess, gpsError, gpsOptions);
+      }
+      // Geolocation: Error
+      function gpsError(err) {
+        console.error(`Error: ${err.code}, ${err.message}`);
+      }
+      // Geolocation: Success
+      function gpsSuccess(pos) {
+        // Get the lat, long, accuracy from Geolocation return (pos.coords)
+        const {
+          latitude,
+          longitude,
+          accuracy,
+          altitude
+        } = pos.coords;
+        // console.log(latitude + '--' + longitude);
+        const localStorageGeoLocation = {
+          latitude: latitude,
+          longitude: longitude,
+          accuracy: accuracy,
+          altitude: altitude
+        };
+        window.localStorage.setItem('geolocation', JSON.stringify(localStorageGeoLocation));
+        $("#user_lat").empty();
+        $("#user_long").empty();
+        $('#accuracy').empty();
+        $("#user_lat").append(latitude.toFixed(6));
+        $("#user_long").append(longitude.toFixed(6));
+        var coordinates = [longitude.toFixed(6), latitude.toFixed(6)];
+        // coordinates = ol.proj.transform(coordinates, 'EPSG:4326', 'EPSG:3857');
+        positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates).transform('EPSG:4326', 'EPSG:3857') : null);
+        //circle_current_location(longitude,latitude);
+        $('#accuracy').text(accuracy.toFixed(2))
+      }
+    </script>
+  </body>
+</html>

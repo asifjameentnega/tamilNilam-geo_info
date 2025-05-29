@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <title>Crop Survey Dashboard</title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+      <!-- Favicons -->
+      <link href="assets/img/tn_logo.png" rel="icon">
+      <link href="assets/img/tn_logo.png" rel="apple-touch-icon">
+      <!-- Google Fonts -->
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      <!-- Vendor CSS Files -->
+      <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <!-- CSS File --> 
+      <link href="assets/css/style.css" rel="stylesheet">
+   </head>
+   <body>
+      <!-- ======= Header ======= -->
+      <header id="header" class="header fixed-top d-flex align-items-center">
+         <div class="d-flex align-items-center justify-content-between">
+            <i class="bi bi-list-nested toggle-sidebar-btn"></i>
+            <a href="index.html" class="logo d-flex align-items-center mx-2">
+               <img src="assets/img/tn_logo.png" alt="logo" class="logo_header">
+               <span class="d-none d-lg-block">
+                  <!-- <i class="bi bi-globe"></i> -->
+                  Crop Survey 
+               </span>
+            </a>
+         </div>
+         <!-- End Logo -->
+         <!-- End Search Bar -->
+         <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+               
+
+               <li class="nav-item">
+                  <a class="nav-link mx-2 nav-profile" href="#">
+                  <i class="bi bi-person-check"></i> Admin Name
+                  </a>
+               </li>
+               <!-- End Profile Nav -->
+               <li class="nav-item">
+                  <a class="nav-link mx-2 nav-profile" href="#">
+                  <i class="bi bi-arrow-right-circle"></i> Log Out
+                  </a>
+               </li>
+            </ul>
+         </nav>
+         <!-- End Icons Navigation -->
+      </header>
+      <!-- End Header -->
+      <!-- ======= Sidebar ======= -->
+      <aside id="sidebar" class="sidebar">
+         <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+               <a class="nav-link collapsed" href="index.html">
+               <i class="bi bi-grid"></i>
+               <span>Dashboard</span>
+               </a> 
+            </li>
+            <!-- End Dashboard Nav -->
+            <li class="nav-item">
+               <a class="nav-link collapsed" href="reports.html">
+               <i class="bi bi-person"></i>
+               <span>Reports</span>
+               </a>
+            </li>
+            <!-- End Profile Page Nav -->
+            <li class="nav-item">
+               <a class="nav-link " href="profile.html"> 
+               <i class="bi bi-person"></i>
+               <span>Profile</span>
+               </a>
+            </li>
+         </ul>
+      </aside>
+      <!-- End Sidebar-->
+      <main id="main" class="main">
+         <!-- End Page Title -->
+         <section class="section dashboard">
+            <div class="row">
+               <!-- project table reports starts -->
+               <div class="col-lg-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <h5 class="card-title">VAO Profile Informations</h5>
+                        <div class="showFilter">
+                           <form class="row g-3">
+                              <div class="col-md-3">
+                                 <input type="text" class="form-control" placeholder="Enter VAO Name">
+                              </div>
+                              <div class="col-md-3">
+                                 <select class="form-select" aria-label="District Name">
+                                    <option selected="">Select District</option>
+                                    <option value="1">District One</option>
+                                    <option value="2">District Two</option>
+                                    <option value="3">District Three</option>
+                                 </select>
+                              </div>
+                              <div class="col-md-3">
+                                 <select class="form-select" aria-label="Taluk Name">
+                                    <option selected="">Select Taluk</option>
+                                    <option value="1">Taluk One</option>
+                                    <option value="2">Taluk Two</option>
+                                    <option value="3">Taluk Three</option>
+                                 </select>
+                              </div>
+                              <div class="col-md-3">
+                                 <select class="form-select" aria-label="Village Name">
+                                    <option selected="">Select Village</option>
+                                    <option value="1">Village One</option>
+                                    <option value="2">Village Two</option>
+                                    <option value="3">Village Three</option>
+                                 </select>
+                              </div>
+                              <!-- <div class="col-md-3"> 
+                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download Pdf" class="btn btn-outline-success"><i class="bi bi-file-earmark-pdf"></i></a>
+                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download CSV" class="btn btn-outline-success mx-1"><i class="bi bi-filetype-csv"></i></a>
+                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download DOC" class="btn btn-outline-success mx-1"><i class="bi bi-filetype-docx"></i></a>
+                                 </div> -->
+                           </form>
+                        </div>
+                        <!-- filter ends -->
+                        <!-- Table with stripped rows -->
+                        <div class="table-responsive">
+                           <table class="table table-striped">
+                              <thead>
+                                 <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">VAO Name</th>
+                                    <th scope="col">Mobile No</th>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">District Name</th>
+                                    <th scope="col">Taluk Name</th>
+                                    <th scope="col">Village Name</th>
+                                    <!-- <th scope="col">Status</th> -->
+                                    <th scope="col">Actions</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th scope="row">1</th>
+                                    <td>VAO Name A</td>
+                                    <td>+916589234710</td>
+                                    <td>VAO</td>
+                                    <td>Chennai</td>
+                                    <td>Aminjikarai </td>
+                                    <td>Villivakkam</td>
+                                    <!-- <td><span class="badge text-bg-success">Approved</span></td> -->
+                                    <td>
+                                       <a data-bs-toggle="offcanvas" href=".farmerInfo" class="cpointer"><i class="bi bi-eye-fill"></i></a>
+                                       <a data-bs-toggle="modal" data-bs-target=".deleteModal" class="cpointer"><i data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Crop Info" class="bi bi-trash"></i></a>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">2</th>
+                                    <td>VAO Name B</td>
+                                    <td>+916589234710</td>
+                                    <td>VAO</td>
+                                    <td>Chennai</td>
+                                    <td>Aminjikarai </td>
+                                    <td>Villivakkam</td>
+                                    <!-- <td><span class="badge text-bg-success">Approved</span></td> -->
+                                    <td>
+                                       <a data-bs-toggle="offcanvas" href=".farmerInfo" class="cpointer"><i class="bi bi-eye-fill"></i></a>
+                                       <a data-bs-toggle="modal" data-bs-target=".deleteModal" class="cpointer"><i data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Crop Info" class="bi bi-trash"></i></a>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">3</th>
+                                    <td>VAO Name C</td>
+                                    <td>+916589234710</td>
+                                    <td>VAO</td>
+                                    <td>Chennai</td>
+                                    <td>Aminjikarai </td>
+                                    <td>Villivakkam</td>
+                                    <!-- <td><span class="badge text-bg-success">Approved</span></td> -->
+                                    <td>
+                                       <a data-bs-toggle="offcanvas" href=".farmerInfo" class="cpointer"><i class="bi bi-eye-fill"></i></a>
+                                       <a data-bs-toggle="modal" data-bs-target=".deleteModal" class="cpointer"><i data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Crop Info" class="bi bi-trash"></i></a>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">4</th>
+                                    <td>VAO Name D</td>
+                                    <td>+916589234710</td>
+                                    <td>VAO</td>
+                                    <td>Chennai</td>
+                                    <td>Aminjikarai </td>
+                                    <td>Villivakkam</td>
+                                    <!-- <td><span class="badge text-bg-success">Approved</span></td> -->
+                                    <td>
+                                       <a data-bs-toggle="offcanvas" href=".farmerInfo" class="cpointer"><i class="bi bi-eye-fill"></i></a>
+                                       <a data-bs-toggle="modal" data-bs-target=".deleteModal" class="cpointer"><i data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Crop Info" class="bi bi-trash"></i></a>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">5</th>
+                                    <td>VAO Name E</td>
+                                    <td>+916589234710</td>
+                                    <td>VAO</td>
+                                    <td>Chennai</td>
+                                    <td>Aminjikarai </td>
+                                    <td>Villivakkam</td>
+                                    <!-- <td><span class="badge text-bg-success">Approved</span></td> -->
+                                    <td>
+                                       <a data-bs-toggle="offcanvas" href=".farmerInfo" class="cpointer"><i class="bi bi-eye-fill"></i></a>
+                                       <a data-bs-toggle="modal" data-bs-target=".deleteModal" class="cpointer"><i data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Crop Info" class="bi bi-trash"></i></a>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <!-- End Table with stripped rows -->
+                     </div>
+                  </div>
+               </div>
+               <!-- project table reports ends -->
+            </div>
+            </div>
+         </section>
+      </main>
+      <!-- End #main -->
+      <!-- ======= Footer ======= -->
+      <footer id="footer" class="footer">
+         <div class="copyright">
+            &copy; Copyright <strong><span>Agri</span></strong>. All Rights Reserved
+         </div>
+         <div class="credits">
+            Designed & Developed by <a href="https://tngis.tn.gov.in/" target="_blank">TNeGA</a>
+         </div>
+      </footer>
+      <!-- End Footer -->
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      <!-- Delete modal starts -->
+      <div class="modal fade deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete VAO - Information</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <p>Are you sure want to delete this VAO?</p>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal">Yes</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- delete modal ends -->
+      <!-- view crop info starts --> 
+      <div class="offcanvas offcanvas-start farmerInfo" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+         <div class="offcanvas-header">
+            <h5 class="offcanvas-title"><i class="bi bi-check2-circle"></i> VAO Inforamtion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+         </div>
+         <div class="offcanvas-body">
+            <div class="row">
+               <div class="pagetitle">
+                  <h5 class="card-title py-1">Crops Overview</h5>
+               </div>
+               <!-- Total no of projects Card -->
+               <div class="col-xxl-4 col-md-6">
+                  <div class="card info-card revenue-card sales-card navigate-link py-3 blue-border">
+                     <div class="card-body pb-0">
+                        <div class="d-flex align-items-center">
+                           <div class="ps-3">
+                              <h6>100</h6>
+                              <span class="badge text-bg-primary">Total Crops</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Total no of projects Card -->
+               <!-- Revenue Card -->
+               <div class="col-xxl-4 col-md-6">
+                  <div class="card info-card revenue-card navigate-link py-3">
+                     <div class="card-body pb-0">
+                        <div class="d-flex align-items-center">
+                           <div class="ps-3">
+                              <h6>80</h6>
+                              <span class="badge text-bg-success">Completed</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- End Revenue Card -->
+               <!-- Revenue Card -->
+               <div class="col-xxl-4 col-md-6">
+                  <div class="card info-card customers-card py-3">
+                     <div class="card-body pb-0">
+                        <div class="d-flex align-items-center">
+                           <div class="ps-3">
+                              <h6>20</h6>
+                              <span class="badge text-bg-danger">Pending</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- End Revenue Card -->
+            </div>
+            <div class="card mb-2">
+               <div class="card-body pb-0 row">
+                  <h6 class="modal-title py-2"><i class="bi bi-file-check"></i> General Informations</h6>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label d-block f-600">VAO Name</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label">VAO Name A</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label f-600">Mobile No</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label"><a href="tel:+916589234710"><i class="bi bi-telephone-outbound"></i> +916589234710</a></label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label f-600">Designation</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label">VAO</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label d-block f-600">District Name</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label">Chennai</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label d-block f-600">Taluk Name</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label">Aminjikarai</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label d-block f-600">Village Name</label>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="name" class="form-label">Villivakkam</label>
+                  </div>
+                  <!-- <div class="col-md-3">
+                     <label for="name" class="form-label d-block f-600">Irrigation source</label>
+                     </div>
+                     <div class="col-md-3">
+                     <label for="name" class="form-label">Irrigation Source</label>
+                     </div>
+                     <div class="col-md-3">
+                     <label for="name" class="form-label d-block f-600">Cultivated by</label>
+                     </div>
+                     <div class="col-md-3">
+                     <label for="name" class="form-label">Owner</label>
+                     </div> -->
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-xxl-4">
+                  <div class="card">
+                     <div class="card-body dashboard">
+                        <h5 class="card-title">Stage 1</h5>
+                        <div class="activity">
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">01</div>
+                              <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">02</div>
+                              <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">03</div>
+                              <i class="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-4">
+                  <div class="card">
+                     <div class="card-body dashboard">
+                        <h5 class="card-title">Stage 2</h5>
+                        <div class="activity">
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">01</div>
+                              <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">02</div>
+                              <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">03</div>
+                              <i class="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-4">
+                  <div class="card">
+                     <div class="card-body dashboard">
+                        <h5 class="card-title">Stage 3</h5>
+                        <div class="activity">
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">01</div>
+                              <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">02</div>
+                              <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">03</div>
+                              <i class="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
+                              <div class="activity-content">
+                                 Completed
+                              </div>
+                           </div>
+                           <!-- End activity item-->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+      <!-- view crop info ends -->
+      <!-- Vendor JS Files -->
+      <script src="assets/vendor/jquery/jquery.min.js"></script>
+      <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Template Main JS File -->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

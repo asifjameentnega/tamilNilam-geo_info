@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+    <!-- general CSS --> 
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboardstyle.css">
+    <title>Tamilnilam</title>
+    <style type="text/css">
+      .gislogo {
+      width: 31px;
+      background: #fff;
+      border-radius: 2.3px;
+      }
+      .font11 {
+      font-size: 11px !important;
+      }
+      .lbl-font {
+      color: #213e7a;
+      font-weight: 600;
+      }
+      .click-data {
+      font-size: 11px;
+      font-weight: 800;
+      position: relative;
+      top: 5px;
+      }
+      .icon-out1 {
+      float: right;
+      position: absolute;
+      right: 2rem;
+      top: 0.5rem;
+      font-size: 18px !important; 
+      }
+      .icon-out2 {
+      float: right;
+      position: absolute;
+      right: 0.3rem;
+      top: 0.5rem;
+      font-size: 18px !important;
+      }
+      .modal-content {
+      background: linear-gradient(to right, rgb(25 30 94), rgb(34 70 129));
+      color: #fff;
+      }
+      button.btn-close {
+      filter: invert(1);
+      opacity: 1;
+      } 
+      .search-by-loc {
+      height: 26% !important;
+      background: transparent;
+      top: 2.5rem;
+      width: 77%;
+      left: 5rem;
+      border: 0; 
+      }
+      .search-by-land {
+      height: 28% !important;
+      background: #0000008f;
+      top: 3.5rem;
+      width: 76%;
+      left: 5.2rem;
+      border: 0; 
+      } 
+      .footer-menu-bar {
+      /*    position: absolute;
+      bottom: 1.2rem;
+      z-index: 999;*/
+      background: #ccc;
+      width: 100%; 
+      } 
+      .footer-menu-bar .font10 { 
+      color: #1f3a77;
+      line-height: 1; 
+      }
+      .footer-menu-bar .tnservices i {
+      font-size: 20px !important;
+      /* position: relative;
+      top: 1.5px;  */
+      }
+      .b1-highlight {
+      background: red !important;
+      } 
+      /*.box1.b1-highlight {
+      background: red !important;
+      }
+      .box2.b2-highlight {
+      background: red !important;
+      }*/ 
+      .box-wrap {
+      display: flex !important;
+      justify-content: space-between;
+      /*width: 100%;*/
+      }
+      .main-wrap {
+      margin-top: 4rem;
+      }
+      .card-radius {
+      border-radius: 7px 15px;
+      }
+      .a-register-wrap .card {
+      background: #20407c;
+      color: #ffffff;
+      }
+      .a-register-wrap h5 {
+      font-size: 16px;
+      margin-bottom: 0;
+      }
+      .card-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 32px;
+      opacity: 0.5;
+      }
+      ul#myTab55 {
+    position: sticky;
+    top: 3.2rem;
+    z-index: 999;
+    background: #f6f5ff;
+      } 
+      .back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 2.5rem;
+    z-index: 996;
+    background: #3f56c0;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+.back-to-top i {
+    font-size: 22px;
+    color: #fff;
+    line-height: 0;
+}
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
+}
+.back-to-top:hover {
+    background: #516be2;
+    color: #fff;
+}
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100 bg-login">
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black-view py-2 mt-0">
+        <div class="container-fluid w-100 d-block text-center">
+
+          <div class="row">
+          <div class="col-8 banner-left1 box-wrap">
+            <a href="#" class="text-white text-none px-2 font13">
+            <img src="assets/img/logo.png" class="img-fluid mainlogo" alt="logo">
+            </a>
+            <a href="#" class="text-white text-none px-2 d-flex align-items-center">
+              <b> 
+                <span class="txt-orange d-block">Tamil Nilam</span>
+              </b>
+              <span id="shop_code"></span>
+            </a>
+          </div>
+          <div class="col-4 d-flex align-items-center justify-content-center">
+          <a class="cpointer text-white text-none px-2">
+            <i class="bi bi-house-check"></i>
+            </a>
+            <a data-bs-toggle="modal" data-bs-target=".disclaimer" class="cpointer text-white text-none px-2">
+            <i class="bi bi-info-circle"></i>
+            </a>
+          </div>
+        </div>
+
+
+        </div>
+      </nav>
+    </header>
+    <!-- Begin page content -->
+    <main class="flex-shrink-0 main-content main-wrap">
+      <!-- filter ends -->
+      <div class="container-fluid pos-rel a-register-wrap">
+       
+        <ul class="nav nav-tabs" id="myTab55" role="tablist">
+          <p class="form-label mb-1 w-100 font-14 txt-blue"><i class="bi bi-check2-circle"></i>  A-Reg</p>
+          <li class="nav-item mb-2" role="presentation">
+            <button class="nav-link active" id="home-tab8" data-bs-toggle="tab" data-bs-target="#home-tab8-pane" type="button" role="tab" aria-controls="home-tab8-pane" aria-selected="false"><i class="bi bi-person-check"></i> Owner info</button>
+          </li>
+          <li class="nav-item mb-2" role="presentation">
+            <button class="nav-link mx-1" id="profile-tab9" data-bs-toggle="tab" data-bs-target="#profile-tab9-pane" type="button" role="tab" aria-controls="profile-tab9-pane" aria-selected="false"><i class="bi bi-pin-map"></i> Land info</button>
+          </li>
+          <li class="nav-item mb-2" role="presentation">
+            <button class="nav-link" id="contact-tab7" data-bs-toggle="tab" data-bs-target="#contact-tab7-pane" type="button" role="tab" aria-controls="contact-tab7-pane" aria-selected="false"><i class="bi bi-file-earmark-check"></i> Crop info</button>
+          </li> 
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active show" id="home-tab8-pane" role="tabpanel" aria-labelledby="home-tab8" tabindex="0">
+            <div class="row m-0">
+              <div class="mb-2 col-12 col-lg-12 px-0">
+                <div class="card">
+                  <div class="card-body py-1">
+                    
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>Owner</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>பழனிவேல்</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>Relation</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>தந்தை</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade mb-5" id="profile-tab9-pane" role="tabpanel" aria-labelledby="profile-tab9" tabindex="0">
+            <div class="mb-2 col-12 col-lg-12 px-0">
+              <div class="card">
+                <div class="card-body py-1">
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>District Code</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>580</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Taluk Code</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>5746</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Village Code</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>932926</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Survey No</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>100</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Sub Div No</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>2B</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>osurvey No</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>100-2</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>partInd</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>P</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>govtPriCode</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>2</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>govtPriTamil</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>ரயத்துவாரி</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>govtPriEng</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>Rayathuvari</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>irrSource</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>-</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>taxRate</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>-</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>soilTypPri</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>8</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>soilTypSec</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>3</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>soilClass</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>9</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>taxHect</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>1.53E+0</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>extHect</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>1</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>extAres</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>0E+0</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>totTax</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>1.54E+0</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>pattaNo</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>287</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>poramboke</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>-</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>remarks</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>-</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>remarks1</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>-</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>form8No</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>1417\/712</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>form6No</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>D141702103</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>assessed</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>false</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p class="mb-1 small-txt txt-orange"><span>cultivable</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span>false</span></p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="tab-pane fade" id="contact-tab7-pane" role="tabpanel" aria-labelledby="contact-tab7" tabindex="0">
+          <div class="mb-2 col-12 col-lg-12 px-0">
+              <div class="card">
+                <div class="card-body py-1">
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Crop Type</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>Agriculture</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Crop Id</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>58</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Crop Name</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>Rice (Paddy)</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Crop Extent</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>0.145</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Irrigation Source</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>Canal</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Expected Sown Date</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>2023-12-01</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p class="mb-1 small-txt txt-orange"><span>Expected Harvest Date</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span>2024-02-29</span></p>
+                    </div> 
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </main>
+    <footer class="footer mt-auto text-center">
+      <div class="footer-menu-bar">
+        <!-- <div id="location_details" style="display: none;">
+          <div><b id="type" class="font10">(District | Taluk | Village)</b>&nbsp;<b id="sur_suv_dt" class="font10"> (Survey / Subdivision)</b></div>
+          <div id=""><span class="font10" id="value">Chengalpattu | Vandalur | Polachery</span>&nbsp;<span class="font10" id="survey_subdivision">(58 / 1B)</span></div>
+          </div> -->
+        <!-- <div class="row service_div m-0" id="eservice_div">
+          <div class="col-3  text-center">
+            <button disabled class="icon-box tnservices" id="a_register" style="background-color: blue!important;" aria-hidden="true">
+              <i class="bi bi-bank text-white" aria-hidden="true"></i></button>
+            <span class="d-block font10 mt-1">A Register</span>
+          </div>
+          <div class="col-3  text-center">
+            <button disabled class="icon-box tnservices" id="fmb_service" style="background-color: red!important;">
+              <i class="bi bi-rulers text-white" aria-hidden="true"></i></button>
+            <span class="d-block font10 mt-1">FMB Sketch</span> 
+          </div>
+          <div class="col-3  text-center">
+            <button disabled class="icon-box tnservices" id="patta_service" style="background-color: orange!important;">
+              <i class="bi bi-house text-white" aria-hidden="true"></i></button> 
+            <span class="d-block font10 mt-1">Patta Chitta</span> 
+          </div>
+          <div class="col-3  text-center">
+            <button disabled class="icon-box tnservices" id="patta_search_service" style="background-color: #9600ff!important;">
+              <i class="bi bi-card-checklist text-white" aria-hidden="true"></i></button>
+            <span class="d-block font10 mt-1">Search Patta</span> 
+          </div>
+          </div> -->
+      </div>
+      <div class="container-fluid">
+        <div class="text-center">
+          <div class="mt-1 mb-1">
+            <p class="info-icons mb-0"><i class="bi bi-calendar-check font12"></i> <span id="showdate" class="font12"></span> <i class="bi bi-clock font12"></i><span id="current-time" class="mx-1 font12"></span><span id="latitude" class="mx-1 font12"></span><span id="longitude" class=" font12"></span><span class="mx-1 font9" id="accuracy"></span></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- disclaimer Modal starts -->
+    <div class="modal fade disclaimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header py-2">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-info-circle"></i> Disclaimer</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body py-2">
+            <p><i class="bi bi-check2-circle"></i> All boundaries displayed are indicative locations. This map shall not be used for any legal purposes.</p>
+            <p><i class="bi bi-check2-circle"></i> Possibilities of FMB sketches not updated in this application is there.</p>
+            <p><i class="bi bi-check2-circle"></i> The availability of FMB maps need to be checked. If FMB sketches are available and shown in this application, contact TNEGA and get them updated. Use the link..... to record your observation.</p>
+            <p><i class="bi bi-check2-circle"></i> If FMB sketches are not available or not updated, contact the respective town or firka surveyor and get them updated in collabland software</p>
+            <p><i class="bi bi-check2-circle"></i> Or wrong depiction of available.FMB sketch may be there.</p>
+            <p><i class="bi bi-check2-circle"></i> If wrong depiction is there, contact the respective surveyor and get the data updated by TNEGA.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- disclaimer Modal ends -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- jQuery -->
+    <script src="assets/scripts/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Bundle with Popper --> 
+    <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Date -->
+    <script type="text/javascript">
+      /*$(document).on({
+           ajaxStart: function() {
+             $('#preloader').show();
+           },
+           ajaxStop: function() {
+             $('#preloader').hide();
+           }
+         });*/
+      
+      
+      var latitude;
+      var longitude;
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var output = (('' + day).length < 2 ? '0' : '') + day + '/' +
+        (('' + month).length < 2 ? '0' : '') + month + '/' + d.getFullYear();
+      document.getElementById("showdate").innerHTML = output;
+    </script>
+    <script>
+      $(document).ready(function() {
+        // Function to get the current time
+        function getCurrentTime() {
+          const now = new Date();
+          const hours = now.getHours().toString().padStart(2, '0');
+          const minutes = now.getMinutes().toString().padStart(2, '0');
+          const seconds = now.getSeconds().toString().padStart(2, '0');
+          return `${hours}:${minutes}:${seconds}`;
+        }
+      
+        // Function to update the time in the HTML element
+        function updateTime() {
+          const currentTime = getCurrentTime();
+          $('#current-time').text(currentTime);
+        }
+      
+        // Initial update
+        updateTime();
+      
+        // Update time every second
+        setInterval(updateTime, 1000);
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        // Function to get the user's current location
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+          } else {
+            $('#latitude').text('Geolocation is not supported by this browser.');
+            $('#longitude').text('Geolocation is not supported by this browser.');
+          }
+        }
+      
+        // Function to handle successful retrieval of user's location
+        function showPosition(position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+      
+          // Update HTML elements with latitude and longitude
+          $('#latitude').text('Lat: ' + latitude);
+          $('#longitude').text('Lon: ' + longitude);
+        }
+      
+        // Function to handle errors in geolocation
+        function showError(error) {
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              $('#latitude').text('User denied the request for Geolocation.');
+              $('#longitude').text('User denied the request for Geolocation.');
+              break;
+            case error.POSITION_UNAVAILABLE:
+              $('#latitude').text('Location information is unavailable.');
+              $('#longitude').text('Location information is unavailable.');
+              break;
+            case error.TIMEOUT:
+              $('#latitude').text('The request to get user location timed out.');
+              $('#longitude').text('The request to get user location timed out.');
+              break;
+            case error.UNKNOWN_ERROR:
+              $('#latitude').text('An unknown error occurred.');
+              $('#longitude').text('An unknown error occurred.');
+              break;
+          }
+        }
+      
+        // Call getLocation() to get the current location
+        getLocation();
+      });
+    </script>
+    <script type="text/javascript">
+      /**
+      * Back to top button
+      */
+      const select = (el, all = false) => {
+      el = el.trim()
+      if (all) {
+      return [...document.querySelectorAll(el)]
+      } else {
+      return document.querySelector(el)
+      }
+      }
+      /**
+      * Easy on scroll event listener 
+      */
+      const onscroll = (el, listener) => {
+      el.addEventListener('scroll', listener)
+      }
+      let backtotop = select('.back-to-top')
+      if (backtotop) {
+      const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+      backtotop.classList.add('active')
+      } else {
+      backtotop.classList.remove('active')
+      }
+      }
+      window.addEventListener('load', toggleBacktotop)
+      onscroll(document, toggleBacktotop)
+      }
+    </script> 
+  </body>
+</html>

@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+
+    <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+    <!-- open layer CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/openlayers/ol.css">
+    <link rel="stylesheet" href="assets/vendor/ol-ext-master/dist/ol-ext.css" />
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert.min.css" />
+    <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css" />
+    <!-- general CSS --> 
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboardstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf_viewer.min.css">
+    <style>
+      .txt-orange { 
+    color: #fff218 !important;
+}
+.box_wrap {
+    background: #0c2552;
+    border-radius: 12px 11px !important;
+    font-size: 14px; 
+} 
+.wrap_btns {
+      font-size: 14px !important;
+    padding: 2px 16px !important;
+}
+.bgred {
+      background: red !important;
+}
+      #pdfViewer {
+        width: 100%; 
+            height: 56vh;
+            overflow: auto;
+            background: #eee;
+      }
+      .pdf-canvas {
+        height: 76vh;
+        width: 100%;
+      }
+      .toolbar {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .toolbar button {
+            margin: 5px;
+        }
+  </style>
+    <title>Tamilnilam</title>
+    <style type="text/css">
+      .icon-out3 {
+            float: right;
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+    font-size: 14px !important;
+      }
+      a.card-link {
+        text-decoration: none;
+      } 
+      .bg-red-color {
+        background: #f83434;
+        font-size: 12px;
+        padding: 3px 7px;
+        border-radius: 3px 7px;
+      } 
+      .show-notify {
+          background: #0074ffa3;
+          font-size: 12px;
+          padding: 3px 5px;
+          border-radius: 3px;
+          border-left: 3px solid red;
+      } 
+      #downloadButton {
+        font-size: 14px;
+        padding: 2px 7px;
+      }  
+      /*.view-pdf {
+        z-index: 1040;
+        height: 100vh;
+        position: relative;
+      }*/
+      .offcanvas .card {
+        background: #22437e;
+      } 
+      .offcanvas h4 {
+        color: #22437e;
+        font-size: 16px;
+      } 
+      .gislogo {
+            width: 31px;
+    background: #fff;
+    border-radius: 2.3px;
+      }
+      .font11 {
+      font-size: 11px !important;
+      }
+      .lbl-font {
+      color: #213e7a;
+      font-weight: 600;
+      }
+      .click-data {
+      font-size: 11px;
+      font-weight: 800;
+      position: relative;
+      top: 5px;
+      }
+      .icon-out1 {
+    float: right;
+    position: absolute;
+    right: 0.2rem;
+    top: 0.5rem;
+    font-size: 18px !important; 
+      }
+      .icon-out2 {
+      float: right;
+      position: absolute;
+      right: 0.3rem;
+      top: 0.5rem;
+      font-size: 18px !important;
+      }
+      .modal-content {
+      background: linear-gradient(to right, rgb(10 16 91), rgb(97 148 233));
+      color: #fff;
+      margin-top: 141px;
+      }
+      button.btn-close {
+      filter: invert(1) !important;
+      opacity: 1 !important;
+      }  
+      .search-by-loc {
+      height: 26% !important;
+      background: transparent;
+      top: 2.5rem;
+      width: 77%;
+      left: 5rem;
+      border: 0; 
+      }
+      .search-by-land {
+        height: 28% !important;
+        background: #0000008f;
+        top: 3.5rem;
+        width: 76%;
+        left: 5.2rem;
+        border: 0; 
+      } 
+      .footer-menu-bar {
+/*    position: absolute;
+    bottom: 1.2rem;
+    z-index: 999;*/
+    background: #ccc;
+    width: 100%; 
+      } 
+      .footer-menu-bar .font10 { 
+      color: #1f3a77;
+      line-height: 1; 
+      }
+      .footer-menu-bar .tnservices i {
+      font-size: 20px !important;
+      /* position: relative;
+      top: 1.5px;  */
+
+      }
+      .b1-highlight {
+        background: red !important;
+      } 
+      /*.box1.b1-highlight {
+        background: red !important;
+      }
+      .box2.b2-highlight {
+        background: red !important;
+      }*/ 
+       .aregister-info {
+            height: 89vh;
+            bottom: 1rem;
+      }  
+      .offcanvas-header {
+        background: #22437e;
+        color: #fff !important;
+        box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+      }
+      
+.lds-facebook,
+.lds-facebook div {
+  box-sizing: border-box;
+}
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: currentColor;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0s;
+}
+#langToggle {
+  /* font-size: 25px; */
+  font-size: 18px !important; 
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100 bg-login">
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black-view py-2">
+        <div class="container-fluid w-100 d-block text-center">
+          <div class="col-lg-12 banner-left1 d-flex">
+            <a href="#" class="text-white text-none px-2 font13">
+            <img src="assets/img/logo.png" class="img-fluid mainlogo" alt="logo">
+            </a>
+            <a href="#" class="text-white text-none px-2 font13 w-75">
+              <style>
+                #spinner{
+                  z-index: 1500;
+                }
+              </style>
+            <b> <span class="txt-orange d-block" id = "tamilnilam">Tamil Nilam <img id="spinner" src="assets/img/Book.gif" alt="Loading..." style="display: none; position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 80px;border-radius: 50%;"> </span>
+              <span class="d-block blink click-data" id = "label1">Click on the map to know land details</span>
+
+            </b> 
+            <span id="shop_code"></span>
+            </a>
+            <a data-bs-toggle="offcanvas" data-bs-target=".logout" class="cpointer text-white text-none px-2 icon-out">
+            </a>
+            <a data-bs-toggle="modal" data-bs-target=".disclaimer" class="cpointer text-white text-none px-2 icon-out1">
+            <i class="bi bi-info-circle"></i>
+            </a>
+            <a class="cpointer text-white text-none icon-out3">
+            <i class="bi bi-translate mx-3" id="langToggle" onclick="switchLang()"></i> 
+            
+            <!-- <span id="text-white">Eng</span> -->
+            <!-- <button id="langToggle" onclick="switchLang()">தமிழ்</button> -->
+            <script>
+              
+                  // $('#langToggle').trigger('click');
+            </script>
+
+            </a>
+
+            <!-- <i class="fa fa-globe" aria-hidden="true" @click="changeLang()"></i> -->
+            <!-- <a href="#" class="cpointer text-white text-none px-2 icon-out2">
+              <i class="bi bi-box-arrow-in-left"></i>
+              </a> -->
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- <div id="preloader"></div> -->
+    <!-- Begin page content -->
+    <main class="flex-shrink-0 main-content mt-0">
+      <!-- filter starts -->
+      <!--  <div class="accordion accordion-flush showFilter" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed py-1 " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <i class="bi bi-funnel"></i> <span class="px-1">Apply Filter</span>
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="mb-2">
+                <label for="exampleInputEmail1" class="form-label">Select Date</label>
+                <input type="date" class="form-control" />
+              </div>
+        
+              <div class="mb-2">
+                <div class="card bg-black-view text-center">
+                  <div class="card-body">
+                    <p class="mb-0 text-white">Verified Applicants</p>
+                    <p class="mb-0 text-white">123456</p>
+                  </div>
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+        </div> -->
+      <!-- filter ends -->
+      
+      <div class="container-fluid pos-rel m-0 p-0">
+        <div id="map"></div>
+        <div class="infoStats d-none">
+          <span class="moreInfos actionBtn px-1 blob blue text-center text-white" data-bs-toggle="offcanvas"
+            data-bs-target=".offcanvasRight">Select Service</span>
+        </div>
+        <div class="right-container d-none" id="numero5">
+          <button type="button" class="btn btn-primary icon-box d-flex" id="switch_layer">
+          <i class="bi bi-layers" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch Layers"></i>
+          </button>
+        </div>
+        <!-- search bar starts -->
+        <div class="search-container d-none" id="numero3"> 
+          <button type="button" class="btn btn-primary icon-box d-flex" id="zoomIn">
+          <i class="bi bi-plus-lg map_icons" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom In"></i>
+          </button>
+          <button type="button" class="btn btn-primary icon-box d-flex" id="zoomOut">
+          <i class="bi bi-dash map_icons" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom Out"></i></button>
+          <button type="button" class="btn btn-primary icon-box d-none" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="TamilNadu Extent" onclick="zoom_extent = [8395626.451712506, 892078.6691354283, 9167334.689279644, 1557386.5633296024];map.getView().fit((zoom_extent), { duration: 2000});"><i class="bi bi-map map_icons" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom Out"></i>
+          </button>
+        </div>
+        <div class="search-container1"> 
+          <button type="button" class="btn btn-primary icon-box d-flex p-1" id="getLocation">
+          <img src="assets/img/live.png" class="liveimg" /></i></button>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#legendModal">
+            <i class="fa fa-info-circle"></i> Legend
+        </button>
+        <div class="modal fade" id="legendModal" tabindex="-1" aria-labelledby="legendModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="legendModalLabel"><i class="fa fa-info-circle"></i> Legend</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <style>
+                          .boundaries {
+                            list-style: none;
+    font-size: large;
+    font-family: serif;
+   
+                          }
+                          .legend-line {
+                              display: inline-block;
+                              width: 20px;
+                              height: 4px;
+                              background-color: currentColor;
+                              vertical-align: middle;
+                              margin-right: 8px;
+                          }
+                          .legend-box {
+                              display: inline-block;
+                              width: 20px;
+                              height: 20px;
+                              background-color: 2px dotted currentColor;
+                              border: 2px solid currentColor;
+                              background-image: radial-gradient(currentColor 1px, transparent 1px);
+                              background-size: 4px 4px;
+                              vertical-align: middle;
+                              margin-right: 8px;
+                          }
+                      </style>
+                      <div class="show-info-list" id="legendImg">
+                          <ul>
+                              <li class="boundaries"><span style="color: #8f0303;" class="legend-line"></span> - District</li>
+                              <li class="boundaries"><span style="color: #d83a5f;" class="legend-line"></span> - Taluk</li>
+                              <li class="boundaries"><span style="color: #dd8706;" class="legend-line"></span> - Village</li>
+                              <li class="boundaries"><span style="color: #c4f70c;" class="legend-line"></span> - Survey Number </li>
+                              <li class="boundaries"><span style="color: #ff00b3;" class="legend-line"></span> - Sub-division  Number</li>
+                              <li class="boundaries"> <span ></span> (Ownership data not linked for the below areas)</li>
+                              <li class="boundaries"><span style="color: #073ef1;" class="legend-box"></span> - Urban Area</li>
+                              <li class="boundaries"><span style="color: #008000;" class="legend-box"></span> - Forest Area</li>
+                              <li class="boundaries"><span style="color: #FF69B4;" class="legend-box"></span> - Other Area</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="search-location mt-2">
+        <button type="button" class="btn btn-primary icon-box box1" data-bs-toggle="offcanvas" data-bs-target=".search-by-loc">
+        <i class="bi bi-search"></i>
+        </button>
+        <button type="button" class="btn btn-primary icon-box box2" data-bs-toggle="offcanvas" data-bs-target=".search-by-land">
+        <i class="bi bi-pin-map"></i>
+        </button> 
+
+       
+
+      <!-- Legend Modal -->
+
+       
+        <!-- card-shadow mb-2 box box-width-legend
+        <div class="accordion" id="legend-box">
+          <div class="accordion-item leftAccordion"> 
+              <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cardInfos" aria-expanded="false" aria-controls="collapseOne">
+                      <strong class="text-white"><i class="fa fa-info-circle"></i>Legend</strong>
+                  </button>
+              </h2>
+              <div id="cardInfos" class="accordion-collapse bg-blues collapse " aria-labelledby="headingOne" data-bs-parent="#bottomContainer">
+                  <div class="accordion-body" style="padding: 5px;">
+                      <style>
+                        .accordion-button{
+                          display: flex;
+                          flex-direction: row;
+                          padding: 5px;
+                          border: none;
+                        }
+                        #legend-box{
+                          height: 100%;
+                          position:absolute;
+                          top: 0;
+                          width: 150px;
+                          right: 0;
+                        }
+                        .accordion-item.leftAccordion{
+                          background-color: white;
+                        }
+        
+                          .boundaries {
+                              list-style: none;
+                              font-size: small;
+                          }
+                          /* .search-location {
+                            width: 80%;
+                            display: flex;
+                            flex-direction: row;
+                            overflow:overlay;
+                            height: min-content;
+                          } */
+                          .legend-line {
+                              display: inline-block;
+                              width: 20px;
+                              height: 4px;
+                              background-color: currentColor;
+                              vertical-align: middle;
+                              margin-right: 8px;
+                          }
+                          .legend-box {
+                            display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        background-color: 2px dotted currentColor;
+                        border: 2px solid currentColor;
+                        background-image: radial-gradient(currentColor 1px, transparent 1px);
+                        background-size: 4px 4px;
+                        vertical-align: middle;
+                        margin-right: 8px;
+                    }
+
+
+                      </style>
+                      <div class="show-info-list" id="legendImg">
+                          <ul>
+                              <li class="boundaries"><span style="color: #8f0303;" class="legend-line"></span> - District</li>
+                              <li class="boundaries"><span style="color: #d83a5f;" class="legend-line"></span> - Taluk</li>
+                              <li class="boundaries"><span style="color: #dd8706;" class="legend-line"></span> - Village</li>
+                              <li class="boundaries"><span style="color: #c4f70c;" class="legend-line"></span> - Survey</li>
+                              <li class="boundaries"><span style="color: #ff00b3;" class="legend-line"></span> - Subdivision</li>
+                              <li class="boundaries"><span style="color: #073ef1;" class="legend-box"></span> - Urban</li>
+                              <li class="boundaries"><span style="color: #008000;" class="legend-box"></span> - Forest</li>
+                              <li class="boundaries"><span style="color: #FF69B4;" class="legend-box"></span> - Other's</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+
+
+        
+        <!-- search location -->
+        <!-- <div class="input-group mb-2 mt-2">
+          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+           <input type="search" class="form-control" placeholder="Search by Location" aria-label="enter location" aria-describedby="basic-addon2" onkeypress="if(event.keyCode==13) {$('#search_query_text').trigger('input')}" id="search_query_text" oninput="this.value = this.value.replace(/[^0-9a-z ]/gi, '')" maxlength="20" autocomplete="off">
+          </div>
+          <ul class="d-none" id="result_search">
+            </ul> -->
+        <!-- search location -->
+      </div>
+
+      
+
+      <div class="bottom-container text-center">
+        <a href="#" class="text-white text-none px-2 font13">
+        <img src="assets/img/tngis-logo.png" class="img-fluid gislogo" alt="logo">
+        </a>  
+      </div>
+
+      </div>
+
+      <!-- </div> -->
+      
+    </main>
+    <footer class="footer mt-auto text-center">
+      <div class="footer-menu-bar">
+        <div id="location_details" style="display: none;">
+        <div><b id="type" class="font10">(District | Taluk | Village)</b>&nbsp;<b id="sur_suv_dt" class="font10"> (Survey / Subdivision)</b></div>
+        <div id=""><span class="font10" id="value"></span>&nbsp;<span class="font10" id="survey_subdivision"></span></div>
+        </div>
+        <div class="row service_div m-0" id="eservice_div" >
+          <div class="col text-center">
+           
+            <button id ="trigger" class="icon-box tnservices" style="background-color: blue!important;" aria-hidden="true" disabled>
+              <i class="bi bi-bank text-white" aria-hidden="true"></i>
+          </button>
+            <span class="d-block font10 mt-1 mb-1" id="a_register">A Register</span>
+          </div>
+          <div class="col text-center">
+           
+            <button id = "fmb_trigger" data-bs-toggle="offcanvas" href=".fmb-info" class="icon-box tnservices" style="background-color: red!important;"aria-hidden="true" disabled>
+              <i class="bi bi-rulers text-white" aria-hidden="true"></i></button>
+            <span class="d-block font10 mt-1 mb-1" id = "fmb_sketch">FMB Sketch</span> 
+          </div>
+          <div class="col text-center">
+           
+            <button data-bs-toggle="offcanvas" data-bs-target=".measure_tool" class="icon-box tnservices" style="background-color: orange!important;" aria-hidden="true" disabled>
+              <i class="bi bi-house text-white" aria-hidden="true"></i></button> 
+            <span class="d-block font10 mt-1">Measure</span> 
+          </div>
+          <div class="text-center">
+          
+            <button data-bs-toggle="modal" id = "patta_chitta"data-bs-target="#othersModalPopup" class="icon-box tnservices" style="background-color: #9600ff!important;"aria-hidden="true"disabled>
+              <i class="bi bi-card-checklist text-white" aria-hidden="true"></i></button>
+            <span class="d-block font10 mt-1 mb-1" id = "Patta_no2">Patta Number</span> 
+          </div>
+
+          
+
+          <!-- <div class="col-3 text-center" style="margin-top: 40px;">
+            <span class="d-block font-weight-bold font10 mt-1">Powered by NIC & TNGIS</span>
+        </div> -->
+        
+        </div>
+
+
+      </div>
+      <div class="container-fluid">
+        <div class="text-center">
+          <div class="mt-1 mb-0">
+            <p class="info-icons mb-0"><i class="bi bi-calendar-check font12"></i> <span id="showdate" class="font12">09/06/2023</span> <i class="bi bi-clock font12"></i><span id="showTime" class="mx-1 font12"></span><span id="user_lat" class="mx-1 font12"></span><span id="user_long" class=" font12"></span>
+              <span class="mx-1 font9" id="accuracy"></span></p>
+            <p class="mb-0"><i class="bi bi-person-check-fill font9"></i><span id="username" class="mx-1 font9"></span><i class="bi bi-telephone-forward font9"></i><span id="mobile_number" class="mx-1 font9"></span>
+              <span class="mx-1 font9" id="version_name">V1.0.1</span></p>
+              <p class="mb-0 font9"><span class="d-block font-weight-bold">Powered by NIC &amp; TNGIS</span></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- right canvas starts -->
+    <div class="offcanvas offcanvas-end offcanvasRight" id="list_of_faclities" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header px-2 py-2" x-data="transButtonComponent()">
+        <h6 class="offcanvas-title"><i class="bi bi-check2-circle"></i> <span  x-text="$t('nearest')" ></span></h6>
+        <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body px-2 py-2">
+        <div class="m-2" id="available_layers">
+          <div class="col-4 boxWrap-sm swapMap" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+            <div class="card text-center mb-2" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+              <div class="card-body px-2 py-2">
+                <img src="assets/img/registration-office.png" alt="logo" class="depicons">
+                <h6 class="mb-0 mt-1">Patta</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-bottom profileView" id="land_info_canvas" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-body small pt-0" >
+       
+        <hr>
+        <p class="mb-2 font11 lbl-font text-center service_error_div d-none">Survey and Subdivision data not available</p>
+        <p class="mb-2 font11 lbl-font text-center service_div">for more details select below options</p>
+        <div class="row service_div" id="eservice_div">
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="a_register" style="background-color: blue!important;">
+            <i class="bi bi-bank text-white" aria-hidden="true"></i></a>
+            <span class="d-block font10 mt-1">A Register</span>
+          </div>
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="fmb_service" style="background-color: red!important;">
+            <i class="bi bi-rulers text-white" aria-hidden="true"></i></a>
+            <span class="d-block font10 mt-1">FMB Sketch</span> 
+          </div>
+          <!-- <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="patta_service" style="background-color: orange!important;">
+            <i class="bi bi-house text-white" aria-hidden="true"></i></a> 
+            <span class="d-block font10 mt-1">Patta Chitta</span> 
+          </div> -->
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="patta_search_service" style="background-color: #9600ff!important;">
+            <i class="bi bi-card-checklist text-white" aria-hidden="true"></i></a>
+            <span class="d-block font10 mt-1 nowrap">Search Patta</span> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <form id="post_tn_form" action="" method="post">
+      <input type='hidden' id='service_name' name='service_name' value=''>
+      <input type='hidden' id='latitude' name='latitude' value=''>
+      <input type='hidden' id='longitude' name='longitude' value=''>
+      <input type='hidden' id='district_code' name='district_code' value=''>
+      <input type='hidden' id='taluk_code' name='taluk_code' value=''>
+      <input type='hidden' id='village_code' name='village_code' value=''>
+      <input type='hidden' id='village_lgd' name='village_lgd' value=''>
+      <input type='hidden' id='survey' name='survey' value=''>
+      <input type='hidden' id='subdivision' name='subdivision' value=''>
+      <input type='hidden' id='survey_name' name='survey_name' value=''>
+      <input type='hidden' id='patta_number_enter' name='patta_number_enter' value=''>
+      <input type="submit" id="btnposttndata" name="btnposttndata" class="btn btn-success d-none" value="Submit data"> 
+    </form>
+    <!-- Modal Popup --> 
+    <div class="modal fade" id="othersModalPopup" tabindex="-1" role="dialog" aria-labelledby="othersModalPopupTitle"
+      aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header py-1">
+            <h6 class="modal-title" id="others-modal-title"><i class="bi bi-check2-circle"></i> Search by Patta</h6>
+            <button type="button" class="btn-close" id ="patta_btn_close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-0 pb-0" id="others-modal-id">
+
+            <!-- <div class="form-check form-check-inline mb-2">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">Patta Search</label>
+            </div> -->
+            <!-- <div class="form-check form-check-inline mb-2">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <label class="form-check-label" for="inlineRadio2">Chitta Search</label>
+            </div> -->
+
+
+            <!-- <div class="patta_search" style="display: none;"> -->
+              <div id="location_details2" style="display: none;">
+                <div><b id="type2" class="mb-1 small-txt txt-orange">(District | Taluk | Village)</b>&nbsp;
+                  <!-- <b id="sur_suv_dt2" class="font10"> (Survey / Subdivision)</b></div> -->
+                <div id=""><span class="font10" id="value2"></span>&nbsp;<span class="font10" id="survey_subdivision2"></span>
+                </div>
+                </div>
+
+
+           <div class="row">
+            <div class="col-7 mb-2">
+              <input type="number" class="form-control number" placeholder="Enter Patta Number" id="patta_number_search" onKeyPress="if(this.value.length==10) return false;" oninput="this.value = this.value.replace(/[^0-9]/gi, '')">
+             
+              
+            </div>
+            <div class="col-5 mb-2">
+               <button type="submit" class="btn btn-success default-padding py-2 font-14 cus-btns1" id="search_patta_number">
+                <i class="bi bi-check2-circle"></i> Search
+              </button>
+
+              
+            
+              
+            </div>
+            <style>
+              .hidden {
+  display: none;
+}
+            </style>
+            <div class="col-lg-12 text-center mb-2">
+              <a class="btn btn-success default-padding py-2 font-14 wrap_btns hidden" id = "display_all_on_map" ><i class="bi bi-eye"></i> View All in Map</a>
+            </div> 
+          </div>
+
+
+            <div class="box_wrap px-2 py-3 mb-2">
+              <div id="patta_info_container"></div>
+              <!-- <div class="row">
+                <div class="col-6">
+                  <label for="inputEmail4" class="form-label txt-orange">Survey No</label>
+                </div>
+                <div class="col-6">
+                  <label for="inputEmail4" id ="patta_survey_no" class="form-label text-white"></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="inputEmail4" class="form-label txt-orange">Sub Division No</label>
+                </div>
+                <div class="col-6">
+                  <label for="inputEmail4" id ="patta_subdivision_no" class="form-label text-white"></label>
+                </div>
+              </div> -->
+              <!-- <div class="row details_wrap">
+                <div class="col-12">
+                  <span class="badge text-bg-primary bg-primary px-2 py-2"><i class="bi bi-file-earmark-check"></i> Details</span>
+                  <span class="badge text-bg-success bgred bg-success mx-2 px-2 py-2"><i class="bi bi-pin-map"></i> view on map</span>
+                </div>
+              </div> -->
+            </div>
+
+           
+          </div>
+          <!-- <div class="chitta_search" style="display: none;">      
+            <small>
+            <span class="txt-orange font10">District Name</span>
+            <span class="mx-1 txt-orange font10">Taluk Name</span>
+            <span class="txt-orange font10">Village Name</span>
+            <span class="mx-1 txt-orange font10">Survey Number</span>
+            <span class="txt-orange font10">Sub Division Number</span>
+            </small>   
+            <div class="col-12 mb-1">
+              <input type="number" class="form-control number" placeholder="Enter Chitta Number" id="chitta_number_search" onKeyPress="if(this.value.length==10) return false;" oninput="this.value = this.value.replace(/[^0-9]/gi, '')">
+            </div>
+            <div class="col-lg-12 mb-2 mx-2">
+              <button type="submit" class="btn btn-success default-padding py-2 font-14 cus-btns1" id="search_chitta_number"><i
+                class="bi bi-check2-circle"></i> Search</button>
+            </div>
+          </div> -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- right canvas ends -->
+    <!-- disclaimer Modal starts -->
+    <div class="modal fade disclaimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header py-2">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-info-circle"></i> Disclaimer</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body py-2">
+            <p id ="d1"><i class="bi bi-check2-circle"></i> All boundaries displayed are indicative locations. This map shall not be used for any legal purposes.</p>
+            <p id ="d2"><i class="bi bi-check2-circle"></i> Possibilities of FMB sketches not updated in this application is there.</p>
+            <p id ="d3"><i class="bi bi-check2-circle"></i> The availability of FMB maps need to be checked. If FMB sketches are available and shown in this application, contact TNEGA and get them updated. Use the link..... to record your observation.</p>
+            <p id ="d4"><i class="bi bi-check2-circle"></i> If FMB sketches are not available or not updated, contact the respective town or firka surveyor and get them updated in collabland software</p>
+            <p id ="d5"><i class="bi bi-check2-circle"></i> Or wrong depiction of available.FMB sketch may be there.</p>
+            <p id ="d6"><i class="bi bi-check2-circle"></i> If wrong depiction is there, contact the respective surveyor and get the data updated by TNEGA.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- disclaimer Modal ends -->
+    <!-- search by location --> 
+    <div class="offcanvas offcanvas-top search-by-loc" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <!-- <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div> -->
+      <div class="offcanvas-body">
+        <div class="input-group mb-2 mt-2">
+          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+          <input type="search" class="form-control" placeholder="Search by Location" aria-label="enter location" aria-describedby="basic-addon2" onkeypress="if(event.keyCode==13) {$('#search_query_text').trigger('input')}" id="search_query_text" oninput="this.value = this.value.replace(/[^0-9a-z ]/gi, '')" maxlength="20" autocomplete="off">
+        </div>
+        <ul class="d-none" id="result_search">
+        </ul>
+      </div>
+    </div>
+    <!-- search by location -->
+    <!-- search by land --> 
+    <div class="offcanvas offcanvas-top search-by-land" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <!-- <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div> -->
+      <div class="offcanvas-body pt-0">
+        <button type="button" class="btn-close mb-1 float-end" data-bs-dismiss="offcanvas" aria-label="Close"></button>  
+        <select class="form-select mb-1 district"  id="district" aria-label="Default select District">
+          <option value="all">Select District</option>
+
+        </select>
+        <select class="form-select mb-1 taluk"  id="taluk"  aria-label="Default select Taluk">
+          <option value="all">Select Taluk</option>
+        </select>
+        <select class="form-select mb-1 firka" id="firka" aria-label="Default select Firka">
+          <option value="all">Select Firka</option>
+  
+        </select>
+
+        </select>
+        <select class="form-select mb-1 village" id="village" aria-label="Default select village">
+          <option value="all">Select Village</option>
+
+        </select>
+
+    
+        <select class="form-select mb-1 survey" id="survey" aria-label="Default select Survey Number">
+          <option selected>select Survey Number</option>
+
+        </select>
+
+        <select class="form-select mb-1 subdivision1" id="subdivision1" aria-label="Default select subdivision Number">
+          <option selected>select subdivision Number</option>
+
+        </select>
+      </div>
+    </div>
+    <!-- search by land -->
+
+    <!-- aregister info -->
+    <div class="offcanvas offcanvas-bottom aregister-info" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <div class="offcanvas-header py-2">
+
+        <div id="location_details1" style="display: none;">
+          <div><b id="type1" class="font10">(District | Taluk | Village)</b>&nbsp;<b id="sur_suv_dt1" class="font10"> (Survey / Subdivision)</b><p class="mb-0 font9" style="text-align: right;"><span class="d-block font-weight-bold">Powered by NIC</span></p>
+          </div>
+          <div id=""><span class="font10" id="value1"></span>&nbsp;<span class="font10" id="survey_subdivision1"></span></div>
+          </div>
+
+        <!-- <h5 class="offcanvas-title text-white">A-Reg</h5> -->
+        <button type="button" id = "areg_button"class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body small py-2">
+        <h4 id = "owner_info"><i class="bi bi-person-check" ></i> Owner Info</h4>
+
+        
+        <div class="row m-0">
+              <div class="mb-2 col-12 col-lg-12 px-0">
+                <div class="card">
+                  <div class="card-body py-1">
+                    <div id="ownerContainer">
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="mb-1 small-txt txt-orange"><span>Total Owners</span></p>
+                        </div>
+                      
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="mb-1 small-txt txt-orange"><span>Owner Name</span></p>
+                        </div>
+                       
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="mb-1 small-txt txt-orange"><span>Relation Name/Relation Type</span></p>
+                        </div>
+                       
+                      </div>
+                    
+                  </div>
+                    
+                
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h4 id = land_info><i class="bi bi-pin-map"></i> Land Info</h4>
+            <div class="mb-2 col-12 col-lg-12 px-0">
+              <div class="card">
+                <div class="card-body py-1">
+                  <div id="landContainer">
+
+                    <div class="row">
+                      <div class="col-6">
+                        <p id="land_type" class="mb-1 small-txt txt-orange"><span>Land Type</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="govtPriEng" ></span>,<span id ="govtPriTamil" ></span></p>
+                      </div>
+                    </div>
+                  
+                  <div class="row">
+                    <div class="col-6">
+                      <p id="o_survey" class="mb-1 small-txt txt-orange"><span>Old Survey No</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id ="osurvey_no"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id="part_Ind" class="mb-1 small-txt txt-orange"><span>partInd</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id ="partInd"></span></p>
+                    </div>
+                  </div>
+                  
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "tax_Rate" class="mb-1 small-txt txt-orange"><span>Tax Rate</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id = "taxRate"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "Primary_soil_Type" class="mb-1 small-txt txt-orange"><span>Primary Soil Type</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id = "soilTypPri"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p  id = "Secondary_soil_Type" class="mb-1 small-txt txt-orange"><span>Secondary Soil Type</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id = "soilTypSec"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "Soil_Class" class="mb-1 small-txt txt-orange"><span>Soil Class</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id = "soilClass" ></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id ="Tax_Per_Hect" class="mb-1 small-txt txt-orange"><span>Tax Per Hectares</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="taxHect"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "Extent_in_Hectares" class="mb-1 small-txt txt-orange"><span>Extent In Hectares</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id = "extHect"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "Extent_in_ares" class="mb-1 small-txt txt-orange"><span>Extent In Ares</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="extAres"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "total_tax" class="mb-1 small-txt txt-orange"><span>Total Tax</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="totTax"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "patta_no" class="mb-1 small-txt txt-orange"><span>Patta No</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p  class="mb-0 small-txt text-white"><span id ="pattaNo"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "porambok" class="mb-1 small-txt txt-orange"><span>Poramboke</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="poramboke"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "remark" class="mb-1 small-txt txt-orange"><span>Remarks</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="remarks"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "remark1" class="mb-1 small-txt txt-orange"><span>Remarks1</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="remarks1"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "form_8no" class="mb-1 small-txt txt-orange"><span>Form8No</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="form8No"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "form_6no" class="mb-1 small-txt txt-orange"><span>Form6No</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="form6No"></span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "isitassessed" class="mb-1 small-txt txt-orange"><span>Is It assessed?</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id = assessed></span></p>
+                      </div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p id = "isitcultivable" class="mb-1 small-txt txt-orange"><span>Is It cultivable?</span></p>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0 small-txt text-white"><span id ="cultivable"></span></p>
+                      </div> 
+                    </div>
+                  
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <h4 id = "crop_info"><i class="bi bi-file-earmark-check"></i> Crop Info (GRAINS)</h4>
+            <div class="mb-2 col-12 col-lg-12 px-0">
+              <div class="card">
+                <div class="card-body py-1">
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "crop_type_ta"class="mb-1 small-txt txt-orange"><span>Crop Type</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id = "crop_type"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "crop_id_ta" class="mb-1 small-txt txt-orange"><span>Crop Id</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id = "crop_id"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "crop_name_ta" class="mb-1 small-txt txt-orange"><span>Crop Name</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id = "crop_name"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "crop_extent_id" class="mb-1 small-txt txt-orange"><span>Crop Extent</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id = "crop_extent"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "irrigation_source_ta" class="mb-1 small-txt txt-orange"><span>Irrigation Source</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id = "irrigation_source"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "sown_date_ta" class="mb-1 small-txt txt-orange"><span>Expected Sown Date</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id ="sown_date"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <p id = "harvest_id_ta" class="mb-1 small-txt txt-orange"><span>Expected Harvest Date</span></p>
+                    </div>
+                    <div class="col-6">
+                      <p class="mb-0 small-txt text-white"><span id = "harvest_id"></span></p>
+                    </div> 
+                  </div>
+                  
+                </div>
+              </div>
+            </div> -->
+
+      </div>
+    </div> 
+    <!-- aregister info -->
+
+    <!-- fmb info -->
+    <div data-bs-scroll="true" data-bs-backdrop="false" class="offcanvas offcanvas-start fmb-info" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header py-2">
+        <h5 class="offcanvas-title text-white"><i class="bi bi-file-earmark-check"></i> FMB Sketch</h5>
+        <button type="button" id = "close_fmb" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> 
+      </div>
+      <div class="offcanvas-body py-2">
+        <div class="col-lg-12">
+          <!-- <a href="assets/pdf/sample.pdf" class="btn btn-success mb-2" download="fmb_sketch.pdf">Download FMB Sketch</a> -->
+
+          <!-- <button id="downloadButton" class="btn btn-success mb-2"><i class="bi bi-download"></i> Download PDF</button>  -->
+
+          <!-- <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" id="pdfViewer" allowfullscreen></iframe>
+        </div> -->
+
+        <div class="toolbar">
+          <!-- <button id="downloadButton" class="btn btn-success"><i class="bi bi-download"></i> Download</button> -->
+         
+
+      </div>
+
+        <div id="pdfViewer">
+          <canvas id="pdfCanvas" class="pdf-canvas"></canvas>
+      </div>
+      <style>
+        div#offcanvasExample {
+    height: 71vh;
+    top: 3.5rem;
+} 
+      </style>
+        <!-- <style>
+          .embed-responsive {
+              position: relative;
+              display: block;
+              width: 100%;
+              height: 100%;
+              padding: 0;
+              overflow: hidden;
+          }
+          .embed-responsive::before {
+              display: block;
+              content: "";
+          }
+          .embed-responsive-16by9::before {
+              padding-top: 56.25%;
+          }
+          .embed-responsive-item {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border: 0;
+          }
+      </style> -->
+
+          <!-- <iframe id="fmb_sketch_frame" allowfullscreen="" class="iframe-css w-100 view-pdf" title="Fmb Sketch Frame Wrap" src="assets/pdf/sample.pdf"></iframe> -->
+          <!-- <iframe src="assets/pdf/sample.pdf" class="w-100 view-pdf"></iframe>  -->
+        </div> 
+      </div>
+    </div>
+    <!-- fmb info -->
+
+    <!-- measure tool -->
+    <div class="offcanvas offcanvas-bottom measure_tool" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="offcanvasBottomLabel">
+      <div class="offcanvas-header py-2"> 
+        <h5 class="offcanvas-title text-white">Measure Tool</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="changeMeasurement('None')"></button>
+      </div>
+      <div class="offcanvas-body small py-2">
+        
+        <p class="mb-1 txt-yellow-color font14"><i class="bi bi-check2-circle"></i> Measure</p>
+        <div class="card"> 
+                    <div class="card-body text-white pt-3">
+                      <a href="#" class="card-link text-white" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Area" onclick="changeMeasurement('Polygon')">
+                      <img src="assets/img/area.png" class="icon-white im20">
+                      </a>
+                      <a href="#" class="card-link text-white" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Line" onclick="changeMeasurement('LineString')">
+                      <img src="assets/img/line.png" class="icon-white im20">
+                      </a>
+                      <a href="#" class="card-link text-white bg-red-color mt-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Reset" onclick="changeMeasurement('None')">
+                        Clear
+                      </a>
+                      <span class="show-notify mt-2 d-block mb-2">* clear is used to remove measure</span>
+                    </div>
+                  </div>
+
+
+      </div>
+    </div>
+    <!-- measure tool -->
+
+
+    <!-- jQuery -->
+    <script src="assets/scripts/jquery/jquery.min.js"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+ 
+  
+    <!-- sweetalert -->
+    <!-- <script src="assets/vendor/sweetalert2/js/sweetalert.min.js"></script> -->
+    <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+
+
+    <!-- Bootstrap Bundle with Popper --> 
+    <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/scripts/global.js"></script> 
+    <script type="text/javascript" src="assets/vendor/openlayers/dist/ol.js"></script>
+    <script src="assets/vendor/ol-ext-master/dist/ol-ext.js"></script>
+    <script type="module" src="assets/vendor/openlayers/source/WMTS.js"></script>
+    <script type="module" src="assets/vendor/openlayers/tilegrid/WMTS.js"></script>
+    <script type="module" src="assets/vendor/openlayers/proj.js"></script>
+    <script type="module" src="assets/vendor/openlayers/extent.js"></script>
+    <script type="text/javascript" src="assets/scripts/global.js"></script> 
+
+    <!-- <script type="text/javascript" src="assets/scripts/map.js"></script>  -->
+    <script type="text/javascript" src="assets/scripts/main.js"></script> 
+    <script type="text/javascript" src="assets/scripts/officialmap.js"></script> 
+    <!-- Turf JS -->
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    <script src="assets/scripts/language.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+// $(document).ready(function() {
+//   $('#downloadButton').click(function() {
+//     var url = 'assets/pdf/sample.pdf'; // URL of the PDF file
+//     var filename = 'fmb_sketch.pdf'; // Name of the downloaded file
+  
+//     // Create a temporary link element
+//     var link = document.createElement('a');
+//     link.href = url;
+//     link.download = filename;
+  
+//     // Trigger the click event on the link to start the download
+//     document.body.appendChild(link);
+//     link.click();
+  
+//     // Clean up after the download
+//     document.body.removeChild(link);
+//   });
+// });
+</script> 
+    <!-- Date -->
+    <script type="text/javascript">
+      /*$(document).on({
+         ajaxStart: function() {
+           $('#preloader').show();
+         },
+         ajaxStop: function() {
+           $('#preloader').hide();
+         }
+       });*/
+       document.getElementById("post_tn_form").action = config.post_url;
+
+      var latitude;
+      var longitude;
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var output = (('' + day).length < 2 ? '0' : '') + day + '/' +
+         (('' + month).length < 2 ? '0' : '') + month + '/' + d.getFullYear();
+      document.getElementById("showdate").innerHTML = output;
+      window.onload = () => {
+        getLocation();
+        zoomLocation();
+      };
+    </script>
+    <!-- End Date -->
+    <!-- Time -->
+    <script type="text/javascript">
+      function zoomLocation()
+      {
+        //added for onload map zoom to current location
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            //x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        var geolocation = JSON.parse(window.localStorage.getItem('geolocation'));
+      
+      }
+      function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        const currentLocation = ol.proj.fromLonLat([longitude.toFixed(6), latitude.toFixed(6)]);
+        view.animate({
+          center: currentLocation,
+          duration: 1000,
+          zoom: 17,
+        });
+      }
+      $(document).ready(function () {
+         setInterval('updateClock()', 1000);
+      });
+      // HTML element where the time will be displayed
+      function updateClock() {
+         var currentTime = new Date();
+         var currentHours = currentTime.getHours();
+         var currentMinutes = currentTime.getMinutes();
+         var currentSeconds = currentTime.getSeconds();
+      
+         // Pad the minutes and seconds with leading zeros, if required
+         currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+         currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+      
+         // Choose either "AM" or "PM" as appropriate
+         var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+      
+         // Convert the hours component to 12-hour format if needed
+         currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+      
+         // Convert an hours component of "0" to "12"
+         currentHours = (currentHours == 0) ? 12 : currentHours;
+      
+         // Compose the string for display
+         var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+      
+      
+         $("#showTime").html(currentTimeString);
+      }
+    </script>
+    <!-- End Time -->
+    <script type="text/javascript">
+      /**
+      * Back to top button
+      */
+      const select = (el, all = false) => {
+      el = el.trim()
+      if (all) {
+      return [...document.querySelectorAll(el)]
+      } else {
+      return document.querySelector(el)
+      }
+      }
+      /**
+      * Easy on scroll event listener 
+      */
+      const onscroll = (el, listener) => {
+      el.addEventListener('scroll', listener)
+      }
+      let backtotop = select('.back-to-top')
+      if (backtotop) {
+      const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+      backtotop.classList.add('active')
+      } else {
+      backtotop.classList.remove('active')
+      }
+      }
+      window.addEventListener('load', toggleBacktotop)
+      onscroll(document, toggleBacktotop)
+      }
+    </script>
+    <script type="text/javascript">
+      /*if (window.localStorage.getItem("user_details_kmut_verification") === null) {
+        window.location.href = "index.html";
+      } 
+      else 
+      {
+        var user_details = JSON.parse(window.localStorage.getItem('user_details_kmut_verification'));
+        console.log(user_details);
+        var shop_code= user_details.shop_code;
+        $("#user_name").empty();
+        $("#mobile_number").empty();
+        $("#user_name").append(user_details.user_name);
+        $("#mobile_number").append(user_details.mobile_number);
+      }*/
+      $(document).ready(function () {
+        $('#show_date').html('On '+new Date().toUTCString().split(',')[1].slice(0,12));
+        $('#current_date').val(new Date().toISOString().split('T')[0]);
+        var date1 = new Date().toISOString().split('T')[0];
+        data2 = date1.replace("-", "");
+        date = data2.replace("-", "");
+        //getPoints(user_details.user_id,date,date);
+        $("#getLocation").click(function () {
+          getLocation();
+          var geolocation = JSON.parse(window.localStorage.getItem('geolocation'));
+          var latitude = geolocation.latitude;
+          var longitude = geolocation.longitude;
+          const currentLocation = ol.proj.fromLonLat([longitude.toFixed(6), latitude.toFixed(6)]);
+          view.animate({
+            center: currentLocation,
+            duration: 1000,
+            zoom: 17,
+          });
+        });
+        $(".list_of_faclities_close").click(function () {
+          $('body').removeClass('showHalfMap');
+          /*map.invalidateSize()
+          setInterval(function () {
+            map.invalidateSize()
+          }, 100);*/
+        });
+        $('#search_query_text').on('input',function(){
+          if($(this).val().length>=3)
+          {
+            //$('#search_location').removeClass('d-none');
+            $('.loaderGif').removeClass('d-none');
+            searchTimeout = setTimeout(searchlocation, 2000);
+          }
+          else
+          {
+             //$('#search_location').addClass('d-none');
+             $('#result_search').empty();
+             $('#result_search').addClass('d-none');
+          }
+        });
+       
+
+
+});
+
+$(document).ready(function () {
+    districtDropDown();
+
+    // Auto highlight based on the most specific stored value
+    if (storedVillageCode) {
+        // Village level highlight
+        highlight();
+    } 
+    if (storedFirkaCode) {
+        // Village level highlight
+        // getVillage(); // Load village dropdown and highlight taluk
+    }
+    else if (storedTalukCode) {
+        // Taluk level highlight
+        getfirka();
+    } else if (storedDistrictCode) {
+        // District level highlight
+        getTaluk(); // Load taluk dropdown and highlight district
+    }
+    $('.village').change(function() {
+        // ZoomTo();
+        highlight();
+   
+        getSurveyNo();
+
+
+    });
+
+    $('.survey').change(function() {
+      getSubdivision();
+        // ZoomTo();
+        highlight();
+    });
+
+    $('.subdivision1').change(function() {
+        // ZoomTo();
+        highlight();
+    });
+});
+
+
+      
+//     $('.district').change(function() {
+//         getTaluk();
+//         // ZoomTo();
+//         highlight();
+//     });
+
+    // $('.taluk').change(function() {
+    //     // getVillage();
+    //     // ZoomTo();
+    //     // highlight();
+    // });
+
+//     $('.firka').change(function() {
+//   getVillage();
+
+
+// });
+
+    
+
+// function loadVillageTiles() {
+//     var selectedVillageCode = $('.village').val();
+//     var tileUrl = getVillageTileFromLocalStorage(selectedVillageCode);
+    
+//     if (tileUrl) {
+//         var cadastral_xyz = new ol.layer.Tile({
+//             title: "Cadastral XYZ",
+//             visible: true,
+//             name: "Cadastral XYZ",
+//             source: new ol.source.XYZ({
+//                 url: tileUrl,
+//                 attributions: "© TNGIS",
+//             }),
+//             displayInLayerSwitcher: true,
+//         });
+//         map.addLayer(cadastral_xyz);
+//     }
+// }
+      
+      /*$('#current_date').on('change',function(){
+        var current_date = $('#current_date').val();
+          $('#show_date').html('On '+new Date(current_date).toUTCString().split(',')[1].slice(0,12));
+          data2 = $('#current_date').val().replace("-", "");
+          date = data2.replace("-", "");
+          getPoints(user_details.user_id,date,date);
+      });*/
+    </script>
+    <script>
+      // Setup Geolocation API options
+      const gpsOptions = {
+        enableHighAccuracy: true,
+        //timeout: 15000,
+        maximumAge: 0
+      };
+      function getLocation() {
+        if ("geolocation" in navigator) { //check geolocation available 
+          locationCapture();
+        } else {
+          // console.log("Browser doesn't support geolocation!");
+          alert("Geolocation is not supported in your device");
+        }
+      }
+      // Location Capture Function
+      function locationCapture() {
+        const watchID = navigator.geolocation.watchPosition(gpsSuccess, gpsError, gpsOptions);
+      }
+      // Geolocation: Error
+      function gpsError(err) {
+        console.error(`Error: ${err.code}, ${err.message}`);
+      }
+      // Geolocation: Success
+      function gpsSuccess(pos) {
+        // Get the lat, long, accuracy from Geolocation return (pos.coords)
+        const {
+          latitude,
+          longitude,
+          accuracy,
+          altitude
+        } = pos.coords;
+        // console.log(latitude + '--' + longitude);
+        const localStorageGeoLocation = {
+          latitude: latitude,
+          longitude: longitude,
+          accuracy: accuracy,
+          altitude: altitude
+        };
+        window.localStorage.setItem('geolocation', JSON.stringify(localStorageGeoLocation));
+        $("#user_lat").empty();
+        $("#user_long").empty();
+        $('#accuracy').empty();
+        $("#user_lat").append(latitude.toFixed(6));
+        $("#user_long").append(longitude.toFixed(6));
+        var coordinates = [longitude.toFixed(6), latitude.toFixed(6)];
+        // coordinates = ol.proj.transform(coordinates, 'EPSG:4326', 'EPSG:3857');
+        positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates).transform('EPSG:4326', 'EPSG:3857') : null);
+        //circle_current_location(longitude,latitude);
+        $('#accuracy').text(accuracy.toFixed(2))
+      }
+      function searchlocation()
+      {
+      
+        clearTimeout(searchTimeout);
+        $('#search_location').addClass('pevent-none');
+        var search_query = $('#search_query_text').val();
+        if(search_query.length>=3)
+        {
+          var data = {
+            "format": "json",
+            "countrycodes":"IN",
+            "addressdetails": 1,
+            "q": search_query,
+            //"limit": 5
+          };
+          $.ajax({
+            method: "GET",
+            //url: "https://nominatim.openstreetmap.org",
+            url: "https://tngis.tnega.org/nominatim/search.php",
+            data: data
+          })
+          .done(function( msg ) {
+              //console.log( msg );
+              if(msg.length>0)
+              {
+                var result_elements = '';
+                $('#result_search').empty();
+                for(var i=0;i<msg.length;i++)
+                {
+                  //var bbox = msg[i].lat.toString();
+                  result_elements += '<li onclick="zoomtosearch('+msg[i].lat+','+msg[i].lon+')">'+msg[i].display_name+'</li>';
+                }
+                $('#result_search').append(result_elements);
+                $('#result_search').removeClass('d-none');
+              }
+              else
+              {
+                $('#result_search').empty();
+                $('#result_search').append('<li class="search_noresult">No Result Found</li>');
+                $('#result_search').removeClass('d-none');
+              }
+          });
+          $('.loaderGif').addClass('d-none');
+          $('#search_location').removeClass('pevent-none');
+        }
+      }
+      //search zoom to location
+      function zoomtosearch(lat,lon)
+      {
+       var lat = parseFloat(lat);
+       var long = parseFloat(lon);
+       // Zoom to lat lon
+       const currentLocation_point_search = ol.proj.fromLonLat([long.toFixed(6), lat.toFixed(6)]);
+       view.animate({
+          center: currentLocation_point_search,
+          duration: 1000,
+          zoom: 17,
+       });
+       $('#result_search').addClass('d-none');
+       //$('#search_location').addClass('d-none');
+      }
+      var vectorLayer;
+      const storedDistrictCode = localStorage.getItem('assignedDistrict');
+    const storedTalukCode = localStorage.getItem('assignedTaluk');
+    const storedFirkaCode = localStorage.getItem('assignedFirka');
+    const storedVillageCode = localStorage.getItem('assignedVillage');
+      function districtDropDown() {
+        $('.taluk').empty();
+        $('.taluk').append('<option value="all">Select Taluk</option>')
+        $('.village').empty();
+        $('.village').append('<option value="all">Select Village</option>')
+        $('.survey').empty();
+        $('.survey').append('<option value="all">Select Survey Number</option>')
+        // Get data from localStorage
+   
+
+
+    // Set data to send to the API
+    let requestData = { 'type': 'district' }; // Default request type is 'district'
+    
+    // If district code is available in localStorage, use it as input
+    if (storedDistrictCode) {
+        requestData.district_code = storedDistrictCode; // Add district code to the request
+    }
+       
+    $.ajax({
+        type: 'POST',
+        headers: { 'X-APP-ID': 'te$t' },
+        url: config.ddl_url + '/v1/admin_dropdown',
+        data: requestData,
+        dataType: 'json',
+        success: function (result) {
+            if (result.success == 1) {
+                var district = result.data;
+                var district_option = '<option value="all">Select District</option>';
+                $('.district').empty(); // Clear the existing options
+
+                district.forEach(function (select) {
+                    // Handle preselection if district code matches the stored one
+                    district_option += `<option value='${select.district_code}' ${
+                        storedDistrictCode == select.district_code ? 'selected' : ''
+                    }>${select.district_name}</option>`;
+                });
+
+
+                $('.district').append(district_option); // Append the options
+
+                // $('.district').val('all');
+                
+               
+               if (storedDistrictCode) {
+                getTaluk();
+                }
+            }
+        }
+    });
+}
+
+     
+
+      // Taluk Dropdown
+      function getTaluk() {
+    // Clear dropdowns and set default values
+    $('.taluk').empty().append('<option value="all">Select Taluk</option>');
+    $('.village').empty().append('<option value="all">Select Village</option>');
+    $('.survey').empty().append('<option value="all">Select Survey Number</option>');
+
+    var district = storedDistrictCode || $(".district").val();
+
+    // Avoid sending AJAX if no district is selected
+    if (district === "all" || !district) {
+        return;
+    }
+
+    // Prepare data object for the AJAX request
+    var requestData = {
+        'type': 'taluk',
+        'district_code': district
+    };
+
+    // If taluk code is stored in localStorage, add it to the requestData
+    if (storedTalukCode) {
+        requestData.taluk_code = storedTalukCode; // Add taluk_code to the request
+    }
+
+    $.ajax({
+        type: 'POST',
+        headers: { 'X-APP-ID': 'te$t' },
+        url: config.ddl_url + '/v1/admin_dropdown',
+        data: requestData,  // Send requestData including taluk_code if available
+        dataType: 'json',
+        success: function (result) {
+            if (result.success == 1) {
+                var taluks = result.data;
+                var taluk_option = '<option value="all">Select Taluk</option>';
+
+                // Populate the taluk dropdown with the returned data
+                $('.taluk').empty();
+                taluks.forEach(function (taluk) {
+                    // Add each taluk to the options, with stored taluk pre-selected if it matches
+                    taluk_option += `<option value='${taluk.taluk_code}' ${
+                        storedTalukCode == taluk.taluk_code ? 'selected' : ''
+                    }>${taluk.taluk_name}</option>`;
+                });
+
+                // Append options to the taluk dropdown
+                $('.taluk').append(taluk_option);
+
+                // Set taluk dropdown to the default 'all' unless storedTalukCode is provided
+                if (storedTalukCode) {
+                    // getVillage();
+                    getfirka();
+                }
+            }
+        }
+    });
+}
+
+
+function getfirka() {
+        var district = storedDistrictCode || $('.district').val();
+        var taluk = storedTalukCode || $('.taluk').val();
+
+        var requestData = {
+          'type': 'firka',
+            'taluk_code': taluk,
+            'district_code': district
+    };
+      
+        $('.firka').empty().append('<option value="all">Select firka</option>');
+        $('.survey').empty().append('<option value="all">Select Survey Number</option>');
+     
+        $.ajax({
+          type: 'POST',
+          headers: { 'X-APP-ID': 'te$t' },
+          url:config.ddl_url+'/v1/admin_dropdown',
+          // url: 'http:village_dashboard_api/v1/admin_dropdown',
+          data: requestData,  // Send requestData including taluk_code if available,
+          dataType: 'json',
+          success: function (result) {
+            if (result.success == 1) {
+              var firkas = result.data;
+              var firka_option = '<option value="all">Select firka</option>';
+              $('.firka').empty();
+              firkas.forEach(function (firka) {
+                firka_option += `<option value='${firka.firka_code}'>${firka.firka_name} </option>`
+              });
+              $('.firka').append(firka_option);
+               // Automatically trigger highlight if village is stored
+               if (storedFirkaCode) {
+                    highlight();
+                    // getVillage();
+                }
+
+                 getVillage();
+             
+             
+            }
+          }
+        })
+      }
+     
+      // Village Dropdown
+      function getVillage() {
+        var district = storedDistrictCode || $('.district').val();
+        var taluk = storedTalukCode || $('.taluk').val();
+      
+        $('.village').empty().append('<option value="all">Select Village</option>');
+        $('.survey').empty().append('<option value="all">Select Survey Number</option>');
+     
+        $.ajax({
+          type: 'POST',
+          headers: { 'X-APP-ID': 'te$t' },
+          url:config.ddl_url+'/v1/admin_dropdown',
+          // url: 'http:village_dashboard_api/v1/admin_dropdown',
+          data: {
+            'type': 'village',
+            'taluk_code': taluk,
+            'district_code': district
+          },
+          dataType: 'json',
+          success: function (result) {
+            if (result.success == 1) {
+              var villages = result.data;
+              var village_option = '<option value="all">Select Village</option>';
+              $('.village').empty();
+              villages.forEach(function (village) {
+                village_option += `<option value='${village.village_code}'>${village.village_name} (${village.village_type}) </option>`
+              });
+              $('.village').append(village_option);
+               // Automatically trigger highlight if village is stored
+               if (storedVillageCode) {
+                    highlight();
+                }
+               
+             
+            }
+          }
+        })
+      }
+
+//     
+      function getSurveyNo() {
+        var district = $('.district').val();
+        var taluk = $('.taluk').val();
+        var village = $('.village').val();
+        if (village == 'xxx') {
+          village = '000';
+        } else {
+        if (village.length === 1) {
+          village = '00' + village;
+        } else if (village.length === 2) {
+          village = '0' + village;
+        }
+      }
+        $('.survey').empty();
+        $('.survey').append('<option value="all">Select Survey Number</option>')
+        $.ajax({
+          type: 'POST',
+          headers: { 'X-APP-ID': 'te$t' },
+          url:config.ddl_url+'/v1/survey_subdivision_dropdown',
+          data: {
+            'type': 'survey',
+            'taluk_code': taluk,
+            'district_code': district,
+            'village_code': village,
+          },
+          dataType: 'json',
+          success: function (result) {
+            if (result.success == 1) {
+              var surveys = result.data;
+              var survey_option = '<option value="all">Select Survey Number</option>';
+              $('.survey').empty();
+              surveys.forEach(function (survey) {
+                survey_option += `<option value='${survey.survey_code}'>${survey.survey_name}  </option>`
+              });
+              $('.survey').append(survey_option);
+            }
+          }
+        })
+        
+      }
+
+      // Subdivision Dropdown
+// Subdivision Dropdown
+function getSubdivision() {
+  var district = $('.district').val();
+  var taluk = $('.taluk').val();
+  var village = $('.village').val();
+  var survey = $('.survey').val();
+  $('.subdivision1').empty();
+  $('.subdivision1').append('<option value="all">Select Subdivision</option>')
+  // var sub_division = $(this).val(); // Get the selected sub-division code
+  
+  // Format the village code
+  if (village == 'xxx') {
+    village = '000';
+  } else {
+    if (village.length === 1) {
+      village = '00' + village;
+    } else if (village.length === 2) {
+      village = '0' + village;
+    }
+  }
+
+  $.ajax({
+    type: 'POST',
+    headers: { 'X-APP-ID': 'te$t' },
+    url: config.ddl_url+'/v1/survey_subdivision_dropdown',
+    data: {
+      'type': 'sub_division',
+      'taluk_code': taluk,
+      'district_code': district,
+      'village_code': village,
+      'survey_no': survey
+    },
+    dataType: 'json',
+    success: function (result) {
+      if (result.success == 1) {
+        var subdivisions = result.data;
+        var subdivision_option = '<option value="all">Select Subdivision</option>';
+        $('.subdivision1').empty();
+        subdivisions.forEach(function (subdivision) {
+          subdivision_option += `<option value='${subdivision.sub_division_code}'>${subdivision.sub_division_name}</option>`
+        });
+        $('.subdivision1').append(subdivision_option);
+      }
+    }
+  })
+}
+
+
+
+      function ZoomTo() {
+        var dist_code = $('.district').val();
+        var taluk_code = $('.taluk').val();
+        var village_code = $('.village').val();
+        var survey = $('.survey').val();
+        // var subdiv = 'all';
+        var subdiv = $('.subdivision1').val();
+
+        $.ajax({
+          type: 'POST',
+          headers: { 'X-APP-ID': 'te$t' },
+          url: config.ddl_url+'/v1/get_extent',
+          data: {
+            'district_code': dist_code,
+            'taluk_code': taluk_code,
+            'village_code': village_code,
+            'survey_no': survey,
+            'sub_div': subdiv,
+            'type': 'extent'
+          },
+          success: function (response) {
+            var zoom_extent = response.extent;
+            // console.log(zoom_extent);
+            if(zoom_extent!==''){
+            zoom_extent = Array.from(zoom_extent.split(','), Number);
+            zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
+            map.getView().fit(zoom_extent, { duration: 3000, padding: [100, 50, 100, 50] });
+            if (vectorLayer) {
+                    map.removeLayer(vectorLayer);
+                }
+               
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: '',
+                text: 'Map Extent Not found',
+                showConfirmButton: true
+            })
+            }
+          }
+        })
+      }
+
+      var localStoragesource = new ol.source.Vector();
+var localLayer = new ol.layer.Vector({
+    source: localStoragesource,
+    // displayInLayerSwitcher: false,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'BLUE',
+            width: 5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 0, 0.1)'
+        })
+    })
+});
+
+
+
+map.addLayer(localLayer);
+localLayer.setVisible(true);
+
+
+
+      var dropdownSource = new ol.source.Vector();
+var dropdownLayer = new ol.layer.Vector({
+    source: dropdownSource,
+    // displayInLayerSwitcher: false,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'cyan',
+            width: 5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 0, 0.1)'
+        })
+    })
+});
+
+
+
+map.addLayer(dropdownLayer);
+dropdownLayer.setVisible(true);
+
+function highlight() {
+    var dist_code = $('.district').val();
+    var taluk_code = $('.taluk').val();
+    var village_code = $('.village').val();
+    var survey_number = $('.survey').val().trim(); // Trim leading/trailing spaces
+    var subdiv = $('.subdivision1').val().trim(); // Trim leading/trailing spaces
+    // var sub_division_number = 'all';
+    var type = '';
+     if (subdiv && subdiv !== 'all' && subdiv !== 'select subdivision Number') {
+        type = 'sub_division_number';
+    } else if (survey_number && survey_number !== 'all') {
+        type = 'survey_number';
+    } else if (village_code && village_code !== 'all') {
+        type = 'revenue_village';
+    } else if (taluk_code && taluk_code !== 'all') {
+        type = 'taluk';
+    } else if (dist_code && dist_code !== 'all') {
+        type = 'district';
+    } else {
+        // console.log("Invalid input");
+        return;
+    }
+
+      var requestData = {
+        'district_code': dist_code,
+        'taluk_code': taluk_code,
+        'village_code': village_code,
+        'survey_number': survey_number,
+        'sub_division_number': subdiv,
+        'case': type,
+        'code_type': 'revenue'
+    };
+
+    // console.log("Request Data:", requestData);
+
+    // AJAX request to get geometry data based on dropdown selection
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-APP-KEY': config.otp_app_key,
+            'X-APP-NAME': config.otp_app_name
+        },
+        // url: 'http:generic_api/v1/get_geom',
+         url: config.send_verify_otp + '/v1/get_geom',
+        data: requestData,
+        success: function (geom) {
+            if (geom.success) {
+                var featureCollection = geom.data;
+                var features = new ol.format.GeoJSON().readFeatures(featureCollection, {
+                    dataProjection: 'EPSG:4326',
+                    featureProjection: 'EPSG:3857'
+                });
+
+                localStoragesource.clear(); // Clear previous features
+                localStoragesource.addFeatures(features); // Add new features
+            
+        // Ensure boundary stays visible
+        localLayer.setVisible(true);
+        mapClickLayer.setVisible(false);
+
+                var extent = localLayer.getSource().getExtent();
+                map.getView().fit(extent, { duration: 4000, maxZoom: 20, padding: [30, 30, 30, 30] });
+
+                // dropdownLayer.setVisible(true);
+                // console.log('Geometry Data:', geom.data);
+            } else {
+                console.error(geom.message);
+            }
+        }
+    });
+}
+
+
+
+
+
+    //   
+    </script>
+
+    
+    <script>
+      $(document).ready(function(){
+        // $(".box1").click(function(){
+        //   $(".box1").toggleClass("b1-highlight");
+        // });
+        // $(".box2").click(function(){
+        //   $(".box2").toggleClass("b2-highlight");
+        // });
+
+        $(document).ready(function(){
+         // $('#a_register').addClass('disabled-link').removeAttr('href');
+          $('button').on('click', function(){
+             $('button').removeClass('b1-highlight');
+             $(this).addClass('b1-highlight')
+          });
+        });
+
+
+      });
+      </script>
+      <script>
+        $(document).ready(function() {
+          // Show corresponding div when a radio button is selected
+          $('input[name="inlineRadioOptions"]').change(function() {
+            // Hide all search divs
+            $('.patta_search, .chitta_search').hide();
+            
+            // Show the corresponding search div based on the selected radio button
+            var selectedValue = $(this).val();
+            if (selectedValue === "option1") {
+              $('.patta_search').show();
+            } else if (selectedValue === "option2") {
+              $('.chitta_search').show();
+            }
+          });
+        });
+      </script>   
+              <script>
+
+                var storedMobileNumber;
+                var storedusername;
+                // $(document).ready(function() {
+                
+                // console.log('Attempting to retrieve mobile number from localStorage...');
+                    // Retrieve mobile number from LOCAL STORAGE
+                    storedMobileNumber = localStorage.getItem('mobile_number');
+                    storedusername = localStorage.getItem('username');
+                    // console.log('Retrieved mobile number IN MAP.HTML:', storedMobileNumber);
+                    $("#mobile_number").append(storedMobileNumber);
+                    $("#username").append(storedusername);
+                // });
+                
+                 </script>
+  </body>
+</html>

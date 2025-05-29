@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+  <!-- Bootstrap CSS -->
+  <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert.min.css" />
+  <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css" />
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+  <!-- general CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+  <title>Tamilnilam</title>
+  <style>
+
+
+.disabled {
+  color: #bbb !important; /* Light gray color for disabled state */
+  pointer-events: none; /* Disable interaction */
+  cursor: not-allowed; /* Show 'not-allowed' cursor on hover */
+  text-decoration: none; /* Remove underline for consistency */
+}
+
+    #snackbar1 {
+      visibility: hidden;
+      min-width: 250px;
+      background-image: linear-gradient(147deg, #9d064bf7 30%, #9f042a 94%);
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 10px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+    }
+
+    #snackbar1.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
+      }
+
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
+
+    /* Chrome * Safari */
+    input[type="number"]::-webkit-inner-spin-button {
+      display: none;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .blinkAlert {
+      z-index: 9;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+      animation: pulseone 1500ms infinite;
+      width: 100%;
+    }
+
+    @keyframes pulseone {
+      0% {
+        box-shadow: #ff0000 0 0 0 0;
+      }
+
+      75% {
+        box-shadow: #ff69b400 0 0 0 16px;
+      }
+    }
+
+    .blinkAlert1 {
+      z-index: 9;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+      animation: pulseone1 1500ms infinite;
+      width: 100%;
+    }
+
+    @keyframes pulseone1 {
+      0% {
+        box-shadow: #00ff9e 0 0 0 0;
+      }
+
+      75% {
+        box-shadow: #ff69b400 0 0 0 16px;
+      }
+    }
+  </style>
+  <script type="module" src="./component/accessDenied.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100 bg-login">
+  <div id="preloader" style="display:none"></div>
+  <!-- Begin page content -->
+  <main class="flex-shrink-0 h-100 login-pg v-center">
+    <div class="area">
+      <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <div class="container-fluid bg-signup otp-wrap">
+      <div class="col-lg-12 text-center">
+        <img src="assets/img/logo.png" class="img-fluid logoimg" alt="logo">
+      </div>
+    
+      <div class="col-lg-12">
+        <div class="logo-section">
+          <!-- <img src="assets/img/logo.png" class="img-fluid logo" alt="Department"> -->
+          <h2 class="otp-txt">OTP <span class="d-block">Verification</span></h2>
+          <p class="logo-des font13 text-white">We have sent you a 4 digit verification code to this <span
+              id="mobile_number"></span>
+          <p>
+        </div>
+        <div class="get-infos">
+          <div class="container-fluid j-initial row t-left mb-2">
+          </div>
+        </div>
+        <div class="submit-no">
+          <form id="myForm">
+            <div class="d-flex justify-content-center otp-value">
+              <div class="">
+                <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"
+                  class="form-control text-center text-white otp-input" name="otp_1" id="otp_1" maxlength="1"
+                  data-next="otp_2" autofocus inputmode="numeric">
+              </div>
+              <div class="mx-1">
+                <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"
+                  class="form-control text-center text-white otp-input" name="otp_2" id="otp_2" maxlength="1"
+                  data-next="otp_3" data-previous="otp_1" inputmode="numeric">
+              </div>
+              <div class="">
+                <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"
+                  class="form-control text-center text-white otp-input" name="otp_3" id="otp_3" maxlength="1"
+                  data-next="otp_4" data-previous="otp_2" inputmode="numeric">
+              </div>
+              <div class="mx-1">
+                <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"
+                  class="form-control text-center text-white otp-input" name="otp_4" id="otp_4" maxlength="1"
+                  data-previous="otp_3" inputmode="numeric">
+              </div>
+            </div>
+            <!-- <div class="text-center my-2">
+                <button type="submit" class="text-white btn btn-success btn-md"><i class="bi  bi-arrow-right-circle"></i> Submit</button>
+              </div> -->
+          </form>
+          <div id="snackbar1"></div>
+        </div>
+        <div class="otp-info text-center">
+          <a href="javascript:void(0);" class="d-block deco-none font13 text-white">Didn’t receive it?</a>
+          <a href="javascript:void(0);" class="d-block deco-none font13 text-white disabled" id="resendOtpLink" onclick="resendOTP()">
+            <i
+              class="bi bi-repeat"></i>
+            Re-Send
+            OTP</a>
+            <p id="timerDisplay" class="font13 text-white mt-2"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- ==================================================== -->
+  <!-- jQuery -->
+  <script src="assets/scripts/jquery/jquery.min.js"></script>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+  <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+  <script src="assets/scripts/global.js"></script>
+  <script src="assets/scripts/language.js"></script>
+  <!-- <script type="text/javascript" src="assets/scripts/officialmap.js"></script>  -->
+  <script>
+    function checkScreenSize() {
+      //console("Screen width:", window.innerWidth); // Log the screen width
+      if (window.innerWidth > 768) {
+        const messageElement = document.createElement('access-denied');
+        document.body.innerHTML = ''; // Clear the body content
+        document.body.appendChild(messageElement); // Append the web component
+      }
+    }
+    window.onload = checkScreenSize;
+    window.onresize = checkScreenSize;
+  </script>
+  <script>
+
+    var storedMobileNumber = localStorage.getItem('mobile_number');
+    var storedUserType = localStorage.getItem('user_type');
+    var storedUserId = localStorage.getItem('user_id');
+
+    $(document).ready(function () {
+      startResendOtpTimer();
+      $("#mobile_number").text(storedMobileNumber || 'your mobile');
+
+
+      $("#mobile_number").val(storedMobileNumber);
+
+      // Initialize jQuery Validate
+      $("#myForm").validate({
+        rules: {
+          otp_1: { required: true },
+          otp_2: { required: true },
+          otp_3: { required: true },
+          otp_4: { required: true }
+        },
+        messages: {
+          otp_1: { required: "Please enter the OTP" },
+          otp_2: { required: "Please enter the OTP" },
+          otp_3: { required: "Please enter the OTP" },
+          otp_4: { required: "Please enter the OTP" }
+        },
+        errorPlacement: function (error, element) {
+          $('#snackbar1').text(error.text());
+          $('#snackbar1').addClass('error show');
+          setTimeout(function () {
+            $('#snackbar1').removeClass('show');
+          }, 3000);
+        },
+        submitHandler: function (form) {
+          verifyOtp();
+        }
+      });
+
+      // Move to next input box and check if all OTP fields are filled
+      $('.otp-input').keyup(function () {
+        if (this.value.length == this.maxLength) {
+          var nextField = $(this).data('next');
+          if (nextField) {
+            $('#' + nextField).focus();
+          } else {
+            // Check if all OTP fields are filled
+            if ($('#otp_1').val() && $('#otp_2').val() && $('#otp_3').val() && $('#otp_4').val()) {
+              $("#myForm").submit();  // Automatically submit the form
+            }
+          }
+        }
+      });
+    });
+
+    // Verify OTP via AJAX
+    function verifyOtp() {
+      const otp = ['otp_1', 'otp_2', 'otp_3', 'otp_4'].map(id => $(`#${id}`).val()).join('');
+      const ajaxSettings = {
+        type: 'POST',
+        // url: `${config.send_verify_otp}/v1/tamil_nilam_otp`,
+        url: config.tamil_nilam_url + '/v1/otp',
+        headers: {
+          // 'X-APP-KEY': config.otp_app_key,
+          // 'X-APP-NAME': config.otp_app_name,
+          'X-APP-USER-ID': storedUserId,
+        },
+        data: {
+          otp_type: 'sms',
+          request_type: 'verify',
+          mobile_number: storedMobileNumber,
+          otp: otp,
+          app_name: 'oTp$%^&!@'
+        },
+        success: function (response) {
+          //console("Full response:", response);
+          if (response && response.length > 0 && response[0].success === 1) {
+            const userData = response[0].data; // Access the `data` object
+            const user_id = userData.user_id;
+            const username = userData.username;
+            const is_first_tym_user = userData.is_first_tym_user;
+            const role = userData.role;
+            const assignedDistrict = userData.district_code; // Get assigned district
+            const assignedTaluk = userData.taluk_code; // Get assigned taluk
+            const assignedFirka = userData.firka_code;
+            const assignedVillage = userData.village_code; // Get assigned village
+            localStorage.setItem('username', username);
+            localStorage.setItem('role', role);
+            localStorage.setItem('user_id', user_id);
+            localStorage.setItem('is_first_tym_user', is_first_tym_user);
+            localStorage.setItem('assignedDistrict', assignedDistrict);
+            localStorage.setItem('assignedTaluk', assignedTaluk);
+            localStorage.setItem('assignedFirka', assignedFirka);
+            localStorage.setItem('assignedVillage', assignedVillage);
+            $('#snackbar1').text("OTP verified successfully").removeClass('error').addClass('success show');
+            setTimeout(() => {
+              // if (role == 'VAO') {
+              // if (role == 'Deputy Inspector Survey' || role == 'Firka Surveyor') {
+              //   window.location.href = "officialmap.html";
+              // } else {
+              //   window.location.href = storedUserType == 1 ? "sign-up.html" : "map.html";
+              // }
+
+              if (is_first_tym_user) {
+                window.location.href = "sign-up.html"; // Redirect to sign-up for first-time users
+                localStorage.setItem('valid_user', "false");
+              } else {
+                window.location.href = "map.html"; // Redirect to map for returning users
+                localStorage.setItem('valid_user', "true");
+              }
+            }, 3000);
+          } else {
+            $('#snackbar1').text("Invalid OTP").removeClass('success').addClass('error show');
+          }
+        },
+        error: function (xhr, status, error) {
+          showSnackbar("Invalid OTP", false);
+          clearOtpFields();
+        }
+      };
+      $.ajax(ajaxSettings);
+    }
+
+    // Clear OTP fields
+    function clearOtpFields() {
+      $('#otp_1').val('');
+      $('#otp_2').val('');
+      $('#otp_3').val('');
+      $('#otp_4').val('');
+      $('#otp_1').focus();
+    }
+
+    // Show snackbar message
+    function showSnackbar(message, isSuccess) {
+      const snackbar = $('#snackbar1');
+      snackbar.text(message);
+      snackbar.removeClass('success error').addClass(`${isSuccess ? 'success' : 'error'} show`);
+      setTimeout(() => snackbar.removeClass('show'), 3000);
+    }
+
+
+    function resendOTP() {
+      startResendOtpTimer();
+      var mobile_number = $("#mobile_number").text();
+
+      $.ajax({
+        type: 'POST',
+        url: config.tamil_nilam_url + '/v1/otp',
+        headers: { 'X-APP-KEY': config.otp_app_key, 'X-APP-NAME': config.otp_app_name, 'X-APP-USER-ID': storedUserId, },
+        data: {
+          'otp_type': 'sms',
+          'request_type': 'send',
+          'mobile_number': storedMobileNumber,
+          'app_name': 'oTp$%^&!@'
+        },
+        success: function (response) {
+          // var response = JSON.parse(response);
+          if (response && response.length > 0 && response[0].success === 1) {
+            Swal.fire({
+              icon: "success",
+              title: 'OTP sent successfully',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          }
+        },
+        error: function (xhr, status, error) {
+          // Handle error here
+          Swal.fire({
+            icon: "error",
+            title: error,
+            showConfirmButton: true,
+            timer: 3000
+          });
+        }
+      });
+    }
+
+    const timerDuration = 180;
+
+function startResendOtpTimer() {
+  const resendOtpLink = document.getElementById("resendOtpLink");
+  const timerDisplay = document.getElementById("timerDisplay");
+  resendOtpLink.classList.add("disabled");
+  resendOtpLink.style.pointerEvents = "none"; // Disable link interaction
+
+  let timeRemaining = timerDuration;
+
+  const timer = setInterval(() => {
+    // Convert seconds to minutes and seconds
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    timerDisplay.textContent = `You can resend OTP in ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+    timeRemaining--;
+
+    // When timer ends, enable the link
+    if (timeRemaining < 0) {
+      clearInterval(timer);
+      resendOtpLink.classList.remove("disabled");
+      resendOtpLink.style.pointerEvents = "auto"; // Enable link interaction
+      timerDisplay.textContent = ""; // Clear the timer display
+    }
+  }, 1000); // Update every second
+}
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+  <!-- Bootstrap CSS -->
+  <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+  <!-- open layer CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/openlayers/ol.css">
+  <link rel="stylesheet" href="assets/vendor/ol-ext-master/dist/ol-ext.css" />
+  <!-- sweetalert -->
+  <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert.min.css" />
+  <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css" />
+  <!-- general CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/dashboardstyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf_viewer.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <title>Tamilnilam</title>
+  <style>
+    /*    @media (min-width: 576px) and (max-width: 768px) {
+    .search-by-loc {
+          top: 5.8rem !important;
+          width: 97% !important;
+          left: 2rem !important;
+    }
+}*/
+
+
+    .small-font1 {
+      font-size: 12px;
+      /* Adjust size as needed */
+      line-height: 1.2;
+      /* Adjust for better readability */
+
+      word-wrap: break-word;
+    }
+
+
+    ul#result_search {
+      width: 100%;
+      max-height: 341px;
+      /* Maximum height before scrolling */
+      overflow-y: auto;
+      /* Enables scroll only when content exceeds max height */
+    }
+
+    .search-by-land {
+      height: max-content;
+      overflow-y: hidden;
+      background: #0000008f;
+      top: 4.8rem !important;
+      width: auto;
+      max-width: 83% !important;
+      left: 3rem !important;
+      border: 0;
+      box-sizing: border-box;
+      padding: 0 !important;
+    }
+
+    .search-by-loc {
+      height: 26%;
+      background: transparent;
+      top: 3.3rem !important;
+      width: 93% !important;
+      left: 2rem !important;
+      border: 0;
+    }
+
+    .ol-control.ol-layerswitcher {
+      position: absolute;
+      right: 0.5em;
+      text-align: left;
+
+      top: 20.9em !important;
+
+      /*top: 4.9em !important;*/
+
+      /*top: 18.9em !important;*/
+      max-height: calc(100% - 6em);
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow: hidden;
+      z-index: 9999999;
+      border: 1px solid #1c2b69 !important;
+      background: #ccc !important;
+    }
+
+    iframe {
+      width: 100%;
+      height: 80vh;
+      /* Adjusts height based on viewport height */
+      border: none;
+      /* Remove border for cleaner look */
+    }
+
+    .txt-orange {
+      color: #fff218 !important;
+    }
+
+    .box_wrap {
+      background: #0c2552;
+      border-radius: 12px 11px !important;
+      font-size: 14px;
+    }
+
+    .wrap_btns {
+      font-size: 14px !important;
+      padding: 2px 16px !important;
+    }
+
+    .bgred {
+      background: red !important;
+    }
+
+    #pdfViewer {
+      width: 100%;
+      height: 77vh;
+      overflow: auto;
+      background: #eee;
+    }
+
+    #pdfViewer1 {
+      width: 100%;
+      height: 56vh;
+      overflow: auto;
+      background: #eee;
+    }
+
+    .pdf-canvas {
+      height: 76vh;
+      width: 100%;
+    }
+
+    .toolbar {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .toolbar button {
+      margin: 5px;
+    }
+
+    .icon-out3 {
+      float: right;
+      position: absolute;
+      right: 2rem;
+      top: 2px;
+      font-size: 14px !important;
+    }
+
+    a.card-link {
+      text-decoration: none;
+    }
+
+    .bg-red-color {
+      background: #f83434;
+      font-size: 12px;
+      padding: 3px 7px;
+      border-radius: 3px 7px;
+    }
+
+    .show-notify {
+      background: #0074ffa3;
+      font-size: 12px;
+      padding: 3px 5px;
+      border-radius: 3px;
+      border-left: 3px solid red;
+    }
+
+    #downloadButton {
+      font-size: 14px;
+      padding: 2px 7px;
+    }
+
+    .offcanvas .card {
+      background: #22437e;
+    }
+
+    .offcanvas h4 {
+      color: #22437e;
+      font-size: 16px;
+    }
+
+    .gislogo {
+      width: 31px;
+      background: #fff;
+      border-radius: 2.3px;
+    }
+
+    .font11 {
+      font-size: 11px !important;
+    }
+
+    .lbl-font {
+      color: #213e7a;
+      font-weight: 600;
+    }
+
+    .click-data {
+      font-size: 11px;
+      font-weight: 800;
+      position: relative;
+      /*      top: 5px;*/
+    }
+
+    .icon-out1 {
+      /*float: right;
+      position: absolute;
+      right: 0.2rem;
+      top: 0.5rem;*/
+      font-size: 18px !important;
+    }
+
+    .icon-out2 {
+      float: right;
+      position: absolute;
+      right: 0.3rem;
+      top: 0.5rem;
+      font-size: 18px !important;
+    }
+
+    .modal-content {
+      background: linear-gradient(to right, rgb(10 16 91), rgb(97 148 233));
+      color: #fff;
+      margin-top: 160px;
+    }
+
+    button.btn-close {
+      /*      filter: invert(1) !important;*/
+      opacity: 1 !important;
+    }
+
+    .search-by-loc {
+      /*height: 26%;*/
+      height: auto;
+      background: transparent;
+      top: 6.3rem;
+      width: 100%;
+      left: 0rem;
+      border: 0;
+    }
+
+    .select2-selection__arrow {
+      right: 10px !important;
+    }
+
+    .search-by-land {
+      height: max-content;
+      overflow-y: hidden;
+      /* background: #0000008f; */
+      background: #20407c;
+      width: auto;
+      border-radius: 4px 7px;
+      box-sizing: border-box;
+    }
+
+    .footer-menu-bar {
+      background: #ccc;
+      width: 100%;
+    }
+
+    .footer-menu-bar .font10 {
+      color: #1f3a77;
+      line-height: 1;
+    }
+
+    .footer-menu-bar .tnservices i {
+      font-size: 20px !important;
+    }
+
+    .b1-highlight {
+      background: red !important;
+    }
+
+    .aregister-info {
+      /*height: 84vh;
+      bottom: 3rem;
+      top: 3.5rem;*/
+      height: 84vh;
+      bottom: 3rem;
+      top: 3.7rem;
+      right: 10px;
+      left: 10px;
+      border-radius: 4px !important;
+    }
+
+    .offcanvas-header {
+      background: #1b2d4e;
+      /*      background: #22437e;*/
+      color: #fff !important;
+      box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+    }
+
+    .small-font-tamil {
+      font-size: 11px
+        /* Adjust this value as needed */
+    }
+
+    .lds-facebook,
+    .lds-facebook div {
+      box-sizing: border-box;
+    }
+
+    .lds-facebook {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .lds-facebook div {
+      display: inline-block;
+      position: absolute;
+      left: 8px;
+      width: 16px;
+      background: currentColor;
+      animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    }
+
+    .lds-facebook div:nth-child(1) {
+      left: 8px;
+      animation-delay: -0.24s;
+    }
+
+    .lds-facebook div:nth-child(2) {
+      left: 32px;
+      animation-delay: -0.12s;
+    }
+
+    .lds-facebook div:nth-child(3) {
+      left: 56px;
+      animation-delay: 0s;
+    }
+
+    #langToggle {
+      /* font-size: 25px; */
+      font-size: 18px !important;
+    }
+
+    @keyframes lds-facebook {
+      0% {
+        top: 8px;
+        height: 64px;
+      }
+
+      50%,
+      100% {
+        top: 24px;
+        height: 32px;
+      }
+    }
+
+    .boundaries {
+      list-style: none;
+      font-size: large;
+      font-family: serif;
+    }
+
+    .legend-line {
+      display: inline-block;
+      width: 20px;
+      height: 4px;
+      background-color: currentColor;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    .legend-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      /* background-color: 2px dotted currentColor; */
+      border: 2px solid currentColor;
+      background-image: radial-gradient(currentColor 1px, transparent 1px);
+      background-size: 4px 4px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    .select2-selection__rendered {
+      background: rgb(255 243 205) !important;
+      border-radius: 4px !important;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 !important;
+      font-size: 14px !important;
+      /* color: #000000 !important; */
+      color: #664d03 !important;
+    }
+
+    .select2-container--default.select2-selection--single {
+      background: rgb(255 243 205) !important;
+    }
+
+    #spinner-container {
+      z-index: 1500;
+    }
+
+    #spinner-text {
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: #000;
+      /* Change to black for high contrast */
+      background-color: rgba(255, 255, 255, 0.9);
+      /* White with slight transparency */
+      padding: 10px;
+      /* Add padding */
+      border-radius: 5px;
+      /* Rounded corners */
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    div#offcanvasExample {
+      /*height: 84vh;
+      top: 3.5rem;*/
+      height: 84vh;
+      top: 3.5rem;
+      left: 10px;
+      width: 95%;
+      border-radius: 4px;
+    }
+
+    #label1 {
+      font-size: 10px;
+    }
+
+    .btn-close {
+      background-color: #ff0000 !important;
+      filter: initial !important;
+      font-size: 14px;
+      background: transparent !important;
+    }
+
+    .btn-close i {
+      background: #ff0000 !important;
+      color: #fff !important;
+      border-radius: 4px;
+      padding: 3px 5px;
+    }
+  </style>
+  <script type="module" src="./component/accessDenied.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100 bg-login">
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black-view py-2">
+      <div class="container-fluid w-100 d-block text-center">
+        <div class="col-lg-12 banner-left1 d-flex">
+          <a href="#" class="text-white text-none px-2 font13">
+            <img src="assets/img/logo.png" class="img-fluid mainlogo" alt="logo">
+          </a>
+
+          <!-- <a data-bs-toggle="offcanvas" data-bs-target=".logout" class="cpointer text-white text-none px-2 icon-out">
+          </a> -->
+
+          <!-- <a class="cpointer text-white text-none icon-out3">
+            <i class="bi bi-translate mx-3" id="langToggle" onclick="switchLang()"></i>
+          </a> -->
+
+          <a href="#" class="text-white text-none px-2 font13 w-75">
+
+            <div id="spinner-container"
+              style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 1500;">
+              <img id="spinner" src="assets/img/Book.gif" alt="Loading..." style="width: 80px; border-radius: 50%;">
+              <p id="spinner-text"
+                style="margin-top: 10px; font-family: 'Inter', sans-serif; font-size: 16px; color: #333; background-color: white;">
+                Fetching data..Please wait</p>
+            </div>
+            <b> <span class="txt-orange d-block" id="tamilnilam">Tamil Nilam Geo-info</span>
+              <span class="d-block blink click-data" id="label1">Click on the map to know land details</span>
+
+            </b>
+            <span id="shop_code"></span>
+          </a>
+
+          <a data-bs-toggle="modal" data-bs-target=".disclaimer" class="cpointer text-white text-none px-2 icon-out1">
+            <i class="bi bi-info-circle"></i>
+          </a>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- Begin page content -->
+  <main class="flex-shrink-0 main-content mt-0">
+    <div class="container-fluid pos-rel m-0 p-0">
+      <div id="map"></div>
+      <div class="infoStats d-none">
+        <span class="moreInfos actionBtn px-1 blob blue text-center text-white" data-bs-toggle="offcanvas"
+          data-bs-target=".offcanvasRight">Select Service</span>
+      </div>
+      <div class="right-container d-none" id="numero5">
+        <button type="button" class="btn btn-primary icon-box d-flex" id="switch_layer">
+          <i class="bi bi-layers" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch Layers"></i>
+        </button>
+      </div>
+      <!-- search bar starts -->
+      <div class="search-container d-none" id="numero3">
+        <button type="button" class="btn btn-primary icon-box d-flex" id="zoomIn">
+          <i class="bi bi-plus-lg map_icons" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom In"></i>
+        </button>
+        <button type="button" class="btn btn-primary icon-box d-flex" id="zoomOut">
+          <i class="bi bi-dash map_icons" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left"
+            title="Zoom Out"></i></button>
+        <button type="button" class="btn btn-primary icon-box d-none" data-bs-toggle="tooltip" data-bs-placement="top"
+          data-bs-title="TamilNadu Extent"
+          onclick="zoom_extent = [8395626.451712506, 892078.6691354283, 9167334.689279644, 1557386.5633296024];map.getView().fit((zoom_extent), { duration: 2000});"><i
+            class="bi bi-map map_icons" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left"
+            title="Zoom Out"></i>
+        </button>
+      </div>
+      <div class="search-container1">
+        <button type="button" class="btn btn-primary icon-box d-flex p-1">
+          <img src="assets/img/live.png" class="liveimg" alt="Live" />
+        </button>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#legendModal">
+          <i class="fa fa-info-circle"></i> Legend
+        </button>
+        <div class="modal fade" id="legendModal" tabindex="-1" aria-labelledby="legendModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header queen py-1">
+                <h5 class="modal-title" id="legendModalLabel"><i class="bi bi-file-earmark-check"></i> Legend</h5>
+
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="show-info-list" id="legendImg">
+                  <ul>
+                    <li class="boundaries"><span style="color: #8f0303;" class="legend-line"></span> - District</li>
+                    <li class="boundaries"><span style="color: #d83a5f;" class="legend-line"></span> - Taluk</li>
+                    <li class="boundaries"><span style="color: #dd8706;" class="legend-line"></span> - Village</li>
+                    <li class="boundaries"><span style="color: #c4f70c;" class="legend-line"></span> - Survey Number
+                    </li>
+                    <li class="boundaries"><span style="color: #ff00b3;" class="legend-line"></span> - Sub-division
+                      Number</li>
+                    <li class="boundaries" style="border-top: 1px solid #ccc; margin: 8px 0;"></li>
+                    <li class="boundaries my-1" style="font-size: medium;"> <span></span> (Ownership data not linked for
+                      the below areas)</li>
+                    <li class="boundaries"><span style="color: #073ef1;" class="legend-box"></span> - Urban Area</li>
+                    <li class="boundaries"><span style="color: #008000;" class="legend-box"></span> - Forest Area</li>
+                    <li class="boundaries"><span style="color: #FF69B4;" class="legend-box"></span> - Other Area</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-location mt-2">
+        <button type="button" class="btn btn-primary icon-box box1" data-bs-toggle="offcanvas"
+          data-bs-target=".search-by-loc">
+          <i class="bi bi-search"></i>
+        </button>
+        <button type="button" class="btn btn-primary icon-box box2" data-bs-toggle="offcanvas"
+          data-bs-target=".search-by-land">
+          <i class="bi bi-pin-map"></i>
+        </button>
+      </div>
+
+      <div class="change-lang mt-2">
+        <a class="cpointer text-white text-none icon-out">
+          <i class="bi bi-translate mx-2" id="langToggle" onclick="switchLang()"></i>
+        </a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer mt-auto text-center">
+    <div class="bottom-container text-center">
+      <button type="button" class="btn btn-info icon-box box2 d-none" id="getOfficial"
+        data-bs-toggle="offcanvas">Official login</button>
+      <a href="#" class="text-white text-none px-2 font13">
+        <img src="assets/img/tngis-logo.png" class="img-fluid gislogo" alt="logo">
+      </a>
+    </div>
+    <div class="search-container1">
+      <button type="button" class="btn btn-primary icon-box d-flex p-1" id="getLocation">
+        <img src="assets/img/live.png" class="liveimg" alt="Live" />
+      </button>
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#legendModal">
+        <i class="fa fa-info-circle"></i> Legend
+      </button>
+      <div class="modal fade" id="legendModal" tabindex="-1" aria-labelledby="legendModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header queen py-1">
+              <h5 class="modal-title" id="legendModalLabel">
+                <i class="bi bi-file-earmark-check"></i>
+                Legend
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="show-info-list" id="legendImg">
+                <ul>
+                  <li class="boundaries"><span style="color: #8f0303;" class="legend-line"></span> - District</li>
+                  <li class="boundaries"><span style="color: #d83a5f;" class="legend-line"></span> - Taluk</li>
+                  <li class="boundaries"><span style="color: #dd8706;" class="legend-line"></span> - Village</li>
+                  <li class="boundaries"><span style="color: #c4f70c;" class="legend-line"></span> - Survey Number </li>
+                  <li class="boundaries"><span style="color: #ff00b3;" class="legend-line"></span> - Sub-division Number
+                  </li>
+                  <li class="boundaries" style="border-top: 1px solid #ccc; margin: 8px 0;"></li>
+                  <li class="boundaries my-1" style="font-size: medium;"> <span></span> (Ownership data not linked for
+                    the below areas)</li>
+                  <li class="boundaries"><span style="color: #073ef1;" class="legend-box"></span> - Urban Area</li>
+                  <li class="boundaries"><span style="color: #008000;" class="legend-box"></span> - Forest Area</li>
+                  <li class="boundaries"><span style="color: #FF69B4;" class="legend-box"></span> - Other Area</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-menu-bar">
+      <div id="location_details" style="display: none;">
+        <div>
+          <b id="type" class="font10">(District | Taluk | Village)</b>&nbsp;<b id="sur_suv_dt" class="font10"> (Survey /
+            Subdivision)</b>
+        </div>
+        <div>
+          <span class="font10" id="value"></span>&nbsp;<span class="font10" id="survey_subdivision"></span>
+        </div>
+      </div>
+      <div class="row service_div m-0" id="eservice_div">
+        <div class="col-4 text-center">
+          <button id="trigger" class="icon-box tnservices" data-bs-toggle="offcanvas"
+            style="background-color: blue!important;" aria-hidden="true" disabled aria-controls="aregisterInfo">
+            <i class="bi bi-bank text-white" aria-hidden="true"></i>
+          </button>
+          <span class="d-block font10 mt-1 mb-1" id="a_register">A Register</span>
+        </div>
+        <div class="col-4  text-center">
+          <!-- <button id="fmb_trigger" data-bs-toggle="offcanvas" href=".fmb-info" class="icon-box tnservices" -->
+          <button id="fmb_trigger" data-bs-toggle="offcanvas" class="icon-box tnservices"
+            style="background-color: red!important;" aria-hidden="true" disabled>
+            <i class="bi bi-rulers text-white" aria-hidden="true"></i>
+          </button>
+          <span class="d-block font10 mt-1 mb-1" id="fmb_sketch">FMB Sketch</span>
+        </div>
+        <div class="col-4  text-center">
+          <button data-bs-toggle="modal" id="patta_chitta" data-bs-target="#othersModalPopup"
+            class="icon-box tnservices" style="background-color: #9600ff!important;" aria-hidden="true" disabled>
+            <i class="bi bi-card-checklist text-white" aria-hidden="true"></i>
+          </button>
+          <span class="d-block font10 mt-1 mb-1" id="Patta_no2">Patta Number</span>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="text-center">
+        <div class="mt-1 mb-0">
+          <p class="info-icons mb-0">
+            <i class="bi bi-calendar-check font12"></i>
+            <span id="showdate" class="font12">09/06/2023</span>
+            <i class="bi bi-clock font12"></i>
+            <span id="showTime" class="mx-1 font12"></span>
+            <span id="user_lat" class="mx-1 font12"></span>
+            <span id="user_long" class=" font12"></span>
+            <span class="mx-1 font9" id="accuracy"></span>
+          </p>
+          <p class="mb-0">
+            <i class="bi bi-person-check-fill font9"></i>
+            <span id="username" class="mx-1 font9"></span>
+            <i class="bi bi-telephone-forward font9"></i>
+            <span id="mobile_number" class="mx-1 font9"></span>
+            <span class="mx-1 font9" id="version_name">V1.0.1</span>
+          </p>
+          <p class="mb-0 font9"><span class="font-weight-bold">Powered by TNGIS &amp; NIC</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- right canvas starts -->
+  <div class="offcanvas offcanvas-end offcanvasRight" id="list_of_faclities" tabindex="-1"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header px-2 py-2" x-data="transButtonComponent()">
+      <h6 class="offcanvas-title"><i class="bi bi-check2-circle"></i> <span x-text="$t('nearest')"></span></h6>
+      <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body px-2 py-2">
+      <div class="m-2" id="available_layers">
+        <div class="col-4 boxWrap-sm swapMap" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+          <div class="card text-center mb-2" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+            <div class="card-body px-2 py-2">
+              <img src="assets/img/registration-office.png" alt="logo" class="depicons">
+              <h6 class="mb-0 mt-1">Patta</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-bottom profileView" id="land_info_canvas" data-bs-scroll="true"
+    data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-body small pt-0">
+      <hr>
+      <p class="mb-2 font11 lbl-font text-center service_error_div d-none">Survey and Subdivision data not available</p>
+      <p class="mb-2 font11 lbl-font text-center service_div">for more details select below options</p>
+      <div class="row service_div" id="eservice_div">
+        <div class="col-3  text-center">
+          <a href="#" class="icon-box tnservices" id="a_register" style="background-color: blue!important;">
+            <i class="bi bi-bank text-white" aria-hidden="true"></i></a>
+          <span class="d-block font10 mt-1">A Register</span>
+        </div>
+        <div class="col-3  text-center">
+          <a href="#" class="icon-box tnservices" id="fmb_service" style="background-color: red!important;">
+            <i class="bi bi-rulers text-white" aria-hidden="true"></i></a>
+          <span class="d-block font10 mt-1">FMB Sketch</span>
+        </div>
+        <div class="col-3  text-center">
+          <a href="#" class="icon-box tnservices" id="patta_search_service"
+            style="background-color: #9600ff!important;">
+            <i class="bi bi-card-checklist text-white" aria-hidden="true"></i></a>
+          <span class="d-block font10 mt-1 nowrap">Search Patta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <form id="post_tn_form" action="" method="post">
+      <input type='hidden' id='service_name' name='service_name' value=''>
+      <input type='hidden' id='latitude' name='latitude' value=''>
+      <input type='hidden' id='longitude' name='longitude' value=''>
+      <input type='hidden' id='district_code' name='district_code' value=''>
+      <input type='hidden' id='taluk_code' name='taluk_code' value=''>
+      <input type='hidden' id='village_code' name='village_code' value=''>
+      <input type='hidden' id='village_lgd' name='village_lgd' value=''>
+      <input type='hidden' id='survey' name='survey' value=''>
+      <input type='hidden' id='subdivision' name='subdivision' value=''>
+      <input type='hidden' id='survey_name' name='survey_name' value=''>
+      <input type='hidden' id='patta_number_enter' name='patta_number_enter' value=''>
+      <input type="submit" id="btnposttndata" name="btnposttndata" class="btn btn-success d-none" value="Submit data"> 
+    </form> -->
+  <!-- Modal Popup -->
+  <div class="modal fade" id="othersModalPopup" tabindex="-1" role="dialog" aria-labelledby="othersModalPopupTitle"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+
+
+        <div class="modal-header py-1">
+          <h6 class="modal-title" id="others-modal-title"><i class="bi bi-check2-circle"></i> Search by Patta</h6>
+
+          <!-- <button type="button" class="btn-close" id="patta_btn_close" data-bs-dismiss="modal"
+            aria-label="Close"></button> -->
+          <button type="button" id="patta_btn_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="bi bi-x"></i>
+          </button>
+
+        </div>
+        <div id="urban_tooltip" class="alert alert-warning text-center py-2 mb-0" style="display: none;">
+          Patta number display feature not available for urban areas
+        </div>
+        <div class="modal-body pt-0 pb-0 " id="others-modal-id">
+
+
+          <div id="location_details2" style="display: none;">
+            <div>
+              <b id="type2" class="mb-1 small-txt txt-orange">(District | Taluk | Village)</b>&nbsp;
+            </div>
+            <div>
+              <span class="font10" id="value2"></span>&nbsp;
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <p id="pattanolable" class="mb-1 small-txt txt-orange"><span>Patta no:</span></p>
+              </div>
+              <div class="col-3">
+                <p class="mb-0 small-txt text-white"><span id="pattanoinput"></span></p>
+              </div>
+            </div>
+            <p class="txt-orange hidden" id="survey_subdivision2label" style="margin-bottom: auto;">List of Survey and
+              Subdivision number for this Patta Number</p>
+            <span class="font10" id="survey_subdivision2"></span>
+          </div>
+          <div class="row">
+            <div class="col-7 mb-2">
+              <input type="number" class="form-control number" placeholder="Enter Patta Number" id="patta_number_search"
+                onKeyPress="if(this.value.length==10) return false;"
+                oninput="this.value = this.value.replace(/[^0-9]/gi, '')">
+            </div>
+            <div class="col-5 mb-2">
+              <button type="submit" class="btn btn-success default-padding py-2 font-14 cus-btns1"
+                id="search_patta_number">
+                <i class="bi bi-check2-circle"></i> Search/தேடுக
+              </button>
+            </div>
+            <div class="col-lg-12 text-center mb-2">
+              <a class="btn btn-success default-padding py-2 font-14 wrap_btns hidden" id="display_all_on_map"><i
+                  class="bi bi-eye"></i> View All in Map</a>
+              <a class="btn btn-success default-padding py-2 font-14 wrap_btns hidden" onclick="callAndroidFunction()"
+                id="downloadButton"><i class="bi bi-download"></i> Download Patta</a>
+
+
+            </div>
+          </div>
+          <div class="box_wrap px-2 py-3 mb-2">
+            <!-- <button id="downloadButton" class="btn btn-success" onclick="callAndroidFunction()">
+              <i class="bi bi-download"></i> Download
+            </button> -->
+            <div id="patta_info_container" style="overflow:auto; max-height: 600px;">
+              <!-- <button id="zoom_in" class="btn btn-primary">Zoom In</button>
+              <button id="zoom_out" class="btn btn-primary">Zoom Out</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- right canvas ends -->
+  <!-- disclaimer Modal starts -->
+  <div class="modal fade disclaimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header py-2">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-info-circle"></i> Disclaimer</h1>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="bi bi-x"></i>
+          </button>
+
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body py-2">
+          <p id="d1"><i class="bi bi-check2-circle"></i> All boundaries displayed are indicative boundaries. The map
+            boundaries shall not be used for any legal purposes.</p>
+          <p id="d2"><i class="bi bi-check2-circle"></i> There are possibilities of FMB sketches not updated in this
+            application wherein the FMB sketches might have got created digitally and may be available in downloads
+            section.</p>
+          <p id="d3"><i class="bi bi-check2-circle"></i> If FMB sketches are not available or not updated, contact the
+            respective Taluka surveyor and get them updated in collabland software.</p>
+          <p id="d4"><i class="bi bi-check2-circle"></i> In case of any wrong depiction of available FMB sketches,
+            please contact the respective Taluka surveyor for updation.</p>
+          <p id="d5"><i class="bi bi-check2-circle"></i> The ownership information displayed are as available in Tamil
+            Nilam database maintained and shared by NIC through API's.</p>
+          <p id="d6"><i class="bi bi-check2-circle"></i> Correction / objection to the ownership records or the maps
+            therein should be represented to Department of Survey and Settlements only.</p>
+          <p id="d7"><i class="bi bi-check2-circle"></i> The Government, Department nor any Officer of Govt and its
+            representatives can't be held responsible for any loss / damage happened due to the utility / effectiveness
+            of usage of the app and its data contents.</p>
+          <p id="d8"><i class="bi bi-check2-circle"></i> The contents are made available to general public as part of
+            its transparency and data utility to general public not for commercial uses.</p>
+          <p id="d9"><i class="bi bi-check2-circle"></i> Any commercial use from the data of this app and its
+            derivatives is strictly prohibited.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- disclaimer Modal ends -->
+  <!-- search by location -->
+  <div class="offcanvas offcanvas-top search-by-loc" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-body">
+      <div class="input-group mb-2 mt-2">
+        <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+        <input type="search" class="form-control" placeholder="Search by Location" aria-label="enter location"
+          aria-describedby="basic-addon2" onkeypress="if(event.keyCode==13) {$('#search_query_text').trigger('input')}"
+          id="search_query_text" oninput="this.value = this.value.replace(/[^0-9a-z ]/gi, '')" maxlength="20"
+          autocomplete="off">
+      </div>
+      <ul class="d-none" id="result_search">
+      </ul>
+    </div>
+  </div>
+  <!-- search by location -->
+  <!-- search by land -->
+  <div class="offcanvas offcanvas-top search-by-land" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-body py-2">
+      <!-- <button type="button" class="btn-close mb-2 float-end" id="dropdownclose" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button> -->
+
+      <button type="button" class="btn-close mb-2 float-end" id="dropdownclose" data-bs-dismiss="offcanvas"
+        aria-label="Close">
+        <i class="bi bi-x"></i>
+      </button>
+
+
+      <select class="form-select mb-1 district" id="district" aria-label="Default select District">
+        <option value="all">Select District</option>
+      </select>
+      <select class="form-select mb-1 taluk" id="taluk" aria-label="Default select Taluk">
+        <option value="all">Select Taluk</option>
+      </select>
+      <select class="form-select mb-1 village" id="village" aria-label="Default select village">
+        <option value="all">Select Village</option>
+      </select>
+      <select class="form-select mb-1 survey js-example-basic-single" id="survey"
+        aria-label="Default select Survey Number">
+        <option value>Select Survey Number</option>
+      </select>
+      <select class="form-select mb-1 mt-1 subdivision1" id="subdivision1"
+        aria-label="Default select subdivision Number">
+        <option value>Select subdivision Number</option>
+      </select>
+    </div>
+  </div>
+  <!-- search by land -->
+
+  <!-- aregister info -->
+  <div class="offcanvas offcanvas-bottom aregister-info" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+
+
+    <div class="offcanvas-header">
+      <h5 id="offcanvasLabel">A-Reg Information</h5>
+      <!-- <h5 class="offcanvas-title text-white">A-Reg</h5> -->
+      <button type="button" id="areg_button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <div class="offcanvas-header py-2 hidden" id="rural_areg_header">
+
+      <div id="location_details1" style="display: none;">
+        <div><b id="type1" class="font10">(District | Taluk | Village)</b>&nbsp;<b id="sur_suv_dt1" class="font10">
+            (Survey / Subdivision)</b>
+        </div>
+        <div id=""><span class="font10" id="value1"></span>&nbsp;<span class="font10" id="survey_subdivision1"></span>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="offcanvas-header py-2 hidden" id="urban_areg_header">
+      <div id="urbanlocation_details">
+        <div><b id="urban_datalable" class="font2">(District | Taluk | Town | Rev_Blk | Ward |
+            survey_no/Subdivision)</b>&nbsp;
+        </div>
+        <div id="urban_data"><span class="font2"></span>&nbsp;
+        </div>
+      </div>
+
+      <!-- <h5 class="offcanvas-title text-white">A-Reg</h5> -->
+      <!-- <button type="button" id="areg_button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+      <!-- <button type="button" id="areg_button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="bi bi-x"></i> -->
+      </button>
+    </div>
+
+
+
+    <div id="rural_ownerinfo" class="offcanvas-body small py-2 hidden">
+      <h4 id="owner_info"><i class="bi bi-person-check"></i> Owner Info</h4>
+      <div class="row m-0">
+        <div class="mb-2 col-12 col-lg-12 px-0">
+          <div class="card">
+            <div class="card-body py-1">
+              <div id="ownerContainer" class="small-font">
+                <div class="row">
+                  <div class="col-6">
+                    <p class="mb-1 small-txt txt-orange small-font"><span>Total Owners</span></p>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <p class="mb-1 small-txt txt-orange small-font"><span>Owner Name</span></p>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <p class="mb-1 small-txt txt-orange small-font"><span>Relation Name/Relation Type</span></p>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 id=land_info><i class="bi bi-pin-map"></i> Land Info</h4>
+      <div class="mb-2 col-12 col-lg-12 px-0">
+        <div class="card">
+          <div class="card-body py-1">
+            <div id="landContainer">
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="land_type" class="mb-1 small-txt txt-orange"><span>Land Type</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="govtPriEng"></span>,<span id="govtPriTamil"></span></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="o_survey" class="mb-1 small-txt txt-orange"><span>Old Survey No</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="osurvey_no"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="part_Ind" class="mb-1 small-txt txt-orange"><span>partInd</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="partInd"></span></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="tax_Rate" class="mb-1 small-txt txt-orange"><span>Tax Rate</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="taxRate"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="Primary_soil_Type" class="mb-1 small-txt txt-orange"><span>Primary Soil Type</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="soilTypPri"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="Secondary_soil_Type" class="mb-1 small-txt txt-orange"><span>Secondary Soil Type</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="soilTypSec"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="Soil_Class" class="mb-1 small-txt txt-orange"><span>Soil Class</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="soilClass"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="Tax_Per_Hect" class="mb-1 small-txt txt-orange"><span>Tax Per Hectares</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="taxHect"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="Extent_in_Hectares" class="mb-1 small-txt txt-orange"><span>Extent In Hectares</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="extHect"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="Extent_in_ares" class="mb-1 small-txt txt-orange"><span>Extent In Ares</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="extAres"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="total_tax" class="mb-1 small-txt txt-orange"><span>Total Tax</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="totTax"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="patta_no" class="mb-1 small-txt txt-orange"><span>Patta No</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="pattaNo"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="porambok" class="mb-1 small-txt txt-orange"><span>Poramboke</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="poramboke"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="remark" class="mb-1 small-txt txt-orange"><span>Remarks</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="remarks"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="remark1" class="mb-1 small-txt txt-orange"><span>Remarks1</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="remarks1"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="form_8no" class="mb-1 small-txt txt-orange"><span>Form8No</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="form8No"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="form_6no" class="mb-1 small-txt txt-orange"><span>Form6No</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="form6No"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="isitassessed" class="mb-1 small-txt txt-orange"><span>Is It assessed?</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id=assessed></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="isitcultivable" class="mb-1 small-txt txt-orange"><span>Is It cultivable?</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="cultivable"></span></p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="urban_ownerinfo" class="offcanvas-body small py-2 hidden">
+      <h4 id="urban_owner_info"><i class="bi bi-person-check"></i> Owner Info</h4>
+      <div class="row m-0">
+        <div class="mb-2 col-12 col-lg-12 px-0">
+          <div class="card">
+            <div class="card-body py-1">
+              <div id="ownerContainer">
+                <!-- <div class="row">
+                  <div class="col-6">
+                    <p id class="mb-1 small-txt txt-orange"><span>Total Owners</span></p>
+                  </div>
+
+                </div> -->
+                <div class="row">
+                  <div class="col-6">
+                    <p id="owner_name_urban" class="mb-1 small-txt txt-orange"><span>Owner Name</span></p>
+                  </div>
+                  <div class="col-6">
+                    <p class="mb-0 small-txt text-white"><span id="owner_nameurban1"></span></p>
+                  </div>
+
+                </div>
+                <!-- <div class="row">
+                  <div class="col-6">
+                    <p class="mb-1 small-txt txt-orange"><span>Relation Name/Relation Type</span></p>Adm
+                  </div>
+
+                </div> -->
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 id=urban_land_info><i class="bi bi-pin-map"></i> Land Info</h4>
+      <div class="mb-2 col-12 col-lg-12 px-0">
+        <div class="card">
+          <div class="card-body py-1">
+            <div id="landContainer">
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="wardurban" class="mb-1 small-txt txt-orange"><span>Ward</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="ward"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="streeturban" class="mb-1 small-txt txt-orange"><span>Street</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="street"></span></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="oldSurveyNoAndLetterurban" class="mb-1 small-txt txt-orange"><span>Old Sy/Letter</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="oldSurveyNoAndLetter"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="govtMittaZamindariInamurban" class="mb-1 small-txt txt-orange"><span>Ownership Type</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="govtMittaZamindariInam"></span></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="dryWetUnassessedPorambokeHouseurban" class="mb-1 small-txt txt-orange">
+                    <span>Land Type</span>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="dryWetUnassessedPorambokeHouse"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="sourceOfIrrigationAndClassurban" class="mb-1 small-txt txt-orange"><span>Source Of Irrigation
+                      And Class</span></p>
+
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="sourceOfIrrigationAndClass"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="ifdoubleCropReteofCompositionurban" class="mb-1 small-txt txt-orange"><span>If double Crop Rate
+                      of Composition</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="ifdoubleCropReteofComposition"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="classAndSortOfSoilurban" class="mb-1 small-txt txt-orange"><span>Soil Class</span>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="classAndSortOfSoil"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="taramurban" class="mb-1 small-txt txt-orange"><span>Rank</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="taram"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="rubeesurban" class="mb-1 small-txt txt-orange"><span>Assessment Rate</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white">
+                    <span id="rubees"></span> / <span id="paise"></span>
+                  </p>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-6">
+                  <p id="paisaurban" class="mb-1 small-txt txt-orange"><span>Paise</span> </p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="paise"></span></p>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-6">
+                  <p id="hecterurban" class="mb-1 small-txt txt-orange"><span>Extent In Hectares:Ares:Square
+                      Meter</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"> </p>
+                  <p class="mb-0 small-txt text-white">
+                    <span id="hecter"></span>:<span id="ares"></span>:<span id="squareMeter"></span>
+                  </p>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-6">
+                  <p id="aresurban" class="mb-1 small-txt txt-orange"><span>Extent In Ares</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="ares"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="squareMeterurban" class="mb-1 small-txt txt-orange"><span>Square Meter</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="squareMeter"></span></p>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-6">
+                  <p id="howTheHoldingIsUtilisedurban" class="mb-1 small-txt txt-orange"><span>Land used</span>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="howTheHoldingIsUtilised"></span></p>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-6">
+                  <p id="digitalSignatureDateurban" class="mb-1 small-txt txt-orange"><span>Digital Signature
+                      Date</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="digitalSignatureDate"></span></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="signedByurban" class="mb-1 small-txt txt-orange"><span>Signed By</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="signedBy"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="destinationurban" class="mb-1 small-txt txt-orange"><span>Destination</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="destination"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="placeurban" class="mb-1 small-txt txt-orange"><span>Place</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="place"></span></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <p id="cossBlockCodeurban" class="mb-1 small-txt txt-orange"><span>CossBlockCode</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id=cossBlockCode></span></p>
+                </div>
+              </div> -->
+
+              <div class="row">
+                <div class="col-6">
+                  <p id="remarkurban" class="mb-1 small-txt txt-orange"><span>Remarks</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-0 small-txt text-white"><span id="remark_urban"></span></p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- aregister info -->
+
+  <!-- fmb info -->
+  <div data-bs-scroll="true" data-bs-backdrop="false" class="offcanvas offcanvas-start fmb-info" tabindex="-1"
+    id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header py-2">
+      <h5 class="offcanvas-title text-white"><i class="bi bi-file-earmark-check"></i> FMB Sketch</h5>
+      <!-- <button type="button" id="close_fmb" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+      <button type="button" id="close_fmb" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="bi bi-x"></i>
+      </button>
+
+    </div>
+    <div class="offcanvas-header py-2" id="fmbheader">
+      <div id="location_details2">
+        <div><b id="type3" class="font10">(District | Taluk | Village)</b>&nbsp;<b id="sur_suv_dt2" class="font10">
+            (Survey / Subdivision)</b>
+        </div>
+        <div id=""><span class="font10" id="value3"></span>&nbsp;<span class="font10" id="survey_subdivision3"></span>
+        </div>
+      </div>
+
+    </div>
+    <div class="offcanvas-body py-2">
+      <div class="col-lg-12">
+        <div class="toolbar">
+          <!-- <button id="zoomIn" class="btn btn-primary">Zoom In</button>
+        <button id="zoomOut" class="btn btn-primary">Zoom Out</button> -->
+
+          <!-- <a class="btn btn-success default-padding py-2 font-14 wrap_btns hidden" onclick="callAndroidFunctionfmb()"id="downloadButtonfmb"><i
+          class="bi bi-download"></i> Download FMB</a> -->
+
+
+
+        </div>
+
+        <div id="pdfViewer">
+          <canvas id="pdfCanvas" class="pdf-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fmb info -->
+
+  <!-- measure tool -->
+  <div class="offcanvas offcanvas-bottom measure_tool" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header py-2">
+      <h5 class="offcanvas-title text-white">Measure Tool</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+        onclick="changeMeasurement('None')"></button>
+    </div>
+    <div class="offcanvas-body small py-2">
+      <p class="mb-1 txt-yellow-color font14"><i class="bi bi-check2-circle"></i> Measure</p>
+      <div class="card">
+        <div class="card-body text-white pt-3">
+          <a href="#" class="card-link text-white" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Area"
+            onclick="changeMeasurement('Polygon')">
+            <img src="assets/img/area.png" class="icon-white im20">
+          </a>
+          <a href="#" class="card-link text-white" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Line"
+            onclick="changeMeasurement('LineString')">
+            <img src="assets/img/line.png" class="icon-white im20">
+          </a>
+          <a href="#" class="card-link text-white bg-red-color mt-2" data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-title="Reset" onclick="changeMeasurement('None')">
+            Clear
+          </a>
+          <span class="show-notify mt-2 d-block mb-2">* clear is used to remove measure</span>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <!-- measure tool -->
+
+  <!-- jQuery -->
+  <script src="assets/scripts/jquery/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="assets/vendor/openlayers/dist/ol.js"></script>
+  <script src="assets/vendor/ol-ext-master/dist/ol-ext.js"></script>
+  <script type="module" src="assets/vendor/openlayers/source/WMTS.js"></script>
+  <script type="module" src="assets/vendor/openlayers/tilegrid/WMTS.js"></script>
+  <script type="module" src="assets/vendor/openlayers/proj.js"></script>
+  <script type="module" src="assets/vendor/openlayers/extent.js"></script>
+  <script type="text/javascript" src="assets/scripts/global.js"></script>
+
+  <script type="text/javascript" src="assets/scripts/map.js"></script>
+  <script type="text/javascript" src="assets/scripts/main.js"></script>
+  <!-- Turf JS -->
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <script src="assets/scripts/language.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+  <script type="text/javascript">
+    /**
+    * Back to top button
+    */
+    const select = (el, all = false) => {
+      el = el.trim()
+      if (all) {
+        return [...document.querySelectorAll(el)]
+      } else {
+        return document.querySelector(el)
+      }
+    }
+    /**
+    * Easy on scroll event listener 
+    */
+    const onscroll = (el, listener) => {
+      el.addEventListener('scroll', listener)
+    }
+    let backtotop = select('.back-to-top')
+    if (backtotop) {
+      const toggleBacktotop = () => {
+        if (window.scrollY > 100) {
+          backtotop.classList.add('active')
+        } else {
+          backtotop.classList.remove('active')
+        }
+      }
+      window.addEventListener('load', toggleBacktotop)
+      onscroll(document, toggleBacktotop)
+    }
+  </script>
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      // Initialize Select2
+      $('.js-example-basic-single').select2({
+        // placeholder: "Select Survey Number"
+      });
+    });
+
+    $(document).ready(function () {
+
+
+      $(".list_of_faclities_close").click(function () {
+        $('body').removeClass('showHalfMap');
+        /*map.invalidateSize()
+        setInterval(function () {
+          map.invalidateSize()
+        }, 100);*/
+      });
+      $('#search_query_text').on('input', function () {
+        if ($(this).val().length >= 3) {
+          //$('#search_location').removeClass('d-none');
+          $('.loaderGif').removeClass('d-none');
+          searchTimeout = setTimeout(searchlocation, 2000);
+        }
+        else {
+          //$('#search_location').addClass('d-none');
+          $('#result_search').empty();
+          $('#result_search').addClass('d-none');
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+let languageContent = {
+  "en": {
+    "label1": "Click on the map to know land details",
+    "tamilnilam": 'Tamil Nilam Geo-info',
+    "doss": 'Department of survey and settlements',
+    "d1": "All boundaries displayed are indicative boundaries. The map boundaries shall not be used for any legal purposes.",
+    "d2": "There are possibilities of FMB sketches not updated in this application wherein the FMB sketches might have got created digitally and may be available in downloads section.",
+    "d3": "If FMB sketches are not available or not updated, contact the respective Taluka surveyor and get them updated in collabland software.",
+    "d4": "In case of any wrong depiction of available FMB sketches, please contact the respective Taluka surveyor for updation",
+    "d5": "The ownership information displayed are as available in Tamil Nilam database maintained and shared by NIC through API's",
+    "d6": "Correction / objection to the ownership records or the maps therein should be represented to Department of Survey and Settlements only.",
+    "d7": "The Government, Department nor any Officer of Govt and its representatives can't be held responsible for any loss / damage happened due to the utility / effectiveness of usage of the app and its data contents.",
+    "d8": "The contents are made available to general public as part of its transparency and data utility to general public not forcommercial uses.",
+    "d9": "Any commercial use from the data of this app and its derivatives is strictly prohibited.",
+    "type1": '(District | Taluk | Village)',
+    "sur_suv_dt1": '(Survey / Subdivision)',
+    "type": '(District | Taluk | Village)',
+    "type2": '(District | Taluk | Village)',
+    "sur_suv_dt": '(Survey / Subdivision)',
+    "owner_info": 'Owner Info',
+    "land_info": 'Land Info',
+    "land_type": 'Land Type',
+    "o_survey": 'Old Survey No',
+    "part_Ind": 'partInd',
+    "tax_Rate": 'Tax Rate',
+    "Primary_soil_Type": 'Primary soil Type',
+    "Secondary_soil_Type": 'Secondary soil type',
+    "Soil_Class": 'Soil Class',
+    "Tax_Per_Hect": 'Tax Per Hect',
+    "Extent_in_Hectares": 'Extent in Hectares',
+    "Extent_in_ares": 'Extent in Ares',
+    "total_tax": 'Total Tax',
+    "patta_no": 'Patta No',
+    "porambok": 'Poramboke',
+    "remark": 'Remarks',
+    "remark1": 'Remarks1',
+    "form_8no": 'Form8No',
+    "form_6no": 'Form6No',
+    "isitassessed": 'Is it assessed?',
+    "isitcultivable": 'Is it cultivable?',
+    "crop_info": 'Crop Info (GRAINS)',
+    "crop_type_ta": 'Crop Type',
+    "crop_id_ta": 'Crop Id',
+    "crop_name_ta": 'Crop Name',
+    "crop_extent_id": 'Crop Extent',
+    "irrigation_source_ta": 'Irrigation Source',
+    "sown_date_ta": 'Expected Sown Date',
+    "harvest_id_ta": 'Expected Harvest Date',
+    'ownerCountLabel': 'Total Owners',
+    'ownerNameLabel': 'Owner name',
+    'ownerRelativeLabel': 'Relation name/Relation type',
+    'a_register': 'A Register',
+    'fmb_sketch': 'FMB Sketch',
+    'pattanolable': 'Patta No:',
+    'Patta_no2': 'Patta No',
+    'others-modal-title': ' Search by Patta',
+    'survey_subdivision2label': 'List of Survey and Subdivision number for this Patta Number',
+    'urban_datalable': '(District | Taluk | Town | Rev_Blk | Ward | survey_no/Subdivision)',
+    'owner_name_urban': 'Owner Name',
+    "urban_land_info": 'Land Info',
+    "dryWetUnassessedPorambokeHouseurban": 'Land Type',
+    "urban_owner_info": 'Owner Info',
+
+    "wardurban": 'Ward',
+    "streeturban": 'Street',
+    "oldSurveyNoAndLetterurban": 'Old Sy/Letter',
+    "govtMittaZamindariInamurban": 'Ownership Type',
+    "sourceOfIrrigationAndClassurban": 'Source Of Irrigation And Class',
+    "ifdoubleCropReteofCompositionurban": 'If double Crop Rate of Composition',
+    "classAndSortOfSoilurban": 'Soil Class',
+    "porambokeHouseurban": 'Poramboke',
+    "taramurban": 'Rank',
+    "rubeesurban": 'Assessment Rate',
+    "hecterurban": 'Extent In Hectares:Ares:Square Meter',
+    "howTheHoldingIsUtilisedurban": 'Land used',
+    "remarkurban": 'Remarks',
+    "urban_land_info": 'Land Info',
+    "urban_tooltip": 'Patta number display feature not available for urban areas'
+
+
+  },
+  "ta": {
+    "label1": "நில விவரங்களை அறிய வரைபடத்தில் கிளிக் செய்யவும்",
+    "tamilnilam": 'தமிழ் நிலம் புவிசார்-தகவல்',
+    "doss": 'கணக்கெடுப்பு மற்றும் குடியேற்றத் துறை',
+    "d1": "காட்டப்படும் அனைத்து எல்லைகளும் அடையாள எல்லைகளாகும். வரைபட எல்லைகள் எந்தவொரு சட்டப்பூர்வ நோக்கங்களுக்காகவும் பயன்படுத்தப்படாது.",
+    "d2": "இந்த பயன்பாட்டில் FMB வரைபடங்களில் புதுப்பிக்கப்படாத சாத்தியக்கூறுகள் உள்ளன, இதில் FMB வரைபடங்கள் டிஜிட்டல் முறையில் உருவாக்கப்பட்டு பதிவிறக்கங்கள் பிரிவில் கிடைக்கலாம்.",
+    "d3": "FMB வரைபடங்கள் கிடைக்கவில்லை அல்லது புதுப்பிக்கப்படவில்லை எனில், அந்தந்த தாலுகா சர்வேயரைத் தொடர்புகொண்டு, கொலாப்லேண்ட் மென்பொருளில் அவற்றைப் புதுப்பிக்கவும்.",
+    "d4": "கிடைக்கக்கூடிய FMB வரைபடங்களில் ஏதேனும் தவறான சித்தரிப்பு இருந்தால், புதுப்பித்தலுக்கு அந்தந்த தாலுகா சர்வேயரைத் தொடர்பு கொள்ளவும்.",
+    "d5": "காண்பிக்கபடும் உரிமையாளரின் தகவல் தமிழ் நிலம் தரவுத்தளத்தில் உள்ளது  அவை NIC ஆல் API மூலம் பராமரிக்கப்பட்டு பகிரப்படுகிறது.",
+    "d6": "இதில் உள்ள உரிமைப் பதிவுகள் அல்லது வரைபடங்களில் திருத்தமோ/ஆட்சேபனையோ இருந்தால் நில அளவை மற்றும் நிலவரித்திட்ட ஆணையகரத்தை அனுக வேண்டும்",
+    "d7": "செயலியின் பயன்பாடு / செயல்திறன் மற்றும் அதன் தரவு உள்ளடக்கங்கள் ஆகியவற்றின் காரணமாக ஏற்படும் இழப்பு / சேதங்களுக்கு அரசு அல்லது அரசாங்கத்தின் எந்த அதிகாரியும் அதன் பிரதிநிதிகளும் பொறுப்பேற்க முடியாது.",
+    "d8": "உள்ளடக்கங்கள் அதன் வெளிப்படைத்தன்மை மற்றும் தரவு பயன்பாட்டின் ஒரு பகுதியாக மக்களின் பொது பயன்பாட்டிற்கு உபயோகப்படுகிறது, இவை வணிக பயன்பாட்டிற்காக அல்ல.",
+    "d9": "இந்தப் பயன்பாடு மற்றும் இந்த செயலியின் தரவுகளிலிருந்து எந்தவொரு வணிகரீதியான பயன்பாடும் கண்டிப்பாக தடைசெய்யப்பட்டுள்ளது.",
+    "type1": '(மாவட்டம் | வட்டம்  | கிராமம்)',
+    "sur_suv_dt1": '(சர்வே / துணை பிரிவு)',
+    "type": '(மாவட்டம் | வட்டம்  | கிராமம்)',
+    "type2": '(மாவட்டம் | வட்டம்  | கிராமம்)',
+    "sur_suv_dt": '(சர்வே / துணை பிரிவு)',
+    "owner_info": 'உரிமையாளரின் தகவல்',
+    "land_info": 'நிலத்தின் தகவல்',
+    "land_type": 'நிலத்தின் வகை',
+    "o_survey": 'பழைய சர்வே எண்',
+    "part_Ind": 'partInd',
+    "tax_Rate": 'வரி விகிதம்',
+    "Primary_soil_Type": 'முதன்மை மண் வகை',
+    "Secondary_soil_Type": 'இரண்டாம் நிலை மண் வகை',
+    "Soil_Class": 'மண் வகைப்பாடு',
+    "Tax_Per_Hect": 'ஒரு ஹெக்டருகானா வரி',
+    "Extent_in_Hectares": 'ஹெக்டேர் பரப்பளவு',
+    "Extent_in_ares": 'ஏரில் உள்ள அளவு',
+    "total_tax": 'மொத்த வரி',
+    "patta_no": 'பட்டா எண்',
+    "porambok": 'பொறம்போக்கு',
+    "remark": 'கருத்துக்கள்',
+    "remark1": 'கருத்துக்கள்1',
+    "form_8no": 'Form8இல்',
+    "form_6no": 'Form6இல்',
+    "isitassessed": 'இது மதிப்பிடப்பட்டதா?',
+    "isitcultivable": 'இது விவாசாய நிலமானதா?',
+    "crop_info": 'பயிரின் தகவல் (GRAINS)',
+    "crop_type_ta": 'பயிரின் வகை',
+    "crop_id_ta": 'பயிரின் ஐடி',
+    "crop_name_ta": 'பயிரின் பெயர்',
+    "crop_extent_id": 'பயிரின் அளவு',
+    "irrigation_source_ta": 'நீர்ப்பாசன ஆதாரம்',
+    "sown_date_ta": 'எதிர்பார்க்கப்படும் விதைக்கப்பட்ட தேதி',
+    "harvest_id_ta": 'எதிர்பார்க்கப்படும் அறுவடை தேதி',
+    'ownerCountLabel': 'மொத்த உரிமையாளர்கள்',
+    'ownerNameLabel': 'உரிமையாளரின் பெயர்',
+    'ownerRelativeLabel': 'உறவினர் பெயர்/உறவின் முறை',
+    'a_register': 'அ-பதிவேடு',
+    'fmb_sketch': 'புலப்படம்',
+    'pattanolable': 'பட்டா எண்:',
+    'Patta_no2': 'பட்டா எண்',
+    'others-modal-title': 'பட்டா மூலம் தேடுங்கள்',
+    'survey_subdivision2label': 'இந்த பட்டா எண்ணுக்கான சர்வே மற்றும் உட்பிரிவு எண்களின் பட்டியல்',
+    'urban_datalable': '(மாவட்டம் | வட்டம் | நகரம் | பிளாக் | வார்டு | சர்வே/துணை பிரிவு)',
+    'owner_name_urban': 'உரிமையாளரின் பெயர்',
+    "urban_owner_info": 'உரிமையாளரின் தகவல்',
+    "urban_land_info": 'நிலத்தின் தகவல்',
+    "dryWetUnassessedPorambokeHouseurban": 'நிலத்தின் வகை',
+
+    "wardurban": 'வார்டு',
+    "streeturban": 'தெரு',
+    "oldSurveyNoAndLetterurban": 'Old Sy/Letter',
+    "govtMittaZamindariInamurban": 'உரிமையாளரின் வகை',
+    "sourceOfIrrigationAndClassurban": 'நீர்ப்பாசனம் மற்றும் வகுப்புக்கான ஆதாரம்',
+    "ifdoubleCropReteofCompositionurban": 'இரட்டிப்பு பயிர் விகிதம் ',
+    "classAndSortOfSoilurban": 'மண் வகுப்பு',
+    "porambokeHouseurban": 'பொரம்போக்கே',
+    "taramurban": 'தரம்',
+    "rubeesurban": 'மதிப்பீட்டு விகிதம்',
+    "hecterurban": 'ஹெக்டேர் : பரப்பு: சதுர மீட்டர்',
+    "howTheHoldingIsUtilisedurban": 'நிலத்தின் பயன்பாடு',
+    "remarkurban": 'கருத்துக்கள்',
+    "urban_land_info": 'நிலத்தின் தகவல்',
+    "urban_tooltip": 'நகர்ப்புற பகுதிகளுக்கு பட்டா எண் காட்சி அம்சம் வழங்கப்படவில்லை'
+
+  }
+}
+
+
+let currentLang = 'en';
+
+
+
+function switchLang() {
+  currentLang = currentLang === 'en' ? 'ta' : 'en';
+  const ids = ['label1', 'doss', 'tamilnilam', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6','d7','d8','d9','d10',
+    'type1', 'Patta_no2', 'type2', 'sur_suv_dt1', 'type', 'sur_suv_dt', 'owner_info',
+    'land_info', 'land_type', 'o_survey', 'part_Ind', 'tax_Rate', 'Primary_soil_Type',
+    'Secondary_soil_Type', 'Soil_Class', 'Tax_Per_Hect', 'Extent_in_Hectares',
+    'Extent_in_ares', 'total_tax', 'pattanolable', 'porambok', 'remark', 'remark1',
+    'form_8no', 'form_6no', 'isitassessed', 'isitcultivable', 'crop_info',
+    'crop_type_ta', 'crop_id_ta', 'crop_name_ta', 'crop_extent_id',
+    'irrigation_source_ta', 'sown_date_ta', 'harvest_id_ta', 'ownerCountLabel',
+    'urban_datalable', 'ownerNameLabel', 'ownerRelativeLabel', 'Patta_no2', 'a_register',
+    'survey_subdivision2label', 'fmb_sketch', 'patta_no', 'urban_owner_info', 'urban_land_info',
+    'dryWetUnassessedPorambokeHouseurban', 'others-modal-title', 'wardurban', 'streeturban',
+    'oldSurveyNoAndLetterurban', 'govtMittaZamindariInamurban', 'sourceOfIrrigationAndClassurban',
+    'ifdoubleCropReteofCompositionurban', 'classAndSortOfSoilurban', 'owner_name_urban', 'porambokeHouseurban',
+    'taramurban', 'rubeesurban', 'hecterurban', 'howTheHoldingIsUtilisedurban', 'remarkurban', 'urban_land_info', 'urban_tooltip'];
+
+  // ids.forEach(id => document.getElementById(id).textContent = languageContent[currentLang][id]);
+  ids.forEach(id => {
+    let element = $('#' + id);
+    if (element.length) {
+      element.text(languageContent[currentLang][id]);
+      if (currentLang === 'ta') {
+        element.addClass('small-font-tamil');
+      } else {
+        element.removeClass('small-font-tamil');
+      }
+    }
+  });
+
+  // document.getElementById('langToggle').textContent = currentLang === 'en' ? "தமிழ்" : "English";
+}
+
+//

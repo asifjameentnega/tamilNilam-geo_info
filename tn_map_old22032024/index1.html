@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+      <!-- Bootstrap CSS -->
+      <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+      <!-- font awesome CSS -->
+      <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css"> 
+      <!-- general CSS --> 
+      <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
+      <title id="application_title">Kalaingar Magalir Urimai Thogai - Tamil Nadu</title>
+      <style>
+      /* Chrome * Safari */
+      input[type="number"]::-webkit-inner-spin-button {
+         display: none;
+      }
+      /* Firefox */
+      input[type="number"] {
+         -moz-appearance: textfield;
+      }
+      .blinkAlert {
+          position: fixed;
+          z-index: 9;
+          bottom: 0;
+          width: 100%;
+          text-align: center; 
+          border-radius: 0;
+          animation: pulseone 1500ms infinite;
+          width: 100%;
+      }
+      @keyframes pulseone{
+          0%{
+              box-shadow: #ff0000 0 0 0 0;
+          }
+          75%{
+              box-shadow:#ff69b400 0 0 0 16px;
+          }
+      }
+
+      .blinkAlert1 {
+          position: fixed;
+          z-index: 9;
+          top: 1rem;
+          width: 100%;
+          text-align: center; 
+          border-radius: 0;
+          animation: pulseone 1500ms infinite;
+          width: 100%;
+      }
+      @keyframes pulseone{
+          0%{
+              box-shadow: #ff0000 0 0 0 0;
+          }
+          75%{
+              box-shadow:#ff69b400 0 0 0 16px;
+          }
+      }
+   </style>
+ 
+   </head>
+   <body class="d-flex flex-column h-100 bg-login">
+
+      <div id="preloader" style="display:none"></div>
+      <!-- Begin page content -->
+      <main class="flex-shrink-0 h-100 login-pg v-center">
+         
+         <div class="area">
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+         </div>
+
+
+         <div class="container-fluid bg-signup">
+             <div class="col-lg-12 text-center">
+               <img src="assets/img/logo.png" class="img-fluid logoimg" alt="logo">
+            </div> 
+            <div class="col-lg-12 text-center mb-2 mt-1">   
+               <p class="text-white otp-txt-signup mb-4"><span class="txt-orange font-600">கலைஞர்</span><span class="d-block font-600">மகளிர் உரிமைத் திட்டம்</span><span class="d-block" id="application_name"></span></p>
+            </div>  
+            <div class="col-lg-12 text-center">  
+               <div class="card bg-light-dark">
+                 <div class="card-body half-card">
+                  <div class="input-group mb-2"> 
+                    <span class="input-group-text">
+                     <i class="bi bi-person-check boxicon"></i>
+                  </span>
+                    <input type="number" class="form-control" placeholder="Mobile Number" aria-label="username" aria-describedby="user" id="mobile_number" autocomplete="off" onKeyPress="if(this.value.length==10) return false;">
+                  </div> 
+                  <div class="input-group mb-2 d-none"> 
+                    <span class="input-group-text">
+                     <i class="bi bi-lock boxicon"></i>
+                  </span>
+                    <input type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="password">
+                  </div>
+                  <!-- <a href="#" class="text-white float-end pwd-txt mb-2"><i class="bi bi-person-lock"></i> Forget Password</a> -->
+
+
+                  <div class="clear-both"></div>
+                  <!-- <div class="mb-2 mt-3 loginbtn">
+                     <a href="user.html" class="text-white btn btn-success btn-md">
+                        <i class="bi bi-arrow-right-circle"></i> <span class="px-1">Sign In</span>
+                     </a> 
+                  </div> -->
+                  <div class="mb-2 mt-3">
+                     <a href="#" class="text-white btn btn-success btn-md" onclick="registerUser()">
+                        <i class="bi bi-arrow-right-circle"></i> <span class="px-1" >Sign In</span>
+                     </a> 
+                  </div>
+
+                 </div> 
+               </div>
+            </div>
+         </div>
+         <div class="alert alert-danger blinkAlert blink py-2 d-none" role="alert">
+             <b>It is NOT FOR TRAINING</b>
+         </div>
+         <div class="alert alert-danger blinkAlert1 blink py-2 d-none" role="alert">
+             <b>கள ஆய்வு செயலி</b>
+         </div>
+      </main>
+      <div id="snackbar"><i class="bi bi-check2-circle"></i><span id="snackbar_message"></span></div>
+      <div id="error_snackbar"><i class="bi bi-check2-circle"></i> <span id="error_snackbar_message">Please fill all the
+            fields</span>
+      </div>
+      <!-- ==================================================== -->
+
+       <!-- jQuery -->
+      <script src="assets/scripts/jquery/jquery.min.js"></script> 
+      <!-- Bootstrap Bundle with Popper --> 
+      <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+      <script src="assets/scripts/global.js"></script>
+      <script type="text/javascript">
+         var application_path;
+         var application_name;
+         var dept_master_id;//to assign dept id to enable filter
+      if (window.localStorage.getItem("user_details_kmut_verification") === null) {
+         
+       } else {
+         window.location.href = "details.html";
+       }
+         
+         // Redirect to OTP Page once Registration is successfull
+         function otpPage() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            $("#snackbar_message").empty();
+            $("#snackbar_message").append(`User Found`);
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 1000);
+            var delay = 1700;
+            setTimeout(function () { window.location = "otp.html"; }, delay);
+         }
+         // Handle Error in Ajax call
+         function errorDisplay(val) {
+            var x = document.getElementById("error_snackbar");
+            x.className = "show";
+            $("#error_snackbar_message").empty();
+            $("#error_snackbar_message").append(val);
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+         }
+         // Register Function
+         function registerUser() {
+            //var name = $("#name").val();
+            var mobile_number = $("#mobile_number").val();
+            //var email = $("#email").val();
+            if (mobile_number != '') {
+               $.ajax({
+                  type: 'POST',
+                  headers: { 'X-APP-KEY': config.app_key,'X-APP-NAME': 'KMUT Verification App' },
+                  url: `${config.api_url}/login_user`,
+                  data: {
+                     //'name': name,
+                     'mobile_number': mobile_number,
+                     //'email': email,
+                     //'application_name':application_name
+                  },
+                  dataType: 'json',
+                  success: function (data, textStatus, http) {
+                     //console.log(data[0]);
+                     if (http.status == 200) {
+                        if (data[0].success == 1) {
+                           window.localStorage.setItem('user_id', JSON.stringify(data[0].data.user_id.id));
+                           window.localStorage.setItem('mobile_number', mobile_number);
+                           //window.localStorage.setItem('application_name', application_name);
+                           window.localStorage.setItem('session_id', data[0].data.session_id);
+                           otpPage();
+                        }
+                     } else if (http.status == 409) {
+                        errorDisplay(data[0].message);
+                     } else if (http.status == 400) {
+                        errorDisplay(data[0].message);
+                     } else {
+                        errorDisplay(data[0].message);
+                     }
+                  },
+                  error: function (errorThrown) {
+                     //console.log(errorThrown);
+                     /*message = errorThrown.responseText;
+                     errorDisplay(message);*/
+                     message = errorThrown.responseJSON[0].message;
+                     errorDisplay(message);
+                  }
+               })
+            } else {
+               alert("Please fill all the fields")
+            }
+         }
+         $(document).on({
+        ajaxStart: function() {
+          $('#preloader').show();
+        },
+        ajaxStop: function() {
+          $('#preloader').hide();
+        }
+      });
+      </script>
+   </body>
+</html>

@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <title>Cadastral Information System</title>
+   <meta content="" name="description">
+   <meta content="" name="keywords">
+   <META NAME="robots" CONTENT="noindex,nofollow">
+   <!-- Favicons -->
+   <link href="assets/img/tn_logo.png" rel="icon">
+   <link href="assets/img/tn_logo.png" rel="apple-touch-icon">
+   <!-- Google Fonts -->
+   <link href="https://fonts.gstatic.com" rel="preconnect">
+   <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet">
+   <!-- Vendor CSS Files -->
+   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+   <!-- open layer CSS -->
+   <link rel="stylesheet" type="text/css" href="assets/vendor/openlayers/ol.css">
+   <link rel="stylesheet" href="assets/vendor/ol-ext-master/dist/ol-ext.css" />
+   <!-- datatable css-->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/datatable/dataTables.css">
+  <!-- leaflet CSS -->
+   <link rel="stylesheet" type="text/css" href="assets/vendor/leaflet/leaflet.css">
+  <!-- sweet alert -->
+   <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css">
+   <!-- CSS File -->
+   <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="toggle-sidebar font-change">
+   <!-- ======= Header ======= -->
+   <header id="header" class="header fixed-top d-flex align-items-center py-1">
+      <div class="d-flex align-items-center justify-content-between">
+         <i class="bi bi-list-nested toggle-sidebar-btn d-none"></i>
+         <a href="index.html" class="logo d-flex align-items-center mx-2">
+            <img src="assets/img/tn_logo.png" alt="logo" class="logo_header">
+            <span class="d-none d-lg-block">
+               <!-- <i class="bi bi-globe"></i> -->
+               Cadastral Information System
+            </span>
+         </a>
+      </div>
+      <!-- End Logo -->
+      <!-- End Search Bar -->
+      <nav class="header-nav ms-auto">
+         <ul class="d-flex align-items-center">
+            <li class="nav-item">
+               <a class="nav-link mx-2 nav-profile login_btn" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target=".loginModal">
+                  <i class="bi bi-lock"></i> Login
+               </a>
+            </li>
+            <!-- <li class="nav-item">
+               <a class="nav-link mx-2 nav-profile d-none" href="javascript:void(0)">
+                  <i class="bi bi-person-check"></i> Admin Name
+               </a>
+            </li> -->
+            <li class="nav-item">
+               <a class="nav-link mx-2 nav-profile logout d-none" href="javascript:void(0)">
+                  <i class="bi bi-arrow-right-circle"></i> Log Out
+               </a>
+            </li>
+         </ul>
+      </nav>
+      <!-- End Icons Navigation -->
+   </header>
+   <!-- End Header -->
+   <!-- ======= Sidebar ======= -->
+   <aside id="sidebar" class="sidebar d-none">
+      <ul class="sidebar-nav" id="sidebar-nav">
+         <li class="nav-item">
+            <a class="nav-link " href="index.html">
+               <i class="bi bi-grid"></i>
+               <span>Cadastral Information System</span>
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link mx-2 nav-profile login_btn" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target=".loginModal">
+               <i class="bi bi-lock"></i> Login
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link mx-2 nav-profile logout d-none" href="javascript:void(0)">
+               <i class="bi bi-arrow-right-circle"></i> Log Out
+            </a>
+         </li>
+      </ul>
+   </aside>
+   <!-- End Sidebar-->
+   <main id="main" class="main">
+      <!-- Dashboard view starts -->
+      <!-- End Page Title -->
+      <section class="section dashboard switchview1">
+         <div class="row mb-1">
+            <div class="col-xxl-3 col-md-3 col-12">
+               <select class="form-select" aria-label="District Name" id="district" onchange="getTaluk(this.value)">
+                  <option value="">Select District</option>
+               </select>
+            </div>
+            <div class="col-xxl-3 col-md-3 col-12">
+               <select class="form-select" aria-label="Taluk Name" id="taluk" onchange="getVillage(this.value)">
+                  <option value="">Select Taluk</option>
+               </select>
+            </div>
+            <div class="col-xxl-3 col-md-3 col-12">
+               <select class="form-select" aria-label="Village Name" id="village" onchange="filterVillage(this.value)">
+                  <option value="">Select Village</option>
+               </select>
+            </div>
+            <div class="col-xxl-3 col-md-3 col-12">
+               <select class="form-select d-none" aria-label="Survey Name" id="survey" onchange="filterSurvey(this.value)">
+                  <option value="">Select Survey Number</option>
+               </select>
+            </div>
+         </div>
+         <div class="container-fluid">
+               <ul class="nav nav-tabs" id="myTab" role="tablist">
+                 <li class="nav-item" role="presentation">
+                   <button class="nav-link main-nav active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Dashboard</button>
+                 </li>
+                 <li class="nav-item" role="presentation">
+                   <button class="nav-link main-nav" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Review</button>
+                 </li>
+              </ul>
+               <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="dashboard-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                     <div class="row">
+                        <!-- Layout 1 -->
+                        <div class="col-md-6 col-lg-7 mb-0 mb-lg-0 card_layout">
+                           <div class="card shadow bg-white rounded layout1">
+                              <div class="card-body row">
+                                 <div class="col-lg-2 nav-align" id="div_scroll">
+                                    <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                          <a class="nav-link dashbord_nav active" id="village_name-tab" href='#village_master'>Codes</a>
+                                       </li>
+                                       <li class="nav-item">
+                                          <a class="nav-link dashbord_nav" id="village_name-tab" href="#cadastral">Map</a>
+                                       </li>
+                                       <li class="nav-item">
+                                          <a class="nav-link dashbord_nav" id="code-tab" href="#fmb">Records</a>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <div class="col-lg-10">
+                                    <div class="scroll-content px-3" data-bs-spy="scroll" data-bs-target="#div_scroll" data-bs-offset="0" tabindex="0">
+                                       <!-- admin Master -->
+                                       <div class="div-margin-bottom" id="village_master">
+                                          <div class="alert alert-primary my-2 text-center py-1" role="alert">
+                                             Admin Master Dashboard
+                                          </div>
+                                          <div class="row d-flex justify-content-center">
+                                             <div class="col-12 align-items-center grid-margin">
+                                                <div class="card bg-gradient-success card-img-holder text-white box-radius">
+                                                   <div class="card-body text-center">
+                                                      <h5 class="font-weight-normal mb- mt-2">Total No.of Polygon(Villages) <span
+                                                            class="layer-selectable" onclick="getData('total_polygon')"><i
+                                                               class="bi bi-info-circle"></i></span></h5>
+                                                      <h3 id="total_polygons">100</h3>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row d-flex justify-content-around mt-1">
+                                             <div class="col-6 align-items-center grid-margin">
+                                                <div class="card bg-gradient-success card-img-holder text-white box-radius layer-selectable" >
+                                                   <div class="card-body text-center">
+                                                      <div class="row br-bottom">
+                                                         <div class="col-5 align-items-center grid-margin br-right"
+                                                            >
+                                                            <h5 class="font-weight-normal mb- mt-2">With LGD
+                                                            </h5>
+                                                            <h3 id="total_lgd_code" onclick="getTableMain('revenue_village_lgd_code','LGD','Village LGD','all')">100</h3>
+                                                         </div>
+                                                         <div class="col-7 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Without LGD
+                                                            </h5>
+                                                            <h3 id="without_lgd_code">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row br-bottom">
+                                                         <div class="col-5 align-items-center grid-margin br-right">
+                                                            <h5 class="font-weight-normal mb- mt-2">Unique
+                                                            </h5>
+                                                            <h3 id="unique_lgd_code" onclick="getTableMain('revenue_village_lgd_code','LGD Unique','Village LGD','unique')">100</h3>
+                                                         </div>
+                                                         <div class="col-3 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('no_lgd_code')">
+                                                            <h5 class="font-weight-normal mb- mt-2">No LGD
+                                                            </h5>
+                                                            <h3 id="no_lgd_code" onclick="getTable('revenue_village_lgd_code','No LGD','Village LGD','all')">100</h3>
+                                                         </div>
+                                                         <div class="col-4 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Others <span
+                                                                  class="layer-selectable" onclick="getData('others_lgd_code')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <h3 id="others_lgd_code" class="layer-selectable"
+                                                               onclick="toggleLayer('others_lgd_code');getTable('revenue_village_lgd_code','Others Without LGD','Village LGD','all','others')">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                         <div class="col-5 align-items-center grid-margin br-right">
+                                                            
+                                                         </div>
+                                                         <div class="col-3 align-items-center grid-margin br-right layer-selectable">
+                                                            <h5 class="font-weight-normal mb- mt-2">No code Unique
+                                                            </h5>
+                                                            <h3 id="no_village_lgd_unique" onclick="getTable('revenue_village_lgd_code','No Code Village LGD unique','Village LGD','unique')">100</h3>
+                                                         </div>
+                                                         <div class="col-4 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Others Unique <span
+                                                                  class="layer-selectable" onclick="getData('others_lgd_code','unique')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <h3 id="others_village_lgd_unique" class="layer-selectable"
+                                                               onclick="getTable('revenue_village_lgd_code','Others Without Village LGD unique','Village LGD','unique','others');">100</h3>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <!-- Census -->
+                                             <div class="col-6 align-items-center grid-margin">
+                                                <div class="card bg-gradient-info card-img-holder text-white box-radius">
+                                                   <div class="card-body text-center">
+                                                      <div class="row br-bottom">
+                                                         <div class="col-5 align-items-center grid-margin br-right layer-selectable"
+                                                            >
+                                                            <h5 class="font-weight-normal mb- mt-2">With Census
+                                                            </h5>
+                                                            <h3 id="total_census_code" onclick="getTableMain('revenue_village_census_code','Census','Census Code','all')">100</h3>
+                                                         </div>
+                                                         <div class="col-7 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Without Census
+                                                            </h5>
+                                                            <h3 id="without_census_code">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row br-bottom">
+                                                         <div class="col-5 align-items-center grid-margin br-right layer-selectable">
+                                                            <h5 class="font-weight-normal mb- mt-2">Unique
+                                                            </h5>
+                                                            <h3 id="unique_census_code" onclick="getTableMain('revenue_village_census_code','Census Unique','Census Code','unique')">100</h3>
+                                                         </div>
+                                                         <div class="col-3 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('no_census_code')">
+                                                            <h5 class="font-weight-normal mb- mt-2">No Census
+                                                            </h5>
+                                                            <h3 id="no_census_code" onclick="getTable('revenue_village_census_code','No Census','Census Code','all')">100</h3>
+                                                         </div>
+                                                         <div class="col-4 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Others <span
+                                                                  class="layer-selectable"
+                                                                  onclick="getData('others_census_code')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <h3 id="others_census_code" class="layer-selectable"
+                                                               onclick="toggleLayer('others_census_code');getTable('revenue_village_census_code','Others No Census','Census Code','all','others')">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                         <div class="col-5 align-items-center grid-margin br-right">
+                                                            
+                                                         </div>
+                                                         <div class="col-3 align-items-center grid-margin br-right layer-selectable">
+                                                            <h5 class="font-weight-normal mb- mt-2">No code Unique
+                                                            </h5>
+                                                            <h3 id="no_census_code_unique" onclick="getTable('revenue_village_census_code','No Code Census unique','Census Code','unique')">100</h3>
+                                                         </div>
+                                                         <div class="col-4 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Others Unique <span
+                                                                  class="layer-selectable" onclick="getData('others_census_code','unique')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <h3 id="others_census_code_unique" class="layer-selectable"
+                                                               onclick="getTable('revenue_village_census_code','Others Without Census code unique','Census Code','unique','others');">100</h3>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row d-flex justify-content-around mt-1">
+                                             <div class="col-md-8 align-items-center grid-margin">
+                                                <div class="card bg-gradient-danger card-img-holder text-white box-radius">
+                                                   <div class="card-body text-center">
+                                                      <div class="row br-bottom">
+                                                         <div class="col-5 align-items-center grid-margin br-right layer-selectable"
+                                                            title="Tamil Nillam" >
+                                                            <h5 class="font-weight-normal mb- mt-2">With Tamil Nillam
+                                                            </h5>
+                                                            <h3 id="total_tn_code" onclick="getTableMain('tamilnilam_code','TamilNilam','TamilNilam Code','all')">100</h3>
+                                                         </div>
+                                                         <div class="col-7 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Without Tamil Nillam
+                                                            </h5>
+                                                            <h3 id="without_tn_code">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row br-bottom">
+                                                         <div class="col-5 align-items-center grid-margin br-right layer-selectable">
+                                                            <h5 class="font-weight-normal mb- mt-2">Unique
+                                                            </h5>
+                                                            <h3 id="unique_tn_code" onclick="getTableMain('tamilnilam_code','TamilNilam Unique','TamilNilam Code','unique')">100</h3>
+                                                         </div>
+                                                         <div class="col-3 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('no_tn_code')">
+                                                            <h5 class="font-weight-normal mb- mt-2">No code
+                                                            </h5>
+                                                            <h3 id="no_tn_code" onclick="getTable('tamilnilam_code','No Code TamilNilam','TamilNilam Code','all')">100</h3>
+                                                         </div>
+                                                         <div class="col-4 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Others <span
+                                                                  class="layer-selectable" onclick="getData('others_tn_code')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <h3 id="others_tn_code" class="layer-selectable"
+                                                               onclick="toggleLayer('others_tn_code');getTable('tamilnilam_code','Others Without TamilNilam code','TamilNilam Code','all','others')">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                         <div class="col-5 align-items-center grid-margin br-right">
+                                                            
+                                                         </div>
+                                                         <div class="col-3 align-items-center grid-margin br-right layer-selectable">
+                                                            <h5 class="font-weight-normal mb- mt-2">No code Unique
+                                                            </h5>
+                                                            <h3 id="no_tn_code_unique" onclick="getTable('tamilnilam_code','No Code TamilNilam','TamilNilam Code','unique')">100</h3>
+                                                         </div>
+                                                         <div class="col-4 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">Others Unique <span
+                                                                  class="layer-selectable" onclick="getData('others_tn_code','unique')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <h3 id="others_tn_code_unique" class="layer-selectable"
+                                                               onclick="getTable('tamilnilam_code','Others Without TamilNilam code','TamilNilam Code','unique','others');">100</h3>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <!-- <div id="chart-container">FusionCharts will render here</div> -->
+                                          <!-- <canvas id="demo" width="400" height="400"></canvas> -->
+                                           
+                                       </div>
+                                       <!-- cadastral -->
+                                       <div class="div-margin-bottom" id="cadastral">
+                                          <div class="alert alert-primary my-2 text-center py-1" role="alert">
+                                             Cadastral Dashboard
+                                          </div>
+                                          <div class="row d-flex justify-content-around mt-1">
+                                             <div class="col-12 align-items-center grid-margin">
+                                                <div class="card bg-gradient-success card-img-holder text-white box-radius">
+                                                   <div class="card-body text-center">
+                                                      <div class="row d-flex justify-content-center">
+                                                         <div class="col-12 align-items-center grid-margin">
+                                                            <div class="card bg-gradient-success card-img-holder text-white box-radius">
+                                                               <div class="card-body text-center layer-selectable"  onclick="toggleLayer('')">
+                                                                  <h5 class="font-weight-normal mb- mt-2">Total No.of Cadastral</h5>
+                                                                  <h3 id="total_cadastral">100</h3>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                          <div>&nbsp;</div>
+                                       </div>
+                                       <!-- FMB Pane -->
+                                       <div class="div-margin-bottom" id="fmb">
+                                          <div class="alert alert-primary my-2 text-center py-1" role="alert">
+                                             FMB Dashboard
+                                          </div>
+                                          <div class="row d-flex justify-content-around mt-1">
+                                             <!-- ROR -->
+                                             <div class="col-6 align-items-center grid-margin">
+                                                <div class="card bg-gradient-danger card-img-holder text-white box-radius">
+                                                   <div class="card-body text-center">
+                                                      <div class="row">
+                                                         <div class="col-md-12 br-bottom">
+                                                            <h5 class="font-weight-normal mb- mt-2">Total ROR
+                                                            </h5>
+                                                            <h3 id="total_ror">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                         <div class="col-5 align-items-center grid-margin br-right"
+                                                            title="">
+                                                            <h5 class="font-weight-normal mb- mt-2">ROR Matched with FMB (List)
+                                                            </h5>
+                                                            <h3 id="ror_match_fmb">100</h3>
+                                                         </div>
+                                                         <div class="col-7 align-items-center grid-margin">
+                                                            <h5 class="font-weight-normal mb- mt-2">ROR Unmatched with FMB (List)
+                                                            </h5>
+                                                            <h3 id="ror_unmatch_ror">100</h3>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="card bg-gradient-info card-img-holder text-white box-radius mt-2">
+                                                   <div class="card-body text-center">
+                                                      <div class="row">
+                                                         <div class="col-md-12 br-bottom">
+                                                            <h5 class="font-weight-normal mb- mt-2">Total No.of Polygon(Villages) 
+                                                            </h5>
+                                                            <h3 id="total_villages">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                         <div class="col-6 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('no_fmb','no_fmb','Village without FMB')">
+                                                            <h5 class="font-weight-normal mb- mt-2">Villages with No FMB
+                                                            </h5>
+                                                            <h3 id="no_fmb_village">100</h3>
+                                                         </div>
+                                                         <!-- <div class="col-6 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('partial_fmb')">
+                                                            <h5 class="font-weight-normal mb- mt-2">Villages with Partial FMB
+                                                            </h5>
+                                                            <h3 id="partial_fmb_village">100</h3>
+                                                         </div> -->
+                                                         <div class="col-6 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('with_fmb','with_fmb', 'Villages With FMB')">
+                                                            <h5 class="font-weight-normal mb- mt-2">Villages with FMB
+                                                            </h5>
+                                                            <h3 id="with_fmb_village">100</h3>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                
+                                             </div>
+                                             <div class="col-6 align-items-center grid-margin">
+                                                <div class="card bg-gradient-success card-img-holder text-white box-radius">
+                                                   <div class="card-body text-center">
+                                                      <div class="row d-flex justify-content-center br-bottom">
+                                                         <div class="col-12 align-items-center grid-margin">
+                                                            <div class="card bg-gradient-success card-img-holder text-white box-radius">
+                                                               <div class="card-body text-center">
+                                                                  <h5 class="font-weight-normal mb- mt-2">Total No.of FMB</h5>
+                                                                  <h3 id="total_fmb_count">100</h3>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row br-bottom">
+                                                         <!-- <div class="col-6 align-items-center grid-margin br-right"> -->
+                                                         <div class="col-6 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('land_type_matched_wmts','land_type_matched','ROR Matched');">
+                                                            <h5 class="font-weight-normal mb- mt-2">FMB Matched with ROR (Spatial)
+                                                            </h5>
+                                                            <h3 id="total_matched_fmb">100</h3>
+                                                         </div>
+                                                         <div class="col-6 align-items-center grid-margin layer-selectable" onclick="toggleLayer('land_type_unmatched_wmts','fmb_unmatched','ROR Unmatched')">
+                                                         <!-- <div class="col-6 align-items-center grid-margin"> -->
+                                                            <h5 class="font-weight-normal mb- mt-2">FMB Unmatched with ROR (Spatial)
+                                                            </h5>
+                                                            <h3 id="total_unmatched_fmb">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <div class="row">
+                                                         <div class="col-6 align-items-center grid-margin br-right layer-selectable" >
+                                                            <h5 class="font-weight-normal mb- mt-2">Type of Lands <span
+                                                                  class="layer-selectable" onclick="getData('land_type')"><i
+                                                                     class="bi bi-info-circle"></i></span>
+                                                            </h5>
+                                                            <!-- <h3 id="fmb_land_type" onclick="toggleLayer('land_type_matched')">100</h3> -->
+                                                            <h3 id="fmb_land_type">100</h3>
+                                                         </div>
+                                                         <div class="col-6 align-items-center grid-margin br-right layer-selectable" >
+                                                            <h5 class="font-weight-normal mb- mt-2">No Survey Number <span
+                                                                  class="layer-selectable"></span>
+                                                            </h5>
+                                                            <h3 id="no_survey_number" onclick="toggleLayer('')">100</h3>
+                                                         </div>
+                                                      </div>
+                                                      <!-- <div class="row ">
+                                                         <div class="col-6 align-items-center grid-margin br-right layer-selectable"
+                                                            onclick="toggleLayer('single_owner')">
+                                                            <h5 class="font-weight-normal mb- mt-2">Single Owner
+                                                            </h5>
+                                                            <h3 id="single_owner">100</h3>
+                                                         </div>
+                                                         <div class="col-6 align-items-center grid-margin layer-selectable" onclick="toggleLayer('multiowner')">
+                                                            <h5 class="font-weight-normal mb- mt-2">Multi Owner
+                                                            </h5>
+                                                            <h3 id="multi_owner">100</h3>
+                                                         </div>
+                                                      </div> -->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row d-flex justify-content-around mt-1">
+                                                <div class="col-md-12 align-items-center grid-margin">
+                                                   <div class="card bg-gradient-danger card-img-holder text-white box-radius">
+                                                      <div class="card-body text-center">
+                                                         <div class="row br-bottom">
+                  
+                                                            <div class="col-12 align-items-center grid-margin">
+                                                               <h5 class="font-weight-normal mb- mt-2">Total Poramboku
+                                                               </h5>
+                                                               <h3 id="total_poramboku">100</h3>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row br-bottom">
+                                                            <div class="col-6 align-items-center grid-margin br-right layer-selectable"
+                                                               onclick="toggleLayer('poramboku_wmts','poramboku','Poramboku Matched');">
+                                                               <h5 class="font-weight-normal mb- mt-2">Matched with FMB
+                                                               </h5>
+                                                               <h3 id="poramboku_matched">100</h3>
+                                                            </div>
+                                                            <div class="col-6 align-items-center grid-margin">
+                                                               <h5 class="font-weight-normal mb- mt-2">UnMatched with FMB <span
+                                                                     class="layer-selectable"></span>
+                                                               </h5>
+                                                               <h3 id="poramboku_unmatched" class="layer-selectable"
+                                                                  >100</h3>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="col-6 align-items-center grid-margin br-right layer-selectable" >
+                                                               <h5 class="font-weight-normal mb- mt-2">Type of Lands <span
+                                                                     class="layer-selectable" onclick="getData('land_type_poramboku')"><i
+                                                                        class="bi bi-info-circle"></i></span>
+                                                               </h5>
+                                                               <h3 id="poramboku_matched_land_type">100</h3>
+                                                            </div>
+                                                            <div class="col-6 align-items-center grid-margin br-right " >
+                                                               
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row d-flex justify-content-around mt-1">
+                                                <div class="col-md-6 align-items-center grid-margin">
+                                                   <canvas id="chart-area"/>
+                                                </div>
+                                                
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+                        <!-- Layout 2 -->
+                        <div class="col-md-6 col-lg-5 mb-5 mb-lg-0 map_div">
+                           <div class="card shadow bg-white rounded" style="height: 72vh;">
+                              <div class="card-body">
+                                 <div class="row">
+                                    <div id="map"></div>
+                                    <div class="map_toggle_div"><a href='javascript:void(0)' class="map_toggle_icon"><i class="bi bi-arrows-angle-contract"></i></a></div>
+                                    <div class="map_current_layer"></div>
+                                    <!-- Logo -->
+                                    <div id="map_footer"><span><img src="assets/img/tngis-logo.png" class="map_logo"> Powered by
+                                          TNGIS
+                                          - TNeGA</span>
+                                    </div>
+                                    <!-- End Logo -->
+                                    <!-- Legend -->
+                                    <div class="accordion card-shadow mb-2 box box-width" id="bottomContainer">
+                                         <div class="accordion-item leftAccordion">
+                                            <h2 class="accordion-header" id="headingOne">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cardInfos" aria-expanded="false" aria-controls="collapseOne">
+                                               <strong class="text-white"><i class="fa fa-info-circle"></i> Legend</strong>
+                                               </button> 
+                                            </h2>
+                                            <div id="cardInfos" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#bottomContainer" style="">
+                                               <div class="accordion-body legend_info" style="padding: 5px;">
+                                                 <div class="show-info-list row">
+                                                   <span style="font-size: 10px;color: #fff;font-weight: bold;text-align: center;white-space: nowrap;"></span>
+                                                   <img id="legend_tag" src="">
+                                                 </div>
+                                                 <div class="show-info-list1 row">
+                                                   
+                                                 </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                    <!-- End Legend -->
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="review-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                     <div class="row">
+                        <div class="col-md-4">
+                           <div class="card georef_conf_form d-none">
+                              <div class="card-body">
+                                 <form name="georef_conf" id="georef_conf" method="POST" autocomplete="off" class="">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="georef_confirmation" id="matched" value="matched" required>
+                                      <label class="form-check-label" for="matched">Matched</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="georef_confirmation" id="unmatched" value="unmatched" required>
+                                      <label class="form-check-label" for="unmatched">Un Matched</label>
+                                    </div>
+                                    <div class="form-floating remarks_div d-none">
+                                      <textarea class="form-control" placeholder="Add remarks here" name="unmatched_remarks" id="unmatched_remarks"></textarea>
+                                      <label for="floatingTextarea">Remarks</label>
+                                    </div>
+                                    <input type="hidden" name="case" value="georef_conf_check">
+                                    <button id="geo_ref_submit" class="btn btn-success mt-1 custom-btn" style="font-size: 12px;padding: 2px 15px;">Submit</button>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <!-- Layout 1 -->
+                        <div class="col-md-6 col-lg-6 mb-0 mb-lg-0 map_layout map_div1">
+                           <div id="georef_title"><span> Raw FMB received from Collabland</span>
+                                    </div>
+                           <div class="card shadow bg-white rounded layout1">
+                              <div class="card-body">
+                                 <div id="raw_map"></div>
+                                 <div class="map_toggle_div1"><a href='javascript:void(0)' class="map_toggle_icon"><i class="bi bi-arrows-angle-contract"></i></a></div>
+                                 <div class="dropdown raw_fmb_dropdown">
+                                    <button class="dropdown-toggle raw_fmb_btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"></button>
+                                    <ul class="dropdown-menu raw_fmb_menu">
+                                    
+                                    </ul>
+                                 </div>
+                                 <div class="raw_fmb_add_marker d-none">
+                                    <a href='javascript:void(0)' class=""><i class="bi bi-info-circle"></i></a>
+                                 </div>
+                                    <!-- Logo -->
+                                    <div id="map_footer1"><span><img src="assets/img/tngis-logo.png" class="map_logo"> Powered by
+                                          TNGIS
+                                          - TNeGA</span>
+                                    </div>
+                                    <!-- End Logo -->
+                              </div>
+                           </div>
+
+                        </div>
+                        <!-- Layout 2 -->
+                        <div class="col-md-6 col-lg-6 mb-5 mb-lg-0 map1_layout">
+                           <div id="georef_title"><span> Georeferrenced Cadastral and FMB</span>
+                                    </div>
+                           <div class="card shadow bg-white rounded" style="height: 72vh;">
+                              <div class="card-body">
+                                 <div class="row">
+                                    <div id="georef_map1"></div>
+                                    <div class="map1_toggle_div"><a href='javascript:void(0)' class="map1_toggle_icon"><i class="bi bi-arrows-angle-contract"></i></a></div>
+                                    <!-- Logo -->
+                                    <div id="map_footer"><span><img src="assets/img/tngis-logo.png" class="map_logo"> Powered by
+                                          TNGIS
+                                          - TNeGA</span>
+                                    </div>
+                                    <!-- End Logo -->
+                                    <!-- Legend -->
+                                    <!-- <div class="accordion card-shadow mb-2 box box-width" id="bottomContainer"
+                                       style="display: block;">
+                                       <div class="accordion-item leftAccordion">
+                                          <h2 class="accordion-header" id="headingOne">
+                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#cardInfos" aria-expanded="true" aria-controls="collapseOne">
+                                                <strong class="text-white"><i class="fa fa-info-circle"></i> Legend</strong>
+                                             </button>
+                                          </h2>
+                                          <div id="cardInfos" class="accordion-collapse collapse bg-blues"
+                                             aria-labelledby="headingOne" data-bs-parent="#bottomContainer" style="">
+                                             <div class="accordion-body">
+                                                <div class="show-info-list row">
+                                                   <span
+                                                      style="font-size: 12px;color: #fff;font-weight: bold;text-align: center;">Range
+                                                      (Quantity)</span>
+                                                   <img id="legend_tag" src="">
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div> -->
+                                    <!-- End Legend -->
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+         </div>
+      </section>
+      <!-- Dashboard view ends -->
+   </main>
+   <!-- Modal Popup -->
+   <div class="modal fade" id="othersModalPopup" tabindex="-1" role="dialog" aria-labelledby="othersModalPopupTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="others-modal-title">Other's Category</h5>
+            </div>
+            <div class="modal-body" id="others-modal-id">
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Table Modal Popup -->
+   <div class="modal fade" id="update_modal" tabindex="-1" role="dialog" aria-labelledby="othersModalPopupTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="update_modal_title">List</h5>
+            </div>
+            <div class="modal-body" id="">
+              <form name="change_code" id="change_code" method="POST" autocomplete="off">
+                  <div class="mb-2">
+                     <label for="formFile" class="form-label">Village Name</label>
+                    <input type="text" name="village_name" id="village_name" class="form-control"  aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="mb-2">
+                     <label for="formFile" class="form-label">Village Code</label>
+                    <input type="text" name="village_code" id="village_code" class="form-control"  required>
+                  </div>
+                  <div class="mb-2">
+                     <label for="formFile" class="form-label" id="selected_table_label"></label>
+                    <input type="text" name="selected_code" id="selected_code" class="form-control"  required>
+                  </div>
+                  <input type="hidden" name="ogc_fid" id="ogc_fid" value="">
+                  <input type="hidden" name="case" value="update_rv">
+                  <input type="hidden" name="old_village_name" id="old_village_name" value="">
+                  <input type="hidden" name="old_village_code" id="old_village_code" value="">
+                  <input type="hidden" name="old_code" id="old_code" value="">
+                  <input type="hidden" name="selected_column" id="selected_column" value="">
+                  <button id="update" class="btn btn-success mt-1 custom-btn">Update</button>
+                </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Table Offcanvas -->
+   <div class="offcanvas offcanvas-bottom table_canvas" tabindex="-1" id="tableModal" aria-labelledby="offcanvasBottomLabel" data-bs-scroll="true" data-bs-backdrop="false">
+     <div class="offcanvas-header">
+       <h5 class="offcanvas-title" id="table-modal-title">Offcanvas bottom</h5>
+       <button type="button" class="btn-close table_close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+     </div>
+     <div class="offcanvas-body small" id="table-modal-id">
+       ...
+     </div>
+   </div>
+   <!-- login modal starts --> 
+    <div class="modal fade loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="">Login</h5>
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            
+            <form name="login_official" id="login_official" method="POST" autocomplete="off">
+               <div class="mb-2">
+                 <input type="text" name="u" id="uname" class="form-control" placeholder="User Name" aria-describedby="emailHelp" required>
+               </div>
+               <div class="mb-2">
+                 <input type="password" name="p" id="pass" class="form-control" placeholder="Password" required>
+               </div>
+               <input type="hidden" name="case" value="loginCheck">
+               <input type="hidden" id="check_value" name="check_value" value="loginCheck">
+               <div class="row">
+                 <div class="col">
+                   <span class="" id="captcha">captcha text</span>
+                 </div>
+                 <div class="col">
+                   <input type="text" class="form-control" id="textBox" placeholder="Captcha" aria-label="Captcha" aria-describedby="basic-addon1" name="captcha" required>
+                 </div>
+                 <div class="col">
+                   <a class="d-block text-center" id="refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col">
+                   <span class="text-danger p-1 mt-1 mv-1" id="output"></span>
+                 </div>
+               </div>
+               <button id="submit" class="btn btn-success mt-1 custom-btn">Login</button>
+            </form>
+         </div>
+        </div>
+      </div>
+    </div>
+    <!-- login modal ends -->
+    <div class="toast-container position-fixed top-0 end-0 p-3 custom_toast">
+      <div id="errorToast" class="toast align-items-center text-bg-primary border-0 " role="alert" aria-live="assertive" aria-atomic="true" style="background: #f24646 !important;">
+        <div class="d-flex">
+        <div class="toast-body">
+          <b class="blink">Invalid Username or Password</b>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      </div>
+      <div id="successToast" class="toast align-items-center text-bg-primary border-0 " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+        <div class="toast-body text-center">
+          <b class="blink">Login Successful</b>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      </div>
+      <div id="logoutToast" class="toast align-items-center text-bg-primary border-0 " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+        <div class="toast-body text-center">
+          <b class="blink">Logout Successful</b>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      </div>
+    </div>
+   <!-- End #main -->
+   <!-- ======= Footer ======= -->
+   <div id="preloader"></div> 
+   <footer id="footer" class="footer">
+       <div class="copyright">
+           © Copyright <strong><span>TNeGA</span></strong>. All Rights Reserved, Designed &amp; Developed by <a href="https://tngis.tn.gov.in/" target="_blank">TNGIS</a>
+        </div>
+   </footer>
+   <!-- End Footer -->
+   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+         class="bi bi-arrow-up-short"></i></a>
+   <script type="text/javascript">
+      var has_login=false;
+      var raw_map;
+      var georef_map1;
+      var goeref_fmbgeojsonLayer;
+      var rawgeojsonLayer;
+      var goeref_vectorgeojsonLayer;
+      var raster_image_layer;
+      var highlight_survey_number;
+      var label_raw_fmb;
+      var label_georef_fmb;
+      var village_check_val = '';
+      var raw_fmb_radio_value;
+      var leaflet_zoom_extent;
+      var openlayer_zoom_extent;
+
+      var raw_map_point;
+      var raw_fmb_marker;
+      var raw_fmb_marker_group;
+   </script>
+   <!-- Vendor JS Files -->
+   <script src="assets/vendor/jquery/jquery.min.js"></script>
+   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Openlayers -->
+   <script type="text/javascript" src="assets/vendor/openlayers/dist/ol.js"></script>
+   <script type="module" src="assets/vendor/openlayers/source/WMTS.js"></script>
+   <script type="module" src="assets/vendor/openlayers/tilegrid/WMTS.js"></script>
+   <script type="module" src="assets/vendor/openlayers/proj.js"></script>
+   <script type="module" src="assets/vendor/openlayers/extent.js"></script>
+   <script src="assets/vendor/ol-ext-master/dist/ol-ext.js"></script>
+   <!-- leaflet -->
+   <script type="text/javascript" src="assets/vendor/leaflet/leaflet.js"></script>
+   <script type="text/javascript" src="assets/vendor/leaflet/leaflet-tilelayer-wmts.js"></script>
+   <script type="text/javascript" src="assets/vendor/leaflet/proj4.js"></script>
+   <script type="text/javascript" src="assets/vendor/leaflet/proj4leaflet.js"></script>
+   <script src="assets/vendor/leaflet/bundle.js"></script>
+   <script src="assets/vendor/shapefile/site/catiline.js"></script>
+   <script src="assets/vendor/shapefile/dist/shp.js"></script>
+   <!-- sweet alert -->
+   <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+   <!-- Template Main JS File -->
+   <script src="assets/js/main.js"></script>
+   <script src="assets/js/map.js"></script>
+   <script src="assets/js/map1.js"></script>
+   <!-- Fusion chart Files -->
+   <!-- <script src="assets/vendor/fusionchart/fusioncharts.js"></script>
+   <script src="assets/vendor/fusionchart/fusioncharts.theme.fusion.js"></script>
+   <script src="assets/vendor/fusionchart/fusioncharts.powercharts.min.js"></script> -->
+
+   <!-- login -->
+   <script src="assets/vendor/captcha/captcha.js"></script> 
+   <script src="assets/vendor/encryption/aes.js"></script>
+   <!-- Crypto js -->
+   <script src="assets/vendor/encryption/crypto-js.min.js"></script>
+   <!-- Encryption js -->
+   <script src="assets/vendor/encryption/Encryption.js"></script>
+   <script type="text/javascript" src="assets/js/login.js"></script>
+   <!-- ChartJs -->
+   <script src="assets/vendor/chartjs/chart.min.js"></script>
+   <script src="assets/vendor/chartjs/chartjs-plugin-datalabels.js"></script>
+   <!-- Datatable -->
+      
+   <script type="text/javascript" src="assets/vendor/datatable/dataTables.js"></script>
+   <script type="text/javascript" src="assets/vendor/datatable/dataTables.bootstrap4.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/jszip.min.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/pdfmake.min.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/vfs_fonts.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/buttons.print.min.js"></script>
+   <script src="assets/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
+   <script type="text/javascript">
+      var current_tab;
+      var district_val;
+      var taluk_val;
+      var village_val;
+      var land_type_body;
+      var land_type_poramboku_body;
+      var cenusu_cod_body;
+      var tamilni_co_body;
+      var total_polygon_body;
+      var v_lgd_co_1_body;
+      var current_scroll_ajax;
+      var scroll_current_tab;
+      var click_counter = 0;
+      var selected_table_column;
+      var myDoughnut;
+      var raw_fmb_status;
+      var georef_fmb_status;
+      var georef_vector_status;
+      var village_raster_status;
+      var api = 'https://tngis.tnega.org/cadastral_api/app/api/v1/';
+      $('.toggleview').click(function () {
+         $('.switchview1').hide();
+         $('.switchview2').show();
+         $('.toggleview1').click(function () {
+            $('.switchview1').show();
+            $('.switchview2').hide();
+         });
+      }); 
+      /*var village_master_layers = [with_lgd_code,no_lgd_code,others_lgd_code,with_census_code,no_census_code,others_census_code,with_tamil_nillam_code,no_tamil_nillam_code,others_tamil_nillam_code];
+      var fmb_layers = [fmb_master,land_type_matched,unmatched_roro,no_fmb,partial_fmb,single_owner,multiowner];*/
+      var village_master_layers = [no_lgd_code,others_lgd_code,no_census_code,others_census_code,no_tamil_nillam_code,others_tamil_nillam_code];
+      var fmb_layers = [fmb_master,land_type_matched,unmatched_roro,single_owner,multiowner];
+   </script>
+   <script type="module">
+
+      $(document).ready(function(){
+         district_val = $('#district').val();
+         taluk_val = $('#taluk').val();
+         village_val = $('#village').val();
+         //current_tab = $(".tab-pane.active").attr('id');
+         current_tab = 'village_master';
+
+         getCardData(district_val,taluk_val,village_val);
+         getAllDist();
+         $(".dashbord_nav").on('click',function(){
+            //var tab_text = $(this).attr('data-bs-target').substring(1);
+            scroll_current_tab = $(this).attr('href').substring(1);
+            click_counter++;
+            /*if(current_tab==tab_text)
+            {
+               
+            }
+            else if(tab_text =='village_master')
+            {
+               district_val = $('#district').val();
+               taluk_val = $('#taluk').val();
+               village_val = $('#village').val();
+               current_tab=tab_text;
+               if(district_val!=''&&taluk_val==''&&village_val=='')
+               {
+                  getCardData(district_val);
+               }
+               else if(district_val!=''&&taluk_val!=''&&village_val=='')
+               {
+                  getCardData(district_val,taluk_val);
+               }
+               else if(district_val!=''&&taluk_val!=''&&village_val!='')
+               {
+                  getCardData(district_val,taluk_val,village_val);
+               }
+               else
+               {
+                  getCardData(district_val,taluk_val,village_val);
+               }
+            }
+            else if(tab_text =='fmb')
+            {
+               district_val = $('#district').val();
+               taluk_val = $('#taluk').val();
+               village_val = $('#village').val();
+               current_tab=tab_text;
+               if(district_val!=''&&taluk_val==''&&village_val=='')
+               {
+                  getCardData(district_val);
+               }
+               else if(district_val!=''&&taluk_val!=''&&village_val=='')
+               {
+                  getCardData(district_val,taluk_val);
+               }
+               else if(district_val!=''&&taluk_val!=''&&village_val!='')
+               {
+                  getCardData(district_val,taluk_val,village_val);
+               }
+               else
+               {
+                  getCardData(district_val,taluk_val,village_val);
+               }
+            }
+            else if(tab_text =='cadastral')
+            {
+               district_val = $('#district').val();
+               taluk_val = $('#taluk').val();
+               village_val = $('#village').val();
+               current_tab=tab_text;
+               if(district_val!=''&&taluk_val==''&&village_val=='')
+               {
+                  getCardData(district_val);
+               }
+               else if(district_val!=''&&taluk_val!=''&&village_val=='')
+               {
+                  getCardData(district_val,taluk_val);
+               }
+               else if(district_val!=''&&taluk_val!=''&&village_val!='')
+               {
+                  getCardData(district_val,taluk_val,village_val);
+               }
+               else
+               {
+                  getCardData(district_val,taluk_val,village_val);
+               }
+            }*/
+         });
+         $(".scroll-content").scroll(function() { 
+            if(click_counter==0)
+            {
+               scroll_current_tab = $('.dashbord_nav.active').attr('href').substring(1);
+            }
+            else
+            {
+               click_counter--;
+            }
+            if(scroll_current_tab == current_scroll_ajax)
+            {
+               //current tab scroll
+            }
+            else
+            {
+               //div change after scroll
+               if(scroll_current_tab =='village_master')
+               {
+                  district_val = $('#district').val();
+                  taluk_val = $('#taluk').val();
+                  village_val = $('#village').val();
+                  current_tab=scroll_current_tab;
+                  if(district_val!=''&&taluk_val==''&&village_val=='')
+                  {
+                     getCardData(district_val);
+                  }
+                  else if(district_val!=''&&taluk_val!=''&&village_val=='')
+                  {
+                     getCardData(district_val,taluk_val);
+                  }
+                  else if(district_val!=''&&taluk_val!=''&&village_val!='')
+                  {
+                     getCardData(district_val,taluk_val,village_val);
+                  }
+                  else
+                  {
+                     getCardData(district_val,taluk_val,village_val);
+                  }
+               }
+               else if(scroll_current_tab =='fmb')
+               {
+                  current_scroll_ajax = 'fmb';
+                  district_val = $('#district').val();
+                  taluk_val = $('#taluk').val();
+                  village_val = $('#village').val();
+                  current_tab=scroll_current_tab;
+                  if(district_val!=''&&taluk_val==''&&village_val=='')
+                  {
+                     getCardData(district_val);
+                  }
+                  else if(district_val!=''&&taluk_val!=''&&village_val=='')
+                  {
+                     getCardData(district_val,taluk_val);
+                  }
+                  else if(district_val!=''&&taluk_val!=''&&village_val!='')
+                  {
+                     getCardData(district_val,taluk_val,village_val);
+                  }
+                  else
+                  {
+                     getCardData(district_val,taluk_val,village_val);
+                  }
+               }
+               else if(scroll_current_tab =='cadastral')
+               {
+                  /*current_scroll_ajax = 'cadastral';
+                  district_val = $('#district').val();
+                  taluk_val = $('#taluk').val();
+                  village_val = $('#village').val();
+                  current_tab=scroll_current_tab;
+                  if(district_val!=''&&taluk_val==''&&village_val=='')
+                  {
+                     getCardData(district_val);
+                  }
+                  else if(district_val!=''&&taluk_val!=''&&village_val=='')
+                  {
+                     getCardData(district_val,taluk_val);
+                  }
+                  else if(district_val!=''&&taluk_val!=''&&village_val!='')
+                  {
+                     getCardData(district_val,taluk_val,village_val);
+                  }
+                  else
+                  {
+                     getCardData(district_val,taluk_val,village_val);
+                  }*/
+               }
+            }
+         });
+         $('.map_toggle_div').click(function(){
+            $('.map_div').toggleClass('toggle_map');
+            $('.card_layout').toggle();
+         });
+         $('.map_toggle_div1').click(function(){
+            $('.map_div1').toggleClass('toggle_map');
+            $('.map1_layout').toggle();
+         });
+         $('.map1_toggle_div').click(function(){
+            $('.map1_layout').toggleClass('toggle_map');
+            $('.map_layout').toggle();
+            georef_map1.invalidateSize() 
+               setInterval(function(){
+                  georef_map1.invalidateSize()
+            }, 100);
+         });
+         $('#review-tab').on('click',function(){
+            $('#survey').removeClass('d-none');
+            raw_map.invalidateSize() 
+               setInterval(function(){
+                  raw_map.invalidateSize()
+            }, 100);
+            georef_map1.invalidateSize() 
+               setInterval(function(){
+                  georef_map1.invalidateSize()
+            }, 100); 
+            if(leaflet_zoom_extent === undefined)
+            {
+
+            }else {
+               georef_map1.invalidateSize();
+               georef_map1.fitBounds([[leaflet_zoom_extent[1],leaflet_zoom_extent[0]],[leaflet_zoom_extent[3],leaflet_zoom_extent[2]]]);   
+               georef_map1.invalidateSize();
+            }
+         });
+         $('#dashboard-tab').on('click',function(){
+            $('#survey').addClass('d-none');
+            if(openlayer_zoom_extent === undefined)
+            {
+
+            }else {
+               map.updateSize();
+               map.getView().fit(openlayer_zoom_extent, map.getSize()); 
+               map.updateSize();
+            }
+         });
+         $('body').on('change','input[name="raw_fmb_survey_sb"]',function(){
+            raw_fmb_radio_value = $(this).val();
+            rawgeojsonLayer.eachLayer(function(featureInstanceLayer) {
+                var propertyValue = featureInstanceLayer.feature.properties.KIDE;
+                if(propertyValue == raw_fmb_radio_value)
+                {
+                  featureInstanceLayer.setStyle({
+                     color: '#ffe599',
+                     fillOpacity: 0.8,
+                     weight: 0.5
+                  });
+                }
+                else
+                {
+                  featureInstanceLayer.setStyle({
+                     color: 'black',
+                     fillOpacity: 0,
+                     weight: 3
+                  });
+                }
+            })
+         });
+         $('body').on('change','.leaflet-control-layers-selector',function(){
+            if(this.checked) {
+               if($(this).next().text() == ' Georef FMB')
+               {
+                  if(label_georef_fmb===undefined)
+                  {
+
+                  }
+                  else
+                  {
+                     $('.geojson_label').css({"display": "block"});
+                  }
+                  
+               }
+            }
+            else
+            {
+               if($(this).next().text() == ' Georef FMB')
+               {
+                  if(label_georef_fmb===undefined)
+                  {
+
+                  }
+                  else
+                  {
+                     $('.geojson_label').css({"display": "none"});
+                  }
+                  
+               }
+            }
+         });
+         $('input[name="georef_confirmation"]').on('change',function(){
+            if($(this).val()=='unmatched')
+            {
+               $('.remarks_div').removeClass('d-none');
+               $('#unmatched_remarks').prop('required',true);
+            }
+            else
+            {
+               $('.remarks_div').addClass('d-none');
+               $('#unmatched_remarks').val('');
+               $('#unmatched_remarks').prop('required',false);
+
+            }
+         });
+         $('#georef_conf').on('submit',function(e){
+            e.preventDefault();
+            var dist = $('#district').val();
+            var tal = $('#taluk').val();
+            var vil = $('#village').val();
+            var sur = $('#survey').val();
+            if(dist!=''&&tal!=''&&vil!=''&&sur!='')
+            {
+               var update_data = $('#georef_conf').serializeArray();
+               update_data.push({ name: "district", value: dist });
+               update_data.push({ name: "taluk", value: tal });
+               update_data.push({ name: "village", value: vil });
+               update_data.push({ name: "survey", value: sur });
+               $.ajax({
+                  type: "POST",
+                  headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+                  url:api+"updateData.php",
+                  dataType: "json",
+                  data: update_data,
+                  success: function (data){
+                     if(data.message == 'success')
+                     {
+                        Swal.fire({
+                          icon: "success",
+                          title: "Submitted Successfully",
+                          showConfirmButton: false,
+                          timer: 3000
+                        }).then(function(){ 
+                          location.reload();
+                        });
+                        $('#update').attr('disabled',false);
+                        $('#update_modal').modal('hide');
+                        $('.table_close').trigger('click');
+                     }
+                     else if(data.message == 'error')
+                     {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Please try again",
+                          showConfirmButton: false,
+                          timer: 3000
+                        })
+                        $('#update').attr('disabled',false);
+                     }
+                  }
+               });
+            }
+            else
+            {
+               alert('Please select district, taluk, village, survey')
+            }
+         });
+      });
+   </script>
+   <script>
+      function getAllDist() 
+      {
+         $.ajax({
+            type: 'POST',
+            headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+            url: api+'dashboard.php',
+            data: {
+               'type': 'getDist',
+            },
+            dataType: 'json',
+            success: function (data) {
+               // console.log(data);
+               if (data[0].success == 1) {
+                  
+                  var district = data[0].data;
+                  var district_option = '<option value="">Select District</option>';
+                  $('#district').empty();
+                  district.forEach(function (select) {
+                     district_option += `<option value='${select.ed_distr_1}'>${select.dist_name_}</option>`;
+                  });
+                  $('#district').append(district_option);
+               }
+            }
+         });
+      }
+      function getCardData(district_val,taluk_val,village_val)
+      {
+         if(current_tab =='fmb')
+         {
+            
+         }
+         else if(current_tab =='village_master')
+         {
+            current_scroll_ajax = 'village_master';
+         }
+         else if(current_tab =='cadastral')
+         {
+            
+         }
+         $.ajax({
+            type: 'POST',
+            headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+            url: api+'dashboard.php',
+            data: {
+               'type': 'stats',
+               'current_tab':current_tab,
+               'district':district_val,
+               'taluk': taluk_val,
+               'village':village_val
+            },
+            dataType: 'json',
+            success: function (data) {
+               // console.log(data);
+               if (data[0].success == 1) {
+                  if(current_tab =='fmb')
+                  {
+                     var total_fmb_count = data[0].data.total_fmb_count ?? 0;
+                     var total_unmatched_fmb = data[0].data.total_unmatched_fmb ?? 0;
+                     var total_matched_fmb = data[0].data.total_matched_fmb ?? 0;
+                     var total_no_fmb_village = data[0].data.total_no_fmb_village_count ?? 0;
+                     //var total_partial_fmb_village_count = data[0].data.total_partial_fmb_village_count ?? 0;
+                     var total_with_fmb_village_count = data[0].data.total_with_fmb_village_count ?? 0;
+                     var total_fmb_land_type_count = data[0].data.total_fmb_land_type_count ?? 0;
+                     var total_rv_count = data[0].data.total_rv_count ?? 0;
+                     var total_single_user_count = data[0].data.total_single_user_count ?? 0;
+                     var total_multi_user_count = data[0].data.total_multi_user_count ?? 0;
+                     var total_ror_count = data[0].data.total_ror_count ?? 0;
+                     var total_ror_matched_count = data[0].data.total_ror_matched_count ?? 0;
+                     var total_ror_unmatched_count = data[0].data.total_ror_unmatched_count ?? 0;;
+                     var no_survey_count = data[0].data.no_survey_count;
+                     var total_poramboku_count = data[0].data.total_poramboku_count;
+                     var total_matched_poramboku_count = data[0].data.total_matched_poramboku_count;
+                     var total_unmatched_poramboku_count = data[0].data.total_unmatched_poramboku_count;
+                     var total_poramboku_land_type_count = data[0].data.total_poramboku_land_type_count;
+                     
+                     
+
+
+                     $("#total_fmb_count").empty();
+                     $("#total_matched_fmb").empty();
+                     $("#total_unmatched_fmb").empty();
+                     //$("#partial_fmb_village").empty();
+                     $("#with_fmb_village").empty();
+                     $("#no_fmb_village").empty();
+                     $("#fmb_land_type").empty();
+                     $("#total_villages").empty();
+                     $("#single_owner").empty();
+                     $("#multi_owner").empty();
+                     $("#total_ror").empty();
+                     $("#ror_match_fmb").empty();
+                     $("#ror_unmatch_ror").empty();
+                     $("#no_survey_number").empty();
+                     $("#total_poramboku").empty();
+                     $("#poramboku_matched").empty();
+                     $("#poramboku_unmatched").empty();
+                     $("#poramboku_matched_land_type").empty();
+                     
+
+
+                     $("#total_fmb_count").append(total_fmb_count);
+                     $("#total_matched_fmb").append(total_matched_fmb);
+                     $("#total_unmatched_fmb").append(total_unmatched_fmb);
+                     $("#no_fmb_village").append(total_no_fmb_village);
+                     //$("#partial_fmb_village").append(total_partial_fmb_village_count);
+                     $("#with_fmb_village").append(total_with_fmb_village_count);
+                     $("#fmb_land_type").append(total_fmb_land_type_count);
+                     $("#total_villages").append(total_rv_count);
+                     $("#single_owner").append(total_single_user_count);
+                     $("#multi_owner").append(total_multi_user_count);
+                     $("#total_ror").append(total_ror_count);
+                     $("#ror_match_fmb").append(total_ror_matched_count);
+                     total_ror_unmatched_count = total_ror_count - total_ror_matched_count
+                     $("#ror_unmatch_ror").append(total_ror_unmatched_count);
+                     $("#no_survey_number").append(no_survey_count);
+                     $("#total_poramboku").append(total_poramboku_count);
+                     $("#poramboku_matched").append(total_matched_poramboku_count);
+                     $("#poramboku_unmatched").append(total_unmatched_poramboku_count);
+                     $("#poramboku_matched_land_type").append(total_poramboku_land_type_count);
+
+                     if(myDoughnut===undefined)
+                     {
+
+                     }
+                     else
+                     {
+                        myDoughnut.destroy();
+                     }
+                     const DATA_COUNT = 3;
+                     const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: total_fmb_count};
+
+                     var labels;
+                     const data1 = {
+                       labels: ['Total', 'Matched With FMB','UnMatched with FMB'],
+                       datasets: [
+                         {
+                           label: 'FMB',
+                           backgroundColor: ['#2d1c59', '#351c75','#9474e7'],
+                           data: [total_fmb_count,total_matched_fmb,total_unmatched_fmb],
+                           renderText: ["Total", "Hello", "Unmatched"],
+                         },
+                         {
+                           label: 'ROR',
+                           backgroundColor: ['#4c0904', '#ba1508','#ef837c'],
+                           data: [total_ror_count, total_ror_matched_count,total_ror_unmatched_count],
+                           renderText: ["Total", "Hello", "Unmatched"]
+                         },
+                         {
+                           label: 'Poramboku',
+                           backgroundColor: ['#204e0b', '#43b50f','#a2ed80'],
+                           data: [total_poramboku_count, total_matched_poramboku_count,total_unmatched_poramboku_count],
+                           renderText: ["Total", "Hello", "Unmatched"]
+                         }
+                       ]
+                     };
+                     const config = {
+                       type: 'doughnut',
+                       data: data1,
+                       options: {
+                         responsive: true,
+                         plugins: {
+                           datalabels: {
+                             color: 'white',
+                             formatter: (val, ctx) => (ctx.dataset.renderText[ctx.dataIndex])
+                           }
+                         }
+                       },
+                     };
+                     var ctx = document.getElementById("chart-area").getContext("2d");
+                     myDoughnut = new Chart(ctx, config);
+
+                  }
+                  else if(current_tab =='village_master')
+                  {
+                     var total_polygons = data[0].data.total_polygons ?? 0;
+                     var total_lgd_code = data[0].data.total_lgd_code ?? 0;
+                     var without_lgd_code = data[0].data.without_lgd_code ?? 0;
+                     var unique_lgd_code = data[0].data.unique_lgd_code ?? 0;
+                     var no_lgd_code = data[0].data.no_lgd_code ?? 0;
+                     var others_lgd_code = data[0].data.others_lgd_code ?? 0;
+                     var no_village_lgd_unique = data[0].data.no_village_lgd_unique_count ?? 0;
+                     var others_village_lgd_unique = data[0].data.others_village_lgd_unique_count ?? 0;
+                     var total_census_code = data[0].data.total_census_code ?? 0;
+                     var without_census_code = data[0].data.without_census_code ?? 0;
+                     var no_census_code = data[0].data.no_census_code ?? 0;
+                     var unique_census_code = data[0].data.unique_census_code ?? 0;
+                     var others_census_code = data[0].data.others_census_code ?? 0;
+                     var no_census_code_unique_count = data[0].data.no_census_code_unique_count ?? 0;
+                     var others_census_code_unique_count = data[0].data.others_census_code_unique_count ?? 0;
+                     var total_tn_code = data[0].data.total_tn_code ?? 0;
+                     var without_tn_code = data[0].data.without_tn_code ?? 0;
+                     var no_tn_code = data[0].data.no_tn_code ?? 0;
+                     var unique_tn_code = data[0].data.unique_tn_code ?? 0;
+                     var others_tn_code = data[0].data.others_tn_code ?? 0;
+                     var others_tn_code_unique_count = data[0].data.others_tn_code_unique_count ?? 0;
+                     var no_tn_code_unique_count = data[0].data.no_tn_code_unique_count ?? 0;
+
+                     $("#total_polygons").empty();
+                     $("#total_lgd_code").empty();
+                     $("#without_lgd_code").empty();
+                     $("#unique_lgd_code").empty();
+                     $("#no_lgd_code").empty();
+                     $("#others_lgd_code").empty();
+                     $("#no_village_lgd_unique").empty();
+                     $("#others_village_lgd_unique").empty();
+                     $("#total_census_code").empty();
+                     $("#without_census_code").empty();
+                     $("#unique_census_code").empty();
+                     $("#no_census_code").empty();
+                     $("#no_census_code_unique").empty();
+                     $("#others_census_code_unique").empty();
+                     $("#others_census_code").empty();
+                     $("#total_tn_code").empty();
+                     $("#without_tn_code").empty();
+                     $("#unique_tn_code").empty();
+                     $("#no_tn_code").empty();
+                     $("#others_tn_code").empty();
+                     $("#others_tn_code_unique").empty();
+                     $("#no_tn_code_unique").empty();
+
+
+                     $("#total_polygons").append(total_polygons);
+                     $("#total_lgd_code").append(total_lgd_code);
+                     $("#without_lgd_code").append(without_lgd_code);
+                     $("#unique_lgd_code").append(unique_lgd_code);
+                     $("#no_lgd_code").append(no_lgd_code);
+                     $("#others_lgd_code").append(others_lgd_code);
+                     $("#no_village_lgd_unique").append(no_village_lgd_unique);
+                     $("#others_village_lgd_unique").append(others_village_lgd_unique);
+                     $("#total_census_code").append(total_census_code);
+                     $("#without_census_code").append(without_census_code);
+                     $("#unique_census_code").append(unique_census_code);
+                     $("#no_census_code").append(no_census_code);
+                     $("#others_census_code").append(others_census_code);
+                     $("#no_census_code_unique").append(no_census_code_unique_count);
+                     $("#others_census_code_unique").append(others_census_code_unique_count);
+                     $("#total_tn_code").append(total_tn_code);
+                     $("#without_tn_code").append(without_tn_code);
+                     $("#unique_tn_code").append(unique_tn_code);
+                     $("#no_tn_code").append(no_tn_code);
+                     $("#others_tn_code").append(others_tn_code);
+                     $("#others_tn_code_unique").append(others_tn_code_unique_count);
+                     $("#no_tn_code_unique").append(no_tn_code_unique_count);
+
+                     var total_cadastral = data[0].data.total_cadastral ?? 0;
+
+                     $("#total_cadastral").empty();
+
+                     $("#total_cadastral").append(total_cadastral);
+
+                     /*(function(){
+                        var canvas = document.getElementById('demo'),
+                            ctx = canvas.getContext('2d'),
+                            config = {
+                                responsive: true
+                            };
+
+                        new Chart(ctx).MultiLevelPie([
+                            {
+                                label: "Total Polygon",
+                                value: total_polygons,
+                                color: '#ffce56',
+                                children: [
+                                     {
+                                        label: "",
+                                        value: '',
+                                        color: '#80ce88',
+                                        children: []
+                                    },
+                                    {
+
+                                     label: "With LGD",
+                                     value: total_lgd_code,
+                                     color: '#80ce88',
+                                     children: [
+                                     {
+                                       label: "",
+                                        value: '',
+                                        color: '#ffce56',
+                                        children: []
+                                     },
+                                       {
+                                          label: "Unique",
+                                          value: unique_lgd_code,
+                                          color: '#ff5f60',
+                                          children: [
+                                          ]
+                                       }]
+                                    },
+                                    {
+                                        label: "Without LGD",
+                                        value: without_lgd_code,
+                                        color: '#ffce56',
+                                        children: []
+                                    }
+                                ]
+                            }
+                        ], config);
+
+                    }).call(this);*/
+                  }
+                  else if(current_tab =='cadastral')
+                  {
+                     /*var total_cadastral = data[0].data.total_cadastral ?? 0;
+                     
+                     
+                     
+
+
+                     $("#total_cadastral").empty();
+                     
+                     
+
+
+                     $("#total_cadastral").append(total_cadastral);*/
+                  }
+
+               }
+            }
+         });
+      }
+      function getData(type,data_type) {
+         var district_val = $('#district').val();
+         var taluk_val = $('#taluk').val();
+         var village_val = $('#village').val();
+         $('#othersModalPopup').modal('hide');
+         $("#others-modal-id").empty();
+         $("#others-modal-title").empty();
+         if(type == 'land_type')
+         {
+            $("#others-modal-title").append(`FMB land type`);
+            //$("#others-modal-id").append(land_type_body);
+         }
+         else if(type == 'land_type_poramboku')
+         {
+            $("#others-modal-title").append(`Poramboku land type`);
+            //$("#others-modal-id").append(land_type_poramboku_body);
+         }
+         else if (type == 'total_polygon') {
+            $("#others-modal-title").append(`Village Categories`);
+            //$("#others-modal-id").append(total_polygon_body);
+         }else if (type == 'others_lgd_code') {
+            //$("#others-modal-id").append(v_lgd_co_1_body);
+            $("#others-modal-title").append(`Others Category`)
+         }else if (type == 'others_census_code') {
+            $("#others-modal-title").append(`Others Category`)
+            //$("#others-modal-id").append(cenusu_cod_body);
+         }else if (type == 'others_tn_code') {
+            $("#others-modal-title").append(`Others Category`)
+            //$("#others-modal-id").append(tamilni_co_body);
+         } else {
+            
+         }
+         $('#othersModalPopup').modal('show');
+         $.ajax({
+            type: 'POST',
+            headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+            url: api+'dashboard.php',
+            data: {
+               'type': 'others_stats',
+               'others_type': type,
+               'current_tab':current_tab,
+               'district':district_val,
+               'taluk': taluk_val,
+               'village':village_val,
+               'data_type': data_type
+            },
+            dataType: 'json',
+            success: function (result) {
+               $("#others-modal-id").empty();
+               var data = result[0].data;
+               var body = `<div class="row">`;
+               data.forEach(function (card) {
+                  body += `<div class="col-4"><div class="card mb-2"><div class="card-body"><h5 class="card-title">${card.name}</h5><p class="card-text">${card.count}</p></div></div></div>`
+               });
+               body += `</div>`;
+               $("#others-modal-id").append(body);
+/*               if (type == 'total_polygon') {
+                  $("#others-modal-title").append(`Village Categories`)
+               } else {
+                  $("#others-modal-title").append(`Others Category`)
+               }*/
+               $('#othersModalPopup').modal('show');
+            }
+         })
+      }
+      function getTaluk(dist_lgd)
+      {
+         $('.georef_conf_form').addClass('d-none');
+         $('.table_close').trigger('click');
+         var taluk_option = '<option value="">Select Taluk</option>';
+         $('#taluk').empty();
+         $('#village').empty();
+         $('#village').append('<option value="">Select Village</option>')
+         $('#survey').empty();
+         $('#survey').append('<option value="">Select Survey Number</option>');
+         $.ajax({
+            type: 'POST',
+            headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+            url: api+'dashboard.php',
+            data: {
+               'type': 'getTaluk',
+               'dist_lgd': dist_lgd
+            },
+            dataType: 'json',
+            success: function (result) {
+               $("#taluk").append('');
+               var data = result[0].data;
+               data.forEach(function (select) {
+                  taluk_option += `<option value='${select.ed_tlkcode}'>${select.talukname_}</option>`
+               });
+               $('#taluk').append(taluk_option);
+            }
+         })
+         $('.geojson_label_raw').text('');
+         $('.geojson_label').text('');
+         if (rawgeojsonLayer != undefined) {
+           raw_map.removeLayer(rawgeojsonLayer);
+          };
+         if (goeref_fmbgeojsonLayer != undefined) {
+           georef_map1.removeLayer(goeref_fmbgeojsonLayer);
+          };
+         if (raster_image_layer != undefined) {
+           georef_map1.removeLayer(raster_image_layer);
+         };
+         getCardData(dist_lgd);
+         if(dist_lgd!='')
+         {
+            var village_cql = "ed_distr_1 ='"+dist_lgd+"'";
+            var village_filterParams = {
+             'CQL_FILTER': '' + village_cql + '',
+            };
+            for(var i=0;i<village_master_layers.length;i++){
+               village_master_layers[i].getSource().updateParams(village_filterParams);
+            }
+            var fmb_cql = "dc ='"+dist_lgd+"'";
+            var fmb_filterParams = {
+             'CQL_FILTER': '' + fmb_cql + '',
+            };
+            for(var i=0;i<fmb_layers.length;i++){
+               fmb_layers[i].getSource().updateParams(fmb_filterParams);
+            }
+            ZoomTo(dist_lgd);
+         }
+         else
+         {
+            var filterParams = {'CQL_FILTER': null ,};
+            for(var i=0;i<village_master_layers.length;i++){
+               village_master_layers[i].getSource().updateParams(filterParams);
+            }
+            for(var i=0;i<fmb_layers.length;i++){
+               fmb_layers[i].getSource().updateParams(filterParams);
+            }
+            map.getView().setCenter(ol.proj.transform([78.81107,10.92304], 'EPSG:4326', 'EPSG:3857'));
+            map.getView().setZoom(7);
+         }
+      }
+      function getVillage(taluk_lgd)
+      {
+         $('.georef_conf_form').addClass('d-none');
+         $('.table_close').trigger('click');
+         var village_option = '<option value="">Select Village</option>';
+         var district_val = $('#district').val();
+         $('#village').empty();
+         $('#survey').empty();
+         $('#survey').append('<option value="">Select Survey Number</option>');
+         $.ajax({
+            type: 'POST',
+            headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+            url: api+'dashboard.php',
+            data: {
+               'type': 'getVillage',
+               'taluk_lgd': taluk_lgd,
+               'district_val':district_val
+            },
+            dataType: 'json',
+            success: function (result) {
+               $("#village").append('');
+               var data = result[0].data;
+               data.forEach(function (select) {
+                  village_option += `<option value='${select.correcte_1}'>${select.corrected_}</option>`
+               });
+               $('#village').append(village_option);
+            }
+         })
+         $('.geojson_label_raw').text('');
+         $('.geojson_label').text('');
+         if (rawgeojsonLayer != undefined) {
+           raw_map.removeLayer(rawgeojsonLayer);
+          };
+         if (goeref_fmbgeojsonLayer != undefined) {
+           georef_map1.removeLayer(goeref_fmbgeojsonLayer);
+          };
+         if (raster_image_layer != undefined) {
+           georef_map1.removeLayer(raster_image_layer);
+         };
+         if(taluk_lgd!='')
+         {
+            var village_cql = "ed_distr_1 ='"+district_val+"' and ed_tlkcode ='"+taluk_lgd+"'";
+            var village_filterParams = {
+             'CQL_FILTER': '' + village_cql + '',
+            };
+            for(var i=0;i<village_master_layers.length;i++){
+               village_master_layers[i].getSource().updateParams(village_filterParams);
+            }
+            var fmb_cql = "dc ='"+district_val+"' and tc ='"+taluk_lgd+"'";
+            var fmb_filterParams = {
+             'CQL_FILTER': '' + fmb_cql + '',
+            };
+            for(var i=0;i<fmb_layers.length;i++){
+               fmb_layers[i].getSource().updateParams(fmb_filterParams);
+            }
+            ZoomTo(district_val,taluk_lgd);
+            getCardData(district_val,taluk_lgd);
+         }
+         else
+         {
+            var village_cql = "ed_distr_1 ='"+district_val+"'";
+            var village_filterParams = {
+             'CQL_FILTER': '' + village_cql + '',
+            };
+            for(var i=0;i<village_master_layers.length;i++){
+               village_master_layers[i].getSource().updateParams(village_filterParams);
+            }
+            var fmb_cql = "dc ='"+district_val+"'";
+            var fmb_filterParams = {
+             'CQL_FILTER': '' + fmb_cql + '',
+            };
+            for(var i=0;i<fmb_layers.length;i++){
+               fmb_layers[i].getSource().updateParams(fmb_filterParams);
+            }
+            ZoomTo(district_val);
+            getCardData(district_val);
+         }
+      }
+      function filterVillage(village_lgd)
+      {
+         $('.georef_conf_form').addClass('d-none');
+         $('.table_close').trigger('click');
+         $('#survey').empty();
+         var survey_option = '<option value="">Select Survey Number</option>';
+         var district_val = $('#district').val();
+         var taluk_val = $('#taluk').val();
+         var village_val = village_lgd;
+          $.ajax({
+            type: 'POST',
+            headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+            url: api+'dashboard.php',
+            data: {
+               'type': 'getSurvey',
+               'village_val': village_lgd,
+               'taluk_val': taluk_val,
+               'district_val':district_val
+            },
+            dataType: 'json',
+            success: function (result) {
+               $("#survey").append('');
+               var data = result[0].data;
+               data.forEach(function (select) {
+                  survey_option += `<option value='${select.kide}'>${select.kide}</option>`
+               });
+               $('#survey').append(survey_option);
+            }
+         })
+         $('.geojson_label_raw').text('');
+         $('.geojson_label').text('');
+         if (rawgeojsonLayer != undefined) {
+           raw_map.removeLayer(rawgeojsonLayer);
+          };
+         if (goeref_fmbgeojsonLayer != undefined) {
+           georef_map1.removeLayer(goeref_fmbgeojsonLayer);
+          };
+         if (raster_image_layer != undefined) {
+           georef_map1.removeLayer(raster_image_layer);
+         };
+         if(village_val!='')
+         {
+            var village_cql = "ed_distr_1 ='"+district_val+"' and ed_tlkcode ='"+taluk_val+"' and correcte_1 ='"+village_val+"'";
+            var village_filterParams = {
+             'CQL_FILTER': '' + village_cql + '',
+            };
+            for(var i=0;i<village_master_layers.length;i++){
+               village_master_layers[i].getSource().updateParams(village_filterParams);
+            }
+            var fmb_cql = "dc ='"+district_val+"' and tc ='"+taluk_val+"'and vc ='"+village_val+"' ";
+            var fmb_filterParams = {
+             'CQL_FILTER': '' + fmb_cql + '',
+            };
+            for(var i=0;i<fmb_layers.length;i++){
+               fmb_layers[i].getSource().updateParams(fmb_filterParams);
+            }
+            ZoomTo(district_val,taluk_val,village_val);
+            if(current_tab=='fmb')
+            {
+               /*land_type_matched.setVisible(true);
+               unmatched_roro.setVisible(true);*/
+            }
+            getCardData(district_val,taluk_val,village_val);
+            var village_text = $('#village option:selected').text();
+            var taluk_text = $('#taluk option:selected').text();
+            var district_text = $('#district option:selected').text();
+            var survey_number = survey_number;
+            $.ajax({
+               type: 'POST',
+               headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+               url: api+'dashboard.php',
+               data: {
+                  'type': 'unzipFiles_villageMap',
+                  'village_val': village_val,
+                  'village_text': village_text,
+                  'taluk_val': taluk_val,
+                  'district_val':district_val,
+                  'survey_number':survey_number
+               },
+               dataType: 'json',
+               success: function (result) {
+                  console.log(result);
+                  
+                  if(result.georef_vector==true)
+                  {
+                     georef_vector_status = true;
+                     shapetojson_georef_cadastral(district_val,taluk_val,district_text,taluk_text,village_text,village_val,result.village_val_excluding_zero,result.georef_vector_file)
+                  }
+                  else
+                  {
+                     georef_vector_status = false;
+                     if (goeref_vectorgeojsonLayer != undefined) {
+                       georef_map1.removeLayer(goeref_vectorgeojsonLayer);
+                     };
+                  }
+                  if(result.raster_image==true)
+                  {
+                     village_raster_status = true;
+                     shapetojson_raster_image(district_text,taluk_text,village_text,village_val,result.village_val_excluding_zero,result.tiff_file)
+                  }
+                  else
+                  {
+                     village_raster_status = false;
+                     if (raster_image_layer != undefined) {
+                       georef_map1.removeLayer(raster_image_layer);
+                     };
+                  }
+               }
+            })
+         }
+         else
+         {
+            var village_cql = "ed_distr_1 ='"+district_val+"' and ed_tlkcode ='"+taluk_val+"'";
+            var village_filterParams = {
+             'CQL_FILTER': '' + village_cql + '',
+            };
+            for(var i=0;i<village_master_layers.length;i++){
+               village_master_layers[i].getSource().updateParams(village_filterParams);
+            }
+            var fmb_cql = "dc ='"+district_val+"' and tc ='"+taluk_val+"'";
+            var fmb_filterParams = {
+             'CQL_FILTER': '' + fmb_cql + '',
+            };
+            for(var i=0;i<fmb_layers.length;i++){
+               fmb_layers[i].getSource().updateParams(fmb_filterParams);
+            }
+            ZoomTo(district_val,taluk_val);
+            land_type_matched.setVisible(false);
+            unmatched_roro.setVisible(false);
+            getCardData(district_val,taluk_val);
+         }
+      }
+      function filterSurvey(survey_number)
+      {
+         if(survey_number!='')
+         {
+            var district_val = $('#district').val();
+            var taluk_val = $('#taluk').val();
+            var village_val = $('#village').val();
+            var village_text = $('#village option:selected').text();
+            var taluk_text = $('#taluk option:selected').text();
+            var district_text = $('#district option:selected').text();
+            var survey_number = survey_number;
+            highlight_survey_number = survey_number;
+             $.ajax({
+               type: 'POST',
+               headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+               url: api+'dashboard.php',
+               data: {
+                  'type': 'zoomsurvey',
+                  'village_val': village_val,
+                  'taluk_val': taluk_val,
+                  'district_val':district_val,
+                  'survey_number':survey_number
+               },
+               dataType: 'json',
+               success: function (result) {
+                  var zoom_extent = result.extent;
+                  zoom_extent = Array.from(zoom_extent.split(','), Number);
+                  leaflet_zoom_extent = zoom_extent;
+                  georef_map1.fitBounds([[zoom_extent[1],zoom_extent[0]],[zoom_extent[3],zoom_extent[2]]]);
+                  /*if(result.georef_count==0)
+                  {
+                     $('.georef_conf_form').removeClass('d-none');
+                  }
+                  else
+                  {
+                     $('.georef_conf_form').addClass('d-none');
+                  }*/
+               }
+            });
+            $.ajax({
+               type: 'POST',
+               headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+               url: api+'dashboard.php',
+               data: {
+                  'type': 'unzipFiles',
+                  'village_val': village_val,
+                  'village_text': village_text,
+                  'taluk_val': taluk_val,
+                  'district_val':district_val,
+                  'survey_number':survey_number
+               },
+               dataType: 'json',
+               success: function (result) {
+                  //console.log(result);
+                  if(result.error==false)
+                  {
+                     $('.geojson_label_raw').text('');
+                     $('.geojson_label').text('');
+                     if(result.raw_fmb == true)
+                     {
+                        raw_fmb_status = true;
+                        shapetojson_raw_fmb(district_val,taluk_val,village_val,survey_number);
+                     }
+                     if(result.georef_vector==true)
+                     {
+                        georef_fmb_status = true;
+                        shapetojson_georef_fmb(district_val,taluk_val,district_text,taluk_text,village_text,village_val,result.village_val_excluding_zero,result.georef_vector_file)
+                     }
+                     if(result.raster_image==true)
+                     {
+                        /*village_raster_status = true;
+                        shapetojson_raster_image(district_text,taluk_text,village_text,village_val,result.village_val_excluding_zero,result.tiff_file)*/
+                     }
+                     if(result.georef_count==0)
+                     {
+                        $('.georef_conf_form').removeClass('d-none');
+                     }
+                     else
+                     {
+                        $('.georef_conf_form').addClass('d-none');
+                     }
+                  }
+                  else
+                  {
+                     raw_fmb_status = false;
+                     /*georef_fmb_status = false;
+                     village_raster_status = false;*/
+                     $('.geojson_label_raw').text('');
+                     $('.geojson_label').text('');
+                     if (rawgeojsonLayer != undefined) {
+                       raw_map.removeLayer(rawgeojsonLayer);
+                      };
+                     if (goeref_fmbgeojsonLayer != undefined) {
+                       georef_map1.removeLayer(goeref_fmbgeojsonLayer);
+                      };
+                     /*if (goeref_vectorgeojsonLayer != undefined) {
+                       georef_map1.removeLayer(goeref_vectorgeojsonLayer);
+                     };
+                     if (raster_image_layer != undefined) {
+                       georef_map1.removeLayer(raster_image_layer);
+                     };*/
+                     Swal.fire({
+                        icon: "error",
+                        title: 'Digital FMB from Collabland is not available for this Survey Number',
+                        showConfirmButton: true,
+                        timer: 5000
+                     })
+                     $('.georef_conf_form').addClass('d-none');
+                  }
+               }
+            })
+         }
+      }
+      function ZoomTo(dist_code,taluk_code,village_code) {
+        $.ajax({
+         type: 'POST',
+         headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+         url: api+'dashboard.php',
+         data: {
+            'dist_code':dist_code,
+            'taluk_code':taluk_code,
+            'village_code':village_code,
+            'type':'getExtent'
+         },
+         success: function(response) {
+            var zoom_extent = response[0].data;
+            zoom_extent = Array.from(zoom_extent.split(','), Number);
+            zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
+            openlayer_zoom_extent = zoom_extent;
+            map.getView().fit(zoom_extent, map.getSize()); 
+
+            var zoom_extent = response[0].data;
+            zoom_extent = Array.from(zoom_extent.split(','), Number);
+            leaflet_zoom_extent = zoom_extent;
+            georef_map1.fitBounds([[zoom_extent[1],zoom_extent[0]],[zoom_extent[3],zoom_extent[2]]]);
+         }
+        })
+      }
+      function getTable(card_name,category_name,selected_table_column,type,others)
+      {
+         var district_val = $('#district').val();
+         var taluk_val = $('#taluk').val();
+         var village_val = $('#village').val();
+         var other_column = others;
+         $('#table-modal-title').text(category_name);
+         $.ajax({
+         type: 'POST',
+         headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+         url: api+'dashboard.php',
+         data: {
+            'dist_code':district_val,
+            'taluk_code':taluk_val,
+            'village_code':village_val,
+            'type':'getTable_list',
+            'requestcolumn':card_name,
+            'others_card': other_column,
+            'data_type': type
+         },
+         success: function(response) {
+            $("#table-modal-id").empty();
+            $("#table").DataTable().clear().draw();
+            $("#table").DataTable().destroy();
+            var sno = 1;
+            var table_option = "<table class='table table-responsive' id='table'><thead><tr><th>S.no</th><th>District</th><th>District Code</th><th>Taluk</th><th>Taluk Code</th><th>Village</th><th>Village Code</th><th>"+selected_table_column+"</th><th>Type</th></tr></thead><tbody>";
+            var data = response[0].data;
+            data.forEach(function (table) {
+               table_option += ` <tr onclick="changeCode(${table.id},'${table.revenue_village_name_new}','${table.ed_rv_code}','${table.result}','${selected_table_column}')"><td>${sno}</td><td>${table.district_name}</td><td>${table.ed_district_code}</td><td>${table.taluk_name}</td><td>${table.ed_taluk_code}</td><td>${table.revenue_village_name_new}</td><td>${table.ed_rv_code}</td><td>${table.result}</td><td>${table.type}</td></tr>`;
+               sno++;
+            });
+            table_option +='</table>';
+            $("#table-modal-id").append(table_option);
+            $('#table').DataTable({
+             "lengthChange": false, "autoWidth": false,"info":false,
+             "buttons": [
+                 {
+                   extend: 'excelHtml5',
+                   text : '<i class="bi bi-download" title = "Download as Excel"></i>',
+                   className:'dt_excel_btn'
+                 }
+               ]
+            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
+            var myOffcanvas = document.getElementById('tableModal')
+            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+            bsOffcanvas.show()
+            //$('#tableModal').modal('show');
+         }
+
+        })
+      }
+      function getTableMain(card_name,category_name,selected_table_column,type)
+      {
+         var district_val = $('#district').val();
+         var taluk_val = $('#taluk').val();
+         var village_val = $('#village').val();
+         //var other_column = others;
+         $('#table-modal-title').text(category_name);
+         $.ajax({
+         type: 'POST',
+         headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+         url: api+'dashboard.php',
+         data: {
+            'dist_code':district_val,
+            'taluk_code':taluk_val,
+            'village_code':village_val,
+            'type':'getTableMain_list',
+            'requestcolumn':card_name,
+            //'others_card': other_column,
+            'data_type': type
+         },
+         success: function(response) {
+            $("#table-modal-id").empty();
+            $("#table").DataTable().clear().draw();
+            $("#table").DataTable().destroy();
+            var sno = 1;
+            var table_option = "<table class='table table-responsive' id='table'><thead><tr><th>S.no</th><th>District</th><th>District Code</th><th>Taluk</th><th>Taluk Code</th><th>Village</th><th>Village Code</th><th>"+selected_table_column+"</th></tr></thead><tbody>";
+            var data = response[0].data;
+            data.forEach(function (table) {
+               table_option += ` <tr><td>${sno}</td><td>${table.district_name}</td><td>${table.ed_district_code}</td><td>${table.taluk_name}</td><td>${table.ed_taluk_code}</td><td>${table.revenue_village_name_new}</td><td>${table.ed_rv_code}</td><td>${table.result}</td></tr>`;
+               sno++;
+            });
+            table_option +='</table>';
+            $("#table-modal-id").append(table_option);
+            $('#table').DataTable({
+             "lengthChange": false, "autoWidth": false,"info":false,
+             "buttons": [
+                 {
+                   extend: 'excelHtml5',
+                   text : '<i class="bi bi-download" title = "Download as Excel"></i>',
+                   className:'dt_excel_btn'
+                 }
+               ]
+            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
+            var myOffcanvas = document.getElementById('tableModal')
+            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+            bsOffcanvas.show()
+            //$('#tableModal').modal('show');
+         }
+
+        })
+      }
+      function changeCode(ogc_fid,village_name,village_code,to_be_changed_code,selected_table_column)
+      {
+         if(has_login==false)
+         {
+            ZoomToChange(ogc_fid);
+         }
+         else
+         {
+            ZoomToChange(ogc_fid);
+            $('#update_modal_title').text('Update '+selected_table_column);
+            $('#village_name').val(village_name);
+            $('#village_code').val(village_code);
+            $('#selected_table_label').text(selected_table_column)
+            $('#selected_code').val(to_be_changed_code);
+            $('#ogc_fid').val(ogc_fid);
+            $('#old_village_name').val(village_name)
+            $('#old_village_code').val(village_code)
+            $('#old_code').val(to_be_changed_code)
+            $('#selected_column').val(selected_table_column)
+            $('#update_modal').modal('show');
+         }
+
+         
+      }
+      function ZoomToChange(id) {
+        $.ajax({
+         type: 'POST',
+         headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+         url: api+'dashboard.php',
+         data: {
+            'id':id,
+            'type':'getExtentChange'
+         },
+         success: function(response) {
+            var zoom_extent = response[0].data;
+            zoom_extent = Array.from(zoom_extent.split(','), Number);
+            zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
+            map.getView().fit(zoom_extent, map.getSize()); 
+         }
+        })
+      }
+      $(document).on({
+         ajaxStart: function() { $('#preloader').show();    },
+         ajaxStop: function() { $('#preloader').hide(); }    
+      });
+      $('#change_code').on('submit',function(e){
+         e.preventDefault();
+         var update_data_preview = "Village Name: <b>"+$('#village_name').val()+"</b><br>Village Code: <b>"+$('#village_code').val()+"</b><br> "+$('#selected_table_label').text()+": <b>"+$('#selected_code').val()+"</b>";
+         Swal.fire({
+            title: 'Please Verify Your Details Before Proceeding',
+            html: update_data_preview,  
+            allowOutsideClick: false,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Confirm',
+            cancelButtonText: 'No, Go Back',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false
+         }).then((result) => {
+         //console.log(result);
+         if (result.isConfirmed) {   
+            $('#update').attr('disabled',true);
+            var update_data = $('#change_code').serialize();
+            $.ajax({
+               type: "POST",
+               headers: { 'X-APP-KEY': 'fmbMa$ter!' },
+               url:api+"updateData.php",
+               dataType: "json",
+               data: update_data,
+               processData: false, 
+               success: function (data){
+                  if(data.message == 'success')
+                  {
+                     Swal.fire({
+                       icon: "success",
+                       title: "Updated Successfully",
+                       showConfirmButton: false,
+                       timer: 3000
+                     }).then(function(){ 
+                       location.reload();
+                     });
+                     $('#update').attr('disabled',false);
+                     $('#update_modal').modal('hide');
+                     $('.table_close').trigger('click');
+                  }
+                  else if(data.message == 'error')
+                  {
+                     Swal.fire({
+                       icon: "error",
+                       title: "Please try again",
+                       showConfirmButton: false,
+                       timer: 3000
+                     })
+                     $('#update').attr('disabled',false);
+                  }
+               }
+            });
+         }
+         else if (result.isDismissed) {}
+        })         
+      });
+   </script>
+</body>
+
+</html>

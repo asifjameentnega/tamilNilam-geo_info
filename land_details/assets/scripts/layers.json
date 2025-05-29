@@ -1,0 +1,291 @@
+[
+    {
+        "layer_name": "generic_viewer:district_headquarters",
+        "layer_display_name": "District Collectrate",
+        "layer_code": 1309,
+        "priority_order": 1,
+        "display_image_name": "tn.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"offices",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:village_panchayat_office",
+        "layer_display_name": "Village Panchayat Office",
+        "layer_code": 1467,
+        "priority_order": 4,
+        "display_image_name": "village-panchyat-offc.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"offices",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:common_service_centres",
+        "layer_display_name": "eSevai Centre",
+        "layer_code": 1171,
+        "priority_order": 1,
+        "display_image_name": "esevai.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"citizen_connect",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:revenue_divisional_office",
+        "layer_display_name": "Revenue Divisional Office",
+        "layer_code": 1465,
+        "priority_order": 2,
+        "display_image_name": "revenue-offc.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"offices",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:police_stations",
+        "layer_display_name": "Police Stations",
+        "layer_code": 1101,
+        "priority_order": 5,
+        "display_image_name": "police.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"emergency",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:public_distribution_system_shop",
+        "layer_display_name": "Ration Shop",
+        "layer_code": 1134,
+        "priority_order": 5,
+        "display_image_name": "pds.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"citizen_connect",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:fire_stations",
+        "layer_display_name": "Fire Stations",
+        "layer_code": 1097,
+        "priority_order": 5,
+        "display_image_name": "fire.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"emergency",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:computed_tomography_scan",
+        "layer_display_name": "CT Scan",
+        "layer_code": 1156,
+        "priority_order": 5,
+        "display_image_name": "ct-scan.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"medical",
+        "status":"inactive"
+    },
+    {
+        "layer_name": "generic_viewer:magnetic_resonance_imaging_scan",
+        "layer_display_name": "MRI Scan",
+        "layer_code": 1141,
+        "priority_order": 5,
+        "display_image_name": "ct-scan.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"medical",
+        "status":"inactive"
+    },
+    {
+        "layer_name": "generic_viewer:hsc",
+        "layer_display_name": "Health Sub Centre",
+        "layer_code": 1452,
+        "priority_order": 3,
+        "display_image_name": "health.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:phc",
+        "layer_display_name": "Primary Health Centre",
+        "layer_code": 1450,
+        "priority_order": 4,
+        "display_image_name": "health.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:dh",
+        "layer_display_name": "District Hospital",
+        "layer_code": 1454,
+        "priority_order": 2,
+        "display_image_name": "hospital2.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:mch",
+        "layer_display_name": "Medical College Hospital",
+        "layer_code": 1455,
+        "priority_order": 1,
+        "display_image_name": "doctor.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:registration_office",
+        "layer_display_name": "Taluk Office",
+        "layer_code": 1469,
+        "priority_order": 3,
+        "display_image_name": "registration-office.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"offices",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:petrol_bunks",
+        "layer_display_name": "Petrol Bunks",
+        "layer_code": 1461,
+        "priority_order": 3,
+        "display_image_name": "gas.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:schools",
+        "layer_display_name": "Schools",
+        "layer_code": 1111,
+        "priority_order": 1,
+        "display_image_name": "book.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:mch",
+        "layer_display_name": "Hospitals",
+        "layer_code": 1468,
+        "priority_order": 2,
+        "display_image_name": "hospital1.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:chc",
+        "layer_display_name": "Community Health Centre",
+        "layer_code": 1451,
+        "priority_order": 5,
+        "display_image_name": "hospital3.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:comprehensive_emergency_obstetric_and_new_born_care",
+        "layer_display_name": "New Born Care hospital (CEmONC)",
+        "layer_code": 1157,
+        "priority_order": 6,
+        "display_image_name": "child2.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:sick_new_born_care_units",
+        "layer_display_name": "Sick New Born Care hospital (SNCU)",
+        "layer_code": 1145,
+        "priority_order": 7,
+        "display_image_name": "child1.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:catheterization_lab",
+        "layer_display_name": "Cardiac Cath Lab",
+        "layer_code": 1155,
+        "priority_order": 8,
+        "display_image_name": "ct-scan.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"hospital",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:arts_college",
+        "layer_display_name": "Arts and Science College",
+        "layer_code": 1112,
+        "priority_order": 4,
+        "display_image_name": "book.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"inactive"
+    },
+    {
+        "layer_name": "generic_viewer:diet",
+        "layer_display_name": "District Institute for Education and Training (DIET)",
+        "layer_code": 1115,
+        "priority_order": 5,
+        "display_image_name": "education4.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:engineering_college",
+        "layer_display_name": "Engineering College",
+        "layer_code": 1113,
+        "priority_order": 6,
+        "display_image_name": "education2.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:hostels",
+        "layer_display_name": "Government Hostels",
+        "layer_code": 1165,
+        "priority_order": 7,
+        "display_image_name": "revenue-offc.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:national_knowledge_network",
+        "layer_display_name": "National Knowledge Network Centre",
+        "layer_code": 1117,
+        "priority_order": 8,
+        "display_image_name": "book.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:national_mission_on_education_through_information_and_communication_technology",
+        "layer_display_name": "NMEICT Centre",
+        "layer_code": 1118,
+        "priority_order": 9,
+        "display_image_name": "education1.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    },
+    {
+        "layer_name": "generic_viewer:poly_technical_college",
+        "layer_display_name": "Poly Technical College",
+        "layer_code": 1114,
+        "priority_order": 10,
+        "display_image_name": "education3.png",
+        "display_image_url": "https://tngis.tnega.org/en_arukil/assets/img/",
+        "category":"education_institution",
+        "category":"institution",
+        "status":"active"
+    }
+]

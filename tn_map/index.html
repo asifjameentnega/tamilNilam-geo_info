@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+  <!-- Bootstrap CSS -->
+  <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert.min.css" />
+  <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css" />
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+  <!-- general CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+  <title>Tamilnilam</title>
+  <style>
+    .font12 {
+      font-size: 12px;
+    }
+
+    .disabled-button {
+      background-color: #ccc !important;
+      /* Lighter background */
+      cursor: not-allowed;
+      /* Disable pointer interaction */
+      opacity: 0.7;
+      /* Reduced opacity */
+    }
+
+    #snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 10px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      transition: visibility 0s, transform 0.5s ease-out;
+    }
+
+    #snackbar.show {
+      visibility: visible;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    /*        .error { test
+      color: white;
+      background: red;
+      padding: 0px 5px;
+      border-radius: 3px 6px;
+      font-size: 14px;
+      margin-bottom: 5px;
+      }*/
+    /*.error {
+      color: #ffffff;
+      background: #90161687;
+      border-radius: 0;
+      font-size: 14px;
+      margin-bottom: 5px;
+      text-align: center;
+      position: absolute;
+      bottom: -5px;
+      width: 100%;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      }*/
+    /* Chrome * Safari */
+    input[type="number"]::-webkit-inner-spin-button {
+      display: none;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .blinkAlert {
+      position: fixed;
+      z-index: 9;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+      animation: pulseone 1500ms infinite;
+      width: 100%;
+    }
+
+    @keyframes pulseone {
+      0% {
+        box-shadow: #ff0000 0 0 0 0;
+      }
+
+      75% {
+        box-shadow: #ff69b400 0 0 0 16px;
+      }
+    }
+
+    .blinkAlert1 {
+      position: fixed;
+      z-index: 9;
+      top: 1rem;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+      animation: pulseone 1500ms infinite;
+      width: 100%;
+    }
+
+    @keyframes pulseone {
+      0% {
+        box-shadow: #ff0000 0 0 0 0;
+      }
+
+      75% {
+        box-shadow: #ff69b400 0 0 0 16px;
+      }
+    }
+  </style>
+  <script type="module" src="./component/accessDenied.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100 bg-login">
+  <!-- Begin page content -->
+  <main class="flex-shrink-0 h-100 login-pg v-center">
+    <div class="area">
+      <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <div class="container-fluid bg-signup">
+      <div class="col-lg-12 text-center">
+        <img src="assets/img/logo.png" class="img-fluid logoimg" alt="logo">
+      </div>
+      <div class="col-lg-12 text-center mb-2 mt-1">
+        <p class="text-white otp-txt-signup mb-4"><span class="txt-orange font-600">Tamilnilam Geo-Info</span>
+          <!-- <span class="d-block font-600">Beneficiary Upload</span><span class="d-block" id="application_name"></span> -->
+        </p>
+      </div>
+      <div class="col-lg-12 text-center">
+        <div class="card bg-light-dark">
+          <div class="card-body half-card">
+            <form id="myForm">
+              <div class="input-group mb-2">
+                <span class="input-group-text">
+                  <i class="bi bi-person-vcard boxicon"></i>
+                </span>
+                <input type="number" class="form-control" placeholder="Enter Mobile Number" aria-label="username"
+                  aria-describedby="user" id="mobile_number" name="mobile_number" autocomplete="off"
+                  onKeyPress="if(this.value.length==12) return false;">
+              </div>
+              <button type="submit" class="text-white btn btn-success btn-md" id="login_button"><i
+                  class="bi bi-arrow-right-circle"></i> Send OTP</button>
+              <!-- <button type="button" class="text-white btn btn-primary btn-md" id="official_login_button"><i class="bi bi-briefcase"></i> Official Login</button> -->
+
+
+            </form>
+            <!-- <a href="sign-up.html" class="text-white mt-3 d-block font12">New User? Sign Up here.</a>  -->
+            <div id="snackbar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- ==================================================== -->
+  <!-- jQuery -->
+  <script src="assets/scripts/jquery/jquery.min.js"></script>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+  <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+  <script src="assets/scripts/global.js"></script>
+  <script src="assets/scripts/language.js"></script>
+  <!-- <script type="text/javascript" src="assets/scripts/officialmap.js"></script>  -->
+
+  <script>
+    // function checkScreenSize() {
+    //   //console("Screen width:", window.innerWidth); // Log the screen width
+    //   if (window.innerWidth > 768) {
+    //     const messageElement = document.createElement('access-denied');
+    //     document.body.innerHTML = ''; // Clear the body content
+    //     document.body.appendChild(messageElement); // Append the web component
+    //   }
+    // }
+    // window.onload = checkScreenSize;
+    // window.onresize = checkScreenSize;
+
+    function isMobileDevice() {
+      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function checkScreenSize() {
+      console.log("Screen width:", window.innerWidth, "Orientation:", screen.orientation?.type);
+
+      const existingMessage = document.querySelector('access-denied');
+      const isWideScreen = window.innerWidth > 768;
+      const isMobile = isMobileDevice(); // Check if it's a mobile device
+
+      if (isWideScreen && !isMobile) {
+        // Show access-denied only for large screens (not mobile)
+        if (!existingMessage) {
+          const messageElement = document.createElement('access-denied');
+          document.body.innerHTML = ''; // Clear body content
+          document.body.appendChild(messageElement);
+        }
+      } else {
+        // Remove access-denied for mobile screens and landscape mode
+        if (existingMessage) {
+          existingMessage.remove();
+          location.reload(); // Reload to restore original content
+        }
+      }
+    }
+
+    // Run on load and resize/orientation change
+    window.onload = checkScreenSize;
+    window.onresize = checkScreenSize;
+    window.addEventListener("orientationchange", checkScreenSize);
+
+  </script>
+
+  <script type="text/javascript">
+    var valid_user = localStorage.getItem('valid_user');
+
+
+
+    $(document).ready(function () {
+      // // Check if mobile number is already stored and redirect accordingly
+      if (valid_user === "true") {
+        window.location.href = "map.html";
+      }
+
+      $('#myForm').validate({
+        rules: {
+          mobile_number: {
+            required: true,
+            minlength: 10,
+            maxlength: 10,
+            digits: true
+          }
+        },
+        messages: {
+          mobile_number: {
+            required: "Mobile number is required",
+            minlength: "Mobile number must be exactly 10 digits",
+            maxlength: "Mobile number must be exactly 10 digits",
+            digits: "Please enter only digits"
+          }
+        },
+        errorPlacement: function (error, element) {
+          $('#snackbar').text(error.text()).addClass('error show');
+          setTimeout(function () {
+            $('#snackbar').removeClass('show');
+          }, 3000);
+        },
+        unhighlight: function (element) {
+          $(element).removeClass('error-input');
+        },
+        submitHandler: function (form) {
+          var mobile_number = $("#mobile_number").val();
+          $.ajax({
+            type: 'POST',
+            // url: config.send_verify_otp + '/v1/tamil_nilam_otp',
+            url: config.tamil_nilam_url + '/v1/otp',
+            headers: {
+              'X-APP-KEY': config.otp_app_key,
+              'X-APP-NAME': config.otp_app_name,
+              'X-APP-USER-ID': 'NULL',
+            },
+            data: {
+              otp_type: 'sms',
+              request_type: 'send',
+              mobile_number: mobile_number,
+              app_name: 'oTp$%^&!@'
+            },
+            success: function (response) {
+              if (response && response.length > 0 && response[0].success === 1) {
+                $('#snackbar').text("OTP sent successfully")
+                  .removeClass('error')
+                  .addClass('success show');
+                localStorage.setItem('mobile_number', mobile_number);
+                $('#login_button').prop('disabled', true).addClass('disabled-button');
+                setTimeout(function () {
+                  $('#snackbar').removeClass('show');
+                  // var redirectUrl = localStorage.getItem('redirect_url') || "otp.html";
+                  window.location.href = "otp.html";
+                }, 1000);
+              } else {
+                $('#snackbar').text(response[0].message)
+                  .removeClass('success')
+                  .addClass('error show');
+                localStorage.setItem('mobile_number', mobile_number);
+                setTimeout(function () {
+                  // Optional: You can uncomment these lines if you want to redirect to another page
+                  // window.location.href = "sign-up.html";
+                }, 1000);
+              }
+            },
+            error: function (xhr, status, error) {
+              Swal.fire({
+                icon: 'error',
+                title: error,
+                showConfirmButton: true,
+                timer: 3000
+              });
+            }
+          });
+          return false; // Prevent the default form submission
+        }
+      });
+
+      // // Handle Official Login Button
+      // $('#official_login_button').on('click', function() {
+      //     localStorage.setItem('redirect_url', 'otp.html');
+      //     $('#myForm').submit(); // Trigger the form submission
+      // });
+
+      // Handle Regular Login Button
+      $('#login_button', '#official_login_button').on('click', function () {
+        localStorage.setItem('redirect_url', 'otp.html');
+        // $('#myForm').submit(); // Trigger the form submission
+      });
+    });
+
+  </script>
+</body>
+
+</html>

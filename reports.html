@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <title>Crop Survey Dashboard</title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+      <!-- Favicons -->
+      <link href="assets/img/tn_logo.png" rel="icon">
+      <link href="assets/img/tn_logo.png" rel="apple-touch-icon">
+      <!-- Google Fonts -->
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      <!-- Vendor CSS Files -->
+      <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <!-- CSS File --> 
+      <link href="assets/css/style.css" rel="stylesheet">
+   </head>
+   <body>
+      <!-- ======= Header ======= -->
+      <header id="header" class="header fixed-top d-flex align-items-center">
+         <div class="d-flex align-items-center justify-content-between">
+            <i class="bi bi-list-nested toggle-sidebar-btn"></i>
+            <a href="index.html" class="logo d-flex align-items-center mx-2">
+               <img src="assets/img/tn_logo.png" alt="logo" class="logo_header">
+               <span class="d-none d-lg-block">
+                  <!-- <i class="bi bi-globe"></i> -->
+                  Crop Survey 
+               </span>
+            </a>
+         </div>
+         <!-- End Logo -->
+         <!-- End Search Bar -->
+         <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+               <li class="nav-item">
+                  <a class="nav-link mx-2 nav-profile" href="#">
+                  <i class="bi bi-person-check"></i> Admin Name
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link mx-2 nav-profile" href="#">
+                  <i class="bi bi-arrow-right-circle"></i> Log Out
+                  </a>
+               </li>
+            </ul>
+         </nav>
+         <!-- End Icons Navigation -->
+      </header>
+      <!-- End Header -->
+      <!-- ======= Sidebar ======= -->
+      <aside id="sidebar" class="sidebar">
+         <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+               <a class="nav-link collapsed" href="index.html">
+               <i class="bi bi-grid"></i>
+               <span>Dashboard</span>
+               </a>
+            </li>
+            <!-- End Dashboard Nav -->
+            <li class="nav-item">
+               <a class="nav-link " href="reports.html">
+               <i class="bi bi-person"></i>
+               <span>Reports</span>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link collapsed" href="profile.html"> 
+               <i class="bi bi-person"></i>
+               <span>Profile</span>
+               </a>
+            </li>
+            <!-- End Profile Page Nav -->
+         </ul>
+      </aside>
+      <!-- End Sidebar-->
+      <main id="main" class="main">
+         <!-- End Page Title -->
+         <section class="section dashboard">
+            
+            <div class="row">
+               
+             <div class="col-lg-12">
+                  <div class="card">
+                     <div class="card-body"> 
+                        <h5 class="card-title"><i class="bi bi-check2-circle"></i> Generate Reports</h5>
+                        <div class="row">
+                           <div class="col-lg-3 mb-2">
+                             <input type="text" class="form-control" placeholder="Enter Survey No"> 
+                           </div>
+                           <div class="col-lg-3 mb-2">
+                             <input type="text" class="form-control" placeholder="Enter Patta No"> 
+                           </div>
+                           <div class="col-lg-3 mb-2"> 
+                              <select class="form-select" aria-label="District Name">
+                                 <option selected="">Select District</option>
+                                 <option value="1">District One</option>
+                                 <option value="2">District Two</option>
+                                 <option value="3">District Three</option>
+                              </select>
+                           </div>
+                           <div class="col-lg-3 mb-2">
+                              <select class="form-select" aria-label="Taluk Name">
+                                 <option selected="">Select Taluk</option>
+                                 <option value="1">Taluk One</option>
+                                 <option value="2">Taluk Two</option>
+                                 <option value="3">Taluk Three</option>
+                              </select>
+                           </div>
+                           <div class="col-lg-3 mb-2">
+                              <select class="form-select" aria-label="Village Name">
+                                 <option selected="">Select Village</option>
+                                 <option value="1">Village One</option>
+                                 <option value="2">Village Two</option>
+                                 <option value="3">Village Three</option>
+                              </select>
+                           </div>
+                           <div class="col-lg-4 v-center mb-2">  
+                              <a href="#" class="btn btn-danger custom-btn"><i class="bi bi-trash3"></i> Clear</a>
+                              <a href="#" class="btn btn-success custom-btn mx-2 view-file"><i class="bi bi-file-earmark-text"></i> Show Report</a>
+                           </div>
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+               
+               
+            </div>
+           
+            </div>
+         </section>
+      </main>
+      <!-- End #main -->
+      <!-- ======= Footer ======= -->
+      <footer id="footer" class="footer">
+         <div class="copyright">
+            &copy; Copyright <strong><span>Agri</span></strong>. All Rights Reserved
+         </div>
+         <div class="credits">
+            Designed & Developed by <a href="https://tngis.tn.gov.in/" target="_blank">TNeGA</a>
+         </div>
+      </footer>
+      <!-- End Footer -->
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+      <!-- Vendor JS Files -->
+      <script src="assets/vendor/jquery/jquery.min.js"></script>
+      <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Template Main JS File -->
+      <script src="assets/js/main.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function(){
+             $('.view-file').click(function(){ 
+                 window.open('assets/pdf/sample.pdf', '_blank', 'fullscreen=yes'); 
+             });
+ 
+         }); 
+      </script>
+   </body>
+</html>

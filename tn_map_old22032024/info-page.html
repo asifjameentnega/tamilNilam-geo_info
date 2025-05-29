@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/img/logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-icons/bootstrap-icons.css">
+    <!-- open layer CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/openlayers/ol.css">
+    <link rel="stylesheet" href="assets/vendor/ol-ext-master/dist/ol-ext.css" />
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert.min.css" />
+    <link rel="stylesheet" href="assets/vendor/sweetalert2/css/sweetalert2.min.css" />
+    <!-- general CSS --> 
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboardstyle.css">
+    <title>Tamilnilam</title>
+    <style type="text/css">
+      .font11 {
+      font-size: 11px !important;
+      }
+      .lbl-font {
+      color: #213e7a;
+      font-weight: 600;
+      }
+      .click-data {
+      font-size: 11px;
+      font-weight: 800;
+      position: relative;
+      top: 5px;
+      }
+      .icon-out1 {
+      float: right;
+      position: absolute;
+      right: 2rem;
+      top: 0.5rem;
+      font-size: 18px !important; 
+      }
+      .icon-out2 {
+      float: right;
+      position: absolute;
+      right: 0.3rem;
+      top: 0.5rem;
+      font-size: 18px !important;
+      }
+      .modal-content {
+      background: linear-gradient(to right, rgb(25 30 94), rgb(34 70 129));
+      color: #fff;
+      }
+      button.btn-close {
+      filter: invert(1);
+      opacity: 1;
+      } 
+      .search-by-loc {
+      height: 26% !important;
+      background: transparent;
+      top: 1.9rem;
+      width: 77%;
+      left: 5rem;
+      border: 0;
+      }
+      .search-by-land {
+      height: 23% !important;
+      background: #0000008f;
+      top: 3.5rem;
+      width: 77%;
+      left: 5rem;
+      border: 0; 
+      } 
+      .footer-menu-bar {
+      position: absolute;
+      bottom: 1.4rem;
+      z-index: 999;
+      background: #ccc;
+      width: 100%; 
+      } 
+      .footer-menu-bar .font10 { 
+      color: #1f3a77;
+      line-height: 1; 
+      }
+      .footer-menu-bar .tnservices i {
+      font-size: 20px !important;
+      }
+      .page-top {
+        margin-top: 4rem;
+      } 
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100 bg-login">
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black-view py-2">
+        <div class="container-fluid w-100 d-block text-center">
+          <div class="col-lg-12 banner-left1 d-flex">
+            <a href="#" class="text-white text-none px-2 font13">
+            <img src="assets/img/logo.png" class="img-fluid mainlogo" alt="logo">
+            </a>
+            <a href="#" class="text-white text-none px-2 font13 w-75">
+            <b> <span class="txt-orange d-block">Tamil Nilam</span>
+            <span class="d-block blink click-data">District, Taluk, Village name, transfering to NIC</span>
+            </b> 
+            <span id="shop_code"></span>
+            </a>
+            <a data-bs-toggle="offcanvas" data-bs-target=".logout" class="cpointer text-white text-none px-2 icon-out">
+            </a>
+            <a data-bs-toggle="modal" data-bs-target=".disclaimer" class="cpointer text-white text-none px-2 icon-out1">
+            <i class="bi bi-info-circle"></i>
+            </a>
+            <!-- <a href="#" class="cpointer text-white text-none px-2 icon-out2">
+              <i class="bi bi-box-arrow-in-left"></i>
+              </a> -->
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div id="preloader"></div>
+    <!-- Begin page content -->
+    <main class="flex-shrink-0 main-content page-top">
+      <!-- filter ends -->
+      <div class="container-fluid pos-rel m-0 p-0">
+
+        <!-- <div class="alert alert-success text-center" role="alert">
+          <h4><i class="bi bi-arrow-right-circle"></i></h4>
+          <p class="mb-0">Transferring to NIC</p> 
+        </div> --> 
+
+        
+      </div>
+
+    </main>
+    <footer class="footer mt-auto text-center">
+      <div class="container-fluid">
+        <div class="text-center">
+          <div class="mt-1 mb-0">
+            <p class="info-icons mb-0"><i class="bi bi-calendar-check font12"></i> <span id="showdate" class="font12">09/06/2023</span> <i class="bi bi-clock font12"></i><span id="showTime" class="mx-1 font12"></span><span id="user_lat" class="mx-1 font12"></span>
+              <span id="user_long" class=" font12">12.235689</span>
+              <span class="mx-1 font9" id="accuracy">46.125874</span>
+            </p>
+            <!-- <p class="mb-0"><i class="bi bi-person-check-fill font9"></i><span id="user_name" class="mx-1 font9">test</span><i class="bi bi-telephone-forward font9"></i><span id="mobile_number" class="mx-1 font9">9876543210</span>
+              <span class="mx-1 font9" id="version_name">V1.0.1</span></p> -->
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- right canvas starts -->
+    <div class="offcanvas offcanvas-end offcanvasRight" id="list_of_faclities" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header px-2 py-2" x-data="transButtonComponent()">
+        <h6 class="offcanvas-title"><i class="bi bi-check2-circle"></i> <span  x-text="$t('nearest')" ></span></h6>
+        <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body px-2 py-2">
+        <div class="m-2" id="available_layers">
+          <div class="col-4 boxWrap-sm swapMap" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+            <div class="card text-center mb-2" data-bs-toggle="offcanvas" data-bs-target=".locInfo">
+              <div class="card-body px-2 py-2">
+                <img src="assets/img/registration-office.png" alt="logo" class="depicons">
+                <h6 class="mb-0 mt-1">Patta</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-bottom profileView" id="land_info_canvas"  data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-body small pt-0" >
+        <div ><b id="type" class="font10"></b>&nbsp;<b id="sur_suv_dt" class="d-none font10"> (Survey / Subdivision)</b><button type="button" class="mt-1 list_of_faclities_close float-end py-1 bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x-circle text-white" aria-hidden="true"></i></button></div>
+        <div id=""><span class="font10" id="value"></span>&nbsp;<span class="font10" id="survey_subdivision"></span></div>
+        <div class="row d-none">
+          <div class="col-6">
+            <p class="mb-0 font11"><span class="lbl-font">District</span> <span class="d-block" id="district"></span></p>
+          </div>
+          <div class="col-6">
+            <p class="mb-0 font11"><span class="lbl-font">Taluk</span> <span class="d-block" id="taluk"></span></p>
+          </div>
+          <div class="clear-both"></div>
+          <div class="col-4" id="village_div">
+            <p class="mb-0 font11"><span class="lbl-font">Village</span> <span class="d-block" id="village"></span></p>
+          </div>
+          <div class="col-4">
+            <p class="mb-0 font11"><span class="lbl-font">Survey No</span> <span class="d-block" id="survey_txt"></span></p>
+          </div>
+          <div class="col-4">
+            <p class="mb-0 font11"><span class="lbl-font">Sub Division No</span> <span class="d-block" id="subdivision_txt"></span></p>
+          </div>
+        </div>
+        <hr>
+        <p class="mb-2 font11 lbl-font text-center service_error_div d-none">Survey and Subdivision data not available</p>
+        <p class="mb-2 font11 lbl-font text-center service_div">for more details select below options</p>
+        <div class="row service_div" id="eservice_div">
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="a_register" style="background-color: blue!important;">
+            <i class="bi bi-bank text-white" aria-hidden="true"></i></a>
+            <span class="d-block font10 mt-1">A Register</span>
+          </div>
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="fmb_service" style="background-color: red!important;">
+            <i class="bi bi-rulers text-white" aria-hidden="true"></i></a>
+            <span class="d-block font10 mt-1">FMB Sketch</span> 
+          </div>
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="patta_service" style="background-color: orange!important;">
+            <i class="bi bi-house text-white" aria-hidden="true"></i></a> 
+            <span class="d-block font10 mt-1">Patta Chitta</span> 
+          </div>
+          <div class="col-3  text-center">
+            <a href="#" class="icon-box tnservices" id="patta_search_service" style="background-color: #9600ff!important;">
+            <i class="bi bi-card-checklist text-white" aria-hidden="true"></i></a>
+            <span class="d-block font10 mt-1 nowrap">Search Patta</span> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <form id="post_tn_form" action="https://tngis.tnega.org/cadastral/tn_map/post_data.php" method="post">
+      <input type='hidden' id='service_name' name='service_name' value=''>
+      <input type='hidden' id='latitude' name='latitude' value=''>
+      <input type='hidden' id='longitude' name='longitude' value=''>
+      <input type='hidden' id='district_code' name='district_code' value=''>
+      <input type='hidden' id='taluk_code' name='taluk_code' value=''>
+      <input type='hidden' id='village_code' name='village_code' value=''>
+      <input type='hidden' id='village_lgd' name='village_lgd' value=''>
+      <input type='hidden' id='survey' name='survey' value=''>
+      <input type='hidden' id='subdivision' name='subdivision' value=''>
+      <input type='hidden' id='patta_number_enter' name='patta_number_enter' value=''>
+      <input type="submit" id="btnposttndata" name="btnposttndata" class="btn btn-success d-none" value="Submit data"> 
+    </form>
+    <!-- Modal Popup -->
+    <div class="modal fade" id="othersModalPopup" tabindex="-1" role="dialog" aria-labelledby="othersModalPopupTitle"
+      aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header py-1">
+            <h6 class="modal-title" id="others-modal-title"><i class="bi bi-check2-circle"></i> Search by Patta Number</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-0 pb-0" id="others-modal-id">
+            <small>
+            <span class="txt-orange font10">District Name</span>
+            <span class="mx-1 txt-orange font10">Taluk Name</span>
+            <span class="txt-orange font10">Village Name</span>
+            </small>   
+            <div class="col-12 mb-1">
+              <input type="number" class="form-control number" placeholder="Enter Patta Number" id="patta_number_search" onKeyPress="if(this.value.length==10) return false;" oninput="this.value = this.value.replace(/[^0-9]/gi, '')">
+            </div>
+            <div class="col-lg-12 mb-2 mx-2">
+              <button type="submit" class="btn btn-success default-padding py-2 font-14 cus-btns1" id="search_patta_number"><i
+                class="bi bi-check2-circle"></i> Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- right canvas ends -->
+    <!-- disclaimer Modal starts -->
+    <div class="modal fade disclaimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header py-2">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-info-circle"></i> Disclaimer</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body py-2">
+            <p><i class="bi bi-check2-circle"></i> All boundaries displayed are indicative locations. This map shall not be used for any legal purposes.</p>
+            <p><i class="bi bi-check2-circle"></i> Possibilities of FMB sketches not updated in this application is there.</p>
+            <p><i class="bi bi-check2-circle"></i> The availability of FMB maps need to be checked. If FMB sketches are available and shown in this application, contact TNEGA and get them updated. Use the link..... to record your observation.</p>
+            <p><i class="bi bi-check2-circle"></i> If FMB sketches are not available or not updated, contact the respective town or firka surveyor and get them updated in collabland software</p>
+            <p><i class="bi bi-check2-circle"></i> Or wrong depiction of available.FMB sketch may be there.</p>
+            <p><i class="bi bi-check2-circle"></i> If wrong depiction is there, contact the respective surveyor and get the data updated by TNEGA.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- disclaimer Modal ends -->
+    <!-- search by location --> 
+    <div class="offcanvas offcanvas-top search-by-loc" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <!-- <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div> -->
+      <div class="offcanvas-body">
+        <div class="input-group mb-2 mt-2">
+          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+          <input type="search" class="form-control" placeholder="Search by Location" aria-label="enter location" aria-describedby="basic-addon2" onkeypress="if(event.keyCode==13) {$('#search_query_text').trigger('input')}" id="search_query_text" oninput="this.value = this.value.replace(/[^0-9a-z ]/gi, '')" maxlength="20" autocomplete="off">
+        </div>
+        <ul class="d-none" id="result_search">
+        </ul>
+      </div>
+    </div>
+    <!-- search by location -->
+    <!-- search by land --> 
+    <div class="offcanvas offcanvas-top search-by-land" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <!-- <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div> -->
+      <div class="offcanvas-body pt-0">
+        <button type="button" class="btn-close mb-1 float-end" data-bs-dismiss="offcanvas" aria-label="Close"></button>  
+        <select class="form-select mb-1" aria-label="Default select District">
+          <option selected>select District</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <select class="form-select mb-1" aria-label="Default select Taluk">
+          <option selected>select Taluk</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <select class="form-select mb-1" aria-label="Default select village">
+          <option selected>select Village</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <select class="form-select mb-1" aria-label="Default select Survey Number">
+          <option selected>select Survey Number</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <!-- search by land -->
+    <!-- jQuery -->
+    <script src="assets/scripts/jquery/jquery.min.js"></script>
+    <!-- sweetalert -->
+    <script src="assets/vendor/sweetalert2/js/sweetalert.min.js"></script>
+    <script src="assets/vendor/sweetalert2/js/sweetalert2.all.min.js"></script>
+    <!-- Bootstrap Bundle with Popper --> 
+    <script src="assets/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/scripts/global.js"></script> 
+    <script type="text/javascript" src="assets/vendor/openlayers/dist/ol.js"></script>
+    <script src="assets/vendor/ol-ext-master/dist/ol-ext.js"></script>
+    <script type="module" src="assets/vendor/openlayers/source/WMTS.js"></script>
+    <script type="module" src="assets/vendor/openlayers/tilegrid/WMTS.js"></script>
+    <script type="module" src="assets/vendor/openlayers/proj.js"></script>
+    <script type="module" src="assets/vendor/openlayers/extent.js"></script>
+    <script type="text/javascript" src="assets/scripts/map.js"></script> 
+    <script type="text/javascript" src="assets/scripts/main.js"></script> 
+    <!-- Turf JS -->
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    <!-- Date -->
+    <script type="text/javascript">
+      /*$(document).on({
+         ajaxStart: function() {
+           $('#preloader').show();
+         },
+         ajaxStop: function() {
+           $('#preloader').hide();
+         }
+       });*/
+      var latitude;
+      var longitude;
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var output = (('' + day).length < 2 ? '0' : '') + day + '/' +
+         (('' + month).length < 2 ? '0' : '') + month + '/' + d.getFullYear();
+      document.getElementById("showdate").innerHTML = output;
+      window.onload = () => {
+        getLocation();
+        zoomLocation();
+      };
+    </script>
+    <!-- End Date -->
+    <!-- Time -->
+    <script type="text/javascript">
+      function zoomLocation()
+      {
+        //added for onload map zoom to current location
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            //x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        var geolocation = JSON.parse(window.localStorage.getItem('geolocation'));
+      
+      }
+      function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        const currentLocation = ol.proj.fromLonLat([longitude.toFixed(6), latitude.toFixed(6)]);
+        view.animate({
+          center: currentLocation,
+          duration: 1000,
+          zoom: 17,
+        });
+      }
+      $(document).ready(function () {
+         setInterval('updateClock()', 1000);
+      });
+      // HTML element where the time will be displayed
+      function updateClock() {
+         var currentTime = new Date();
+         var currentHours = currentTime.getHours();
+         var currentMinutes = currentTime.getMinutes();
+         var currentSeconds = currentTime.getSeconds();
+      
+         // Pad the minutes and seconds with leading zeros, if required
+         currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+         currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+      
+         // Choose either "AM" or "PM" as appropriate
+         var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+      
+         // Convert the hours component to 12-hour format if needed
+         currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+      
+         // Convert an hours component of "0" to "12"
+         currentHours = (currentHours == 0) ? 12 : currentHours;
+      
+         // Compose the string for display
+         var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+      
+      
+         $("#showTime").html(currentTimeString);
+      }
+    </script>
+    <!-- End Time -->
+    <script type="text/javascript">
+      /**
+      * Back to top button
+      */
+      const select = (el, all = false) => {
+      el = el.trim()
+      if (all) {
+      return [...document.querySelectorAll(el)]
+      } else {
+      return document.querySelector(el)
+      }
+      }
+      /**
+      * Easy on scroll event listener 
+      */
+      const onscroll = (el, listener) => {
+      el.addEventListener('scroll', listener)
+      }
+      let backtotop = select('.back-to-top')
+      if (backtotop) {
+      const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+      backtotop.classList.add('active')
+      } else {
+      backtotop.classList.remove('active')
+      }
+      }
+      window.addEventListener('load', toggleBacktotop)
+      onscroll(document, toggleBacktotop)
+      }
+    </script>
+
+
+  </body>
+</html>
