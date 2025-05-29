@@ -892,24 +892,69 @@
         <i class="bi bi-x"></i>
       </button>
 
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="rural-tab" data-bs-toggle="tab" data-bs-target="#rural" type="button"
+            role="tab" aria-controls="rural" aria-selected="true">Rural</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="urban-tab" data-bs-toggle="tab" data-bs-target="#urban" type="button" role="tab"
+            aria-controls="urban" aria-selected="false">Urban</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="rural" role="tabpanel" aria-labelledby="rural-tab">
+          <select class="form-select mb-1 district" id="district" aria-label="Default select District">
+            <option value="all">Select District</option>
+          </select>
+          <select class="form-select mb-1 taluk" id="taluk" aria-label="Default select Taluk">
+            <option value="all">Select Taluk</option>
+          </select>
+          <select class="form-select mb-1 village" id="village" aria-label="Default select village">
+            <option value="all">Select Village</option>
+          </select>
+          <select class="form-select mb-1 survey js-example-basic-single" id="survey"
+            aria-label="Default select Survey Number">
+            <option value>Select Survey Number</option>
+          </select>
+          <select class="form-select mb-1 mt-1 subdivision1" id="subdivision1"
+            aria-label="Default select subdivision Number">
+            <option value>Select subdivision Number</option>
+          </select>
+        </div>
+        <div class="tab-pane fade" id="urban" role="tabpanel" aria-labelledby="urban-tab">
 
-      <select class="form-select mb-1 district" id="district" aria-label="Default select District">
-        <option value="all">Select District</option>
-      </select>
-      <select class="form-select mb-1 taluk" id="taluk" aria-label="Default select Taluk">
-        <option value="all">Select Taluk</option>
-      </select>
-      <select class="form-select mb-1 village" id="village" aria-label="Default select village">
-        <option value="all">Select Village</option>
-      </select>
-      <select class="form-select mb-1 survey js-example-basic-single" id="survey"
-        aria-label="Default select Survey Number">
-        <option value>Select Survey Number</option>
-      </select>
-      <select class="form-select mb-1 mt-1 subdivision1" id="subdivision1"
-        aria-label="Default select subdivision Number">
-        <option value>Select subdivision Number</option>
-      </select>
+          <select class="form-select mb-1 district" id="district" aria-label="Default select District">
+            <option value="all">Select District</option>
+          </select>
+          <select class="form-select mb-1 taluk" id="taluk" aria-label="Default select Taluk">
+            <option value="all">Select Taluk</option>
+          </select>
+          <select class="form-select mb-1 Town" id="Town" aria-label="Default select Town">
+            <option value="all">Select Town</option>
+          </select>
+
+             <select class="form-select mb-1 Ward" id="Ward" aria-label="Default select Ward">
+            <option value="all">Select Ward</option>
+          </select>
+
+             <select class="form-select mb-1 Block" id="Block" aria-label="Default select Block">
+            <option value="all">Select Block</option>
+          </select>
+
+          <select class="form-select mb-1 urban_survey " id="urban_survey"
+            aria-label="Default select Survey Number">
+            <option value>Select Survey Number</option>
+          </select>
+          <select class="form-select mb-1 mt-1 urban_subdivision1" id="urban_subdivision1"
+            aria-label="Default select subdivision Number">
+            <option value>Select subdivision Number</option>
+          </select>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
   <!-- search by land -->

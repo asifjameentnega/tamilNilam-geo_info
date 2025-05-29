@@ -806,12 +806,12 @@ function mapclick(evt, latitude = null, longitude = null) {
       localStorage.setItem('taluk_name', response.data[name]);
 
     } else if (adminresponseData.data.rural_urban == 'urban') {
-       $('#type').text('(District | Taluk | Town | Ward | Block)');
+      $('#type').text('(District | Taluk | Town | Ward | Block)');
       $('#value').text(`${response.data.district_name} | ${response.data.taluk_name} | ${response.data.revenue_town_name} | ${response.data.revenue_ward_name} | ${response.data.revenue_block_name}`);
       //  setText('type', 'dfsdfrdf', 'value', 'Town Panchayat');
     }
     else {
-     
+
     }
 
 
@@ -898,129 +898,129 @@ function mapclick(evt, latitude = null, longitude = null) {
     //     responseData = response; // Store the response data
 
     //     if (response.success != 2) {
-          //console("get details by coordinates", response.data);
-          $('#location_details').show();
-          $('#location_details1').show();
-          $('#location_details2').show();
-          $('.service_div').removeClass('d-none');
-          $('.service_error_div').addClass('d-none');
+    //console("get details by coordinates", response.data);
+    $('#location_details').show();
+    $('#location_details1').show();
+    $('#location_details2').show();
+    $('.service_div').removeClass('d-none');
+    $('.service_error_div').addClass('d-none');
 
-          $('#latitude').val(latitude);
-          $('#longitude').val(longitude);
-          $('.tnservices').removeClass('d-none');
-          $('#a_register').removeAttr('disabled');
-          $('#fmb_service').removeAttr('disabled');
-          $('#patta_service').removeAttr('disabled');
-          $('#patta_search_service').removeAttr('disabled');
-          var buttons = document.querySelectorAll('#eservice_div .icon-box');
-          buttons.forEach(function (button) {
-            button.disabled = false;
-            document.getElementById("patta_chitta").disabled = false;
-          });
+    $('#latitude').val(latitude);
+    $('#longitude').val(longitude);
+    $('.tnservices').removeClass('d-none');
+    $('#a_register').removeAttr('disabled');
+    $('#fmb_service').removeAttr('disabled');
+    $('#patta_service').removeAttr('disabled');
+    $('#patta_search_service').removeAttr('disabled');
+    var buttons = document.querySelectorAll('#eservice_div .icon-box');
+    buttons.forEach(function (button) {
+      button.disabled = false;
+      document.getElementById("patta_chitta").disabled = false;
+    });
 
-          // $('#dropdownclose').trigger('click');
+    // $('#dropdownclose').trigger('click');
 
-          var geojson_geom = JSON.parse(response.data.geojson_geom);
-          var features = new ol.format.GeoJSON().readFeatures(geojson_geom, {
-            featureProjection: 'EPSG:3857'
-          });
-          mapClickSource.clear(); // Clear previous features
-          mapClickSource.addFeatures(features); // Add new features
-          // Update visibility
-          mapClickLayer.setVisible(true);
-          dropdownLayer.setVisible(false);
-          var extent = mapClickLayer.getSource().getExtent();
-          map.getView().fit(extent, { duration: 1000 });
-          $('#sur_suv_dt').removeClass('d-none');
-          $('#sur_suv_dt1').removeClass('d-none');
-
-
-
-          survey_no_display();
-          if (zoom_extent = getExtentfromgeom(geojson_geom)) {
-            // var zoom_extent = response.extent;
-            // zoom_extent = Array.from(zoom_extent.split(','), Number);
-            // zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
-            // map.getView().fit(zoom_extent, map.getSize());
+    var geojson_geom = JSON.parse(response.data.geojson_geom);
+    var features = new ol.format.GeoJSON().readFeatures(geojson_geom, {
+      featureProjection: 'EPSG:3857'
+    });
+    mapClickSource.clear(); // Clear previous features
+    mapClickSource.addFeatures(features); // Add new features
+    // Update visibility
+    mapClickLayer.setVisible(true);
+    dropdownLayer.setVisible(false);
+    var extent = mapClickLayer.getSource().getExtent();
+    map.getView().fit(extent, { duration: 1000 });
+    $('#sur_suv_dt').removeClass('d-none');
+    $('#sur_suv_dt1').removeClass('d-none');
 
 
-            // var zoom_extent = response.extent;
-            // zoom_extent = Array.from(zoom_extent.split(','), Number);
-            // zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
 
-            // Expand the extent to zoom out slightly
-            var expandedExtent = [
-              zoom_extent[0] - (zoom_extent[2] - zoom_extent[0]) * 0.3,
-              zoom_extent[1] - (zoom_extent[3] - zoom_extent[1]) * 0.3,
-              zoom_extent[2] + (zoom_extent[2] - zoom_extent[0]) * 0.3,
-              zoom_extent[3] + (zoom_extent[3] - zoom_extent[1]) * 0.3
-            ];
+    survey_no_display();
+    if (zoom_extent = getExtentfromgeom(geojson_geom)) {
+      // var zoom_extent = response.extent;
+      // zoom_extent = Array.from(zoom_extent.split(','), Number);
+      // zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
+      // map.getView().fit(zoom_extent, map.getSize());
 
-            map.getView().fit(expandedExtent, map.getSize());
-          }
-        // } else {
-        //   $('#eservice_div').removeClass('d-none');
-        //   $('body').removeClass('showHalfMap');
-        //   $('#location_details').hide();
-        //   $('#location_details1').hide();
-        //   $('#location_details2').hide();
-        //   $('#survey_subdivision').text('');
-        //   $('#survey_subdivision1').text('');
-        //   $('#survey_subdivision3').text('');
-        //   $('#a_register').attr('disabled', true);
-        //   $('#fmb_service').attr('disabled', true);
-        //   $('#patta_service').attr('disabled', true);
-        //   $('#patta_search_service').attr('disabled', true);
 
-        //   const currentLocation = ol.proj.fromLonLat([longitude, latitude]);
-        //   view.animate({
-        //     center: currentLocation,
-        //     duration: 1000,
-        //     zoom: 15,
-        //   });
-        //   Swal.fire({
-        //     icon: 'error',
-        //     title: '',
-        //     text: 'Survey Number and Subdivision Details Not available in map.  Please contact the Revenue Surveyor in ' + location_name + ' taluk office .',
-        //     showConfirmButton: true
-        //   });
+      // var zoom_extent = response.extent;
+      // zoom_extent = Array.from(zoom_extent.split(','), Number);
+      // zoom_extent = ol.proj.transformExtent(zoom_extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'));
 
-        //   $('#sur_suv_dt').addClass('d-none');
-        //   $('#sur_suv_dt1').addClass('d-none');
-        //   $('.service_div').removeClass('d-none');
-        //   $('.service_error_div').removeClass('d-none');
-        // }
-      // },
-      // error: function (data, textStatus, http) {
-      //   hideSpinner(); // Hide spinner on error
-      //   $('#location_details').hide();
-      //   $('#location_details1').hide();
-      //   $('#location_details2').hide();
-      //   $('body').removeClass('showHalfMap');
-      //   $('#eservice_div').removeClass('d-none');
-      //   $('#a_register').attr('disabled', true);
-      //   $('#fmb_service').attr('disabled', true);
-      //   $('#patta_service').attr('disabled', true);
-      //   $('#patta_search_service').attr('disabled', true);
+      // Expand the extent to zoom out slightly
+      var expandedExtent = [
+        zoom_extent[0] - (zoom_extent[2] - zoom_extent[0]) * 0.3,
+        zoom_extent[1] - (zoom_extent[3] - zoom_extent[1]) * 0.3,
+        zoom_extent[2] + (zoom_extent[2] - zoom_extent[0]) * 0.3,
+        zoom_extent[3] + (zoom_extent[3] - zoom_extent[1]) * 0.3
+      ];
 
-      //   $('#survey_subdivision').text('');
-      //   const currentLocation = ol.proj.fromLonLat([longitude, latitude]);
-      //   view.animate({
-      //     center: currentLocation,
-      //     duration: 1000,
-      //     zoom: 15,
-      //   });
-      //   Swal.fire({
-      //     icon: 'error',
-      //     title: '',
-      //     text: 'Survey Number and Subdivision Details Not available in map.  Please contact the Revenue Surveyor in ' + location_name + ' taluk office .',
-      //     showConfirmButton: true
-      //   });
-      //   $('#sur_suv_dt').addClass('d-none');
-      //   $('#sur_suv_dt1').addClass('d-none');
-      //   $('.service_div').addClass('d-none');
-      //   $('.service_error_div').removeClass('d-none');
-      // }
+      map.getView().fit(expandedExtent, map.getSize());
+    }
+    // } else {
+    //   $('#eservice_div').removeClass('d-none');
+    //   $('body').removeClass('showHalfMap');
+    //   $('#location_details').hide();
+    //   $('#location_details1').hide();
+    //   $('#location_details2').hide();
+    //   $('#survey_subdivision').text('');
+    //   $('#survey_subdivision1').text('');
+    //   $('#survey_subdivision3').text('');
+    //   $('#a_register').attr('disabled', true);
+    //   $('#fmb_service').attr('disabled', true);
+    //   $('#patta_service').attr('disabled', true);
+    //   $('#patta_search_service').attr('disabled', true);
+
+    //   const currentLocation = ol.proj.fromLonLat([longitude, latitude]);
+    //   view.animate({
+    //     center: currentLocation,
+    //     duration: 1000,
+    //     zoom: 15,
+    //   });
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: '',
+    //     text: 'Survey Number and Subdivision Details Not available in map.  Please contact the Revenue Surveyor in ' + location_name + ' taluk office .',
+    //     showConfirmButton: true
+    //   });
+
+    //   $('#sur_suv_dt').addClass('d-none');
+    //   $('#sur_suv_dt1').addClass('d-none');
+    //   $('.service_div').removeClass('d-none');
+    //   $('.service_error_div').removeClass('d-none');
+    // }
+    // },
+    // error: function (data, textStatus, http) {
+    //   hideSpinner(); // Hide spinner on error
+    //   $('#location_details').hide();
+    //   $('#location_details1').hide();
+    //   $('#location_details2').hide();
+    //   $('body').removeClass('showHalfMap');
+    //   $('#eservice_div').removeClass('d-none');
+    //   $('#a_register').attr('disabled', true);
+    //   $('#fmb_service').attr('disabled', true);
+    //   $('#patta_service').attr('disabled', true);
+    //   $('#patta_search_service').attr('disabled', true);
+
+    //   $('#survey_subdivision').text('');
+    //   const currentLocation = ol.proj.fromLonLat([longitude, latitude]);
+    //   view.animate({
+    //     center: currentLocation,
+    //     duration: 1000,
+    //     zoom: 15,
+    //   });
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: '',
+    //     text: 'Survey Number and Subdivision Details Not available in map.  Please contact the Revenue Surveyor in ' + location_name + ' taluk office .',
+    //     showConfirmButton: true
+    //   });
+    //   $('#sur_suv_dt').addClass('d-none');
+    //   $('#sur_suv_dt1').addClass('d-none');
+    //   $('.service_div').addClass('d-none');
+    //   $('.service_error_div').removeClass('d-none');
+    // }
     // });
   }).fail(function (jqXHR, textStatus, errorThrown) {
     $(".list_of_faclities_close").trigger('click');
@@ -1341,7 +1341,7 @@ $(document).on('click', '#trigger', function (e) {
   // let locationDetails = locationDetailsArray.filter(value => value !== '').join('<br>');
 
 
-  if (adminresponseData.data.rural_urban =='rural'){
+  if (adminresponseData.data.rural_urban == 'rural') {
     data = {
       district_code: responseData.data.district_code.toString().padStart(2, '0'),
       taluk_code: responseData.data.taluk_code.toString().padStart(2, '0'),
@@ -1352,7 +1352,7 @@ $(document).on('click', '#trigger', function (e) {
     }
   }
 
- else if(adminresponseData.data.rural_urban == 'urban'){
+  else if (adminresponseData.data.rural_urban == 'urban') {
     data = {
       district_code: responseData.data.district_code.toString().padStart(2, '0'),
       taluk_code: responseData.data.taluk_code.toString().padStart(2, '0'),
@@ -1360,13 +1360,13 @@ $(document).on('click', '#trigger', function (e) {
       ward_code: responseData.data.firka_ward_number.toString().padStart(2, '0'),
       block_code: responseData.data.urban_block_number.toString().padStart(2, '0'),
       survey_number: responseData.data.survey_number,
-      
+
       sub_division_number: responseData.data.sub_division ? responseData.data.sub_division.toString() : land_type === "urban" ? '-' : '-',
       area_type: 'urban'
     }
   }
-  else{
-    
+  else {
+
     swal.fire({
       icon: 'error',
       title: '',
@@ -1383,7 +1383,7 @@ $(document).on('click', '#trigger', function (e) {
       'X-APP-USER-ID': storedUserId,
       'X-APP-NAME': 'T@mi!_nill@m^&'
     },
-   data,
+    data,
 
     success: function (response) {
       if (response.success === 1 || response.success === 3) {
@@ -2437,8 +2437,8 @@ function clearDependentDropdowns() {
   $('#subdivision1').empty().append('<option value="all">Select Subdivision</option>');
 }
 
-districtDropDown();
-$('#district').change(function () {
+
+$('.district').change(function () {
   clearDependentDropdowns();
   getTaluk();
   highlight();
@@ -2488,65 +2488,69 @@ $('#subdivision1').change(function () {
 // const gpsOptions = {
 
 var vectorLayer;
-// District Dropdown
-function districtDropDown() {
-  // $('#taluk').empty().append('<option value="all">Select Taluk</option>');
-  // $('#village').empty().append('<option value="all">Select Village</option>');
-  // $('.survey').empty().append('<option value="all">Select Survey Number</option>');
-  // $('#subdivision1').empty().append('<option value="all">Select Subdivision</option>');
+// // District Dropdown
+// function districtDropDown5() {
+//   // $('#taluk').empty().append('<option value="all">Select Taluk</option>');
+//   // $('#village').empty().append('<option value="all">Select Village</option>');
+//   // $('.survey').empty().append('<option value="all">Select Survey Number</option>');
+//   // $('#subdivision1').empty().append('<option value="all">Select Subdivision</option>');
 
-  $.ajax({
-    type: 'POST',
-    headers: {
 
-      'X-APP-USER-ID': storedUserId
-    },
-    url: config.tamil_nilam_url + '/v1/admin_dropdown',
-    data: { 'type': 'district' },
-    dataType: 'json',
-    success: function (result) {
-      if (result.success == 1) {
-        var district = result.data;
-        var district_option = '<option value="all">Select District</option>';
-        $('#district').empty();
-        district.forEach(function (select) {
-          district_option += `<option value='${select.district_code}'>${select.district_name}</option>`;
-        });
-        $('#district').append(district_option);
-      }
-    }
-  });
-}
+//   $.ajax({
+//     type: 'POST',
+//     headers: {
+
+//       'X-APP-USER-ID': storedUserId
+//     },
+//     url: config.tamil_nilam_url + '/v1/admin_dropdown',
+//     data: { 'type': 'district' },
+//     dataType: 'json',
+//     success: function (result) {
+//       if (result.success == 1) {
+//         var district = result.data;
+//         var district_option = '<option value="all">Select District</option>';
+//         $('#district').empty();
+//         district.forEach(function (select) {
+//           district_option += `<option value='${select.district_code}'>${select.district_name}</option>`;
+//         });
+//         $('#district').append(district_option);
+//       }
+
+//     }
+//   });
+
+
+// }
 
 // Taluk Dropdown
-function getTaluk() {
+// function getTaluk() {
 
-  var district = $("#district").val();
-  $.ajax({
-    type: 'POST',
-    headers: {
+//   var district = $("#district").val();
+//   $.ajax({
+//     type: 'POST',
+//     headers: {
 
-      'X-APP-USER-ID': storedUserId
-    },
-    url: config.tamil_nilam_url + '/v1/admin_dropdown',
-    data: {
-      'type': 'taluk',
-      'district_code': district
-    },
-    dataType: 'json',
-    success: function (result) {
-      if (result.success == 1) {
-        var taluks = result.data;
-        var taluk_option = '<option value="all">Select Taluk</option>';
-        $('#taluk').empty();
-        taluks.forEach(function (taluk) {
-          taluk_option += `<option value='${taluk.taluk_code}'>${taluk.taluk_name}</option>`;
-        });
-        $('#taluk').append(taluk_option);
-      }
-    }
-  });
-}
+//       'X-APP-USER-ID': storedUserId
+//     },
+//     url: config.tamil_nilam_url + '/v1/admin_dropdown',
+//     data: {
+//       'type': 'taluk',
+//       'district_code': district
+//     },
+//     dataType: 'json',
+//     success: function (result) {
+//       if (result.success == 1) {
+//         var taluks = result.data;
+//         var taluk_option = '<option value="all">Select Taluk</option>';
+//         $('#taluk').empty();
+//         taluks.forEach(function (taluk) {
+//           taluk_option += `<option value='${taluk.taluk_code}'>${taluk.taluk_name}</option>`;
+//         });
+//         $('#taluk').append(taluk_option);
+//       }
+//     }
+//   });
+// }
 
 // Village Dropdown
 // function getVillage() {
@@ -2970,3 +2974,185 @@ function getExtentfromgeom(geojson_geom) {
   var extent = geojsonSource.getExtent();
   return extent;
 }
+
+
+
+const DB_NAME = 'location';
+const DB_VERSION = 1;
+
+// Initialize IndexedDB
+function initDB(callback) {
+  const dbRequest = indexedDB.open(DB_NAME, DB_VERSION);
+
+  dbRequest.onerror = function (event) {
+    console.error('IndexedDB error:', event.target.error);
+  };
+
+  dbRequest.onupgradeneeded = function (event) {
+    const db = event.target.result;
+
+    if (!db.objectStoreNames.contains('district')) {
+      const districtStore = db.createObjectStore('district', { keyPath: 'district_code' });
+      districtStore.createIndex('district_name', 'district_name', { unique: false });
+      districtStore.createIndex('district_lgd_code', 'district_lgd_code', { unique: false });
+    }
+
+       if (!db.objectStoreNames.contains('taluk')) {
+      const talukStore = db.createObjectStore('taluk', { keyPath: 'unique_id' }); // composite key
+      talukStore.createIndex('district_code', 'district_code', { unique: false });
+    }
+  };
+
+  dbRequest.onsuccess = function (event) {
+    const db = event.target.result;
+    callback(db);
+  };
+}
+
+// Load District Dropdown
+function districtDropDown() {
+  initDB(function (db) {
+    const tx = db.transaction('district', 'readonly');
+    const store = tx.objectStore('district');
+    const getAllRequest = store.getAll();
+
+    getAllRequest.onsuccess = function () {
+      const districts = getAllRequest.result;
+
+      if (districts.length > 0) {
+        console.log('Loaded districts from IndexedDB');
+        populateDistrictDropdown(districts);
+      } else {
+        console.log('Fetching districts from API...');
+        fetchDistrictsFromAPI(db);
+      }
+    };
+
+    getAllRequest.onerror = function (e) {
+      console.error('Error reading districts:', e);
+    };
+  });
+}
+
+// Fetch Districts from API
+function fetchDistrictsFromAPI(db) {
+  $.ajax({
+    type: 'POST',
+    headers: {
+      'X-APP-USER-ID': storedUserId
+    },
+    url: config.tamil_nilam_url + '/v1/admin_dropdown',
+    data: { type: 'district' },
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 1 && Array.isArray(result.data)) {
+        const districts = result.data;
+        const tx = db.transaction('district', 'readwrite');
+        const store = tx.objectStore('district');
+
+        districts.forEach(d => {
+          store.put({
+            district_code: d.district_code,
+            district_name: d.district_name
+          
+          });
+        });
+
+        tx.oncomplete = () => {
+          console.log('Stored districts in IndexedDB');
+          populateDistrictDropdown(districts);
+        };
+
+        tx.onerror = (e) => console.error('Error storing districts:', e);
+      } else {
+        console.warn('API returned empty or invalid district data');
+      }
+    },
+    error: function (err) {
+      console.error('District API error:', err);
+    }
+  });
+}
+
+// Populate District Dropdown
+function populateDistrictDropdown(districts) {
+  let options = '<option value="">Select District</option>';
+  districts.forEach(d => {
+    options += `<option value="${d.district_code}">${d.district_name}</option>`;
+  });
+  $('.district').html(options);
+}
+
+
+// Load Taluk Dropdown
+function getTaluk() {
+  const selectedDistrictCode = $(this).closest('form').find('.district').val();
+  console.log('Selected District Code:', selectedDistrictCode);
+  initDB(function (db) {
+    const tx = db.transaction('taluk', 'readonly');
+    const store = tx.objectStore('taluk');
+    const index = store.index('district_code');
+    const request = index.getAll(IDBKeyRange.only(selectedDistrictCode));
+
+    request.onsuccess = function () {
+      const taluks = request.result;
+      if (taluks.length > 0) {
+        populateTalukDropdown(taluks);
+      } else {
+        fetchTalukFromAPI(db, selectedDistrictCode);
+      }
+    };
+
+    request.onerror = e => console.error('Read taluks error:', e);
+  });
+}
+
+function fetchTalukFromAPI(db, districtCode) {
+  $.ajax({
+    type: 'POST',
+    headers: {
+      'X-APP-USER-ID': storedUserId
+    },
+    url: config.tamil_nilam_url + '/v1/admin_dropdown',
+    data: {
+      type: 'taluk',
+      district_code: districtCode
+    },
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 1) {
+        const taluks = result.data;
+        const tx = db.transaction('taluk', 'readwrite');
+        const store = tx.objectStore('taluk');
+
+        taluks.forEach(taluk => {
+          store.put({
+            unique_id: `${districtCode}_${taluk.taluk_code}`,
+            taluk_code: taluk.taluk_code,
+            taluk_name: taluk.taluk_name,
+            district_code: districtCode
+          });
+        });
+
+        tx.oncomplete = () => populateTalukDropdown(taluks);
+        tx.onerror = e => console.error('Taluk write error:', e);
+      }
+    },
+    error: err => console.error('Taluk fetch error:', err)
+  });
+}
+
+function populateTalukDropdown(taluks) {
+  let html = '<option value="all">Select Taluk</option>';
+  taluks.forEach(t => {
+    html += `<option value="${t.taluk_code}">${t.taluk_name}</option>`;
+  });
+  $(this).closest('form').find('.taluk').empty().append(html);
+}
+
+
+// Event bindings
+$('.box2').click(function () {
+  districtDropDown();
+});
+
