@@ -1,6 +1,7 @@
 var config = {
     tamil_nilam_url: 'https://tngis.tnega.org/tamilnilam_api',
     aregcheck: 'https://tngis.tnega.org/generic_api',
+    genericapi_v2 : 'https://tngis.tnega.org/generic_api/v2',
 
     app_key: 'tn@mapapp',
     app_name: 'tn@mapapp',

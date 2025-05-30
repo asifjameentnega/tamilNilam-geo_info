@@ -2150,7 +2150,7 @@ $(document).ready(function () {
 
           'X-APP-USER-ID': storedUserId,
         },
-        // url: config.send_verify_otp + '/v1/get_geom', // Adjust URL if necessary
+        // url: config.send_verify_otp + '/v1/
         url: config.tamil_nilam_url + '/v1/get_geom',
         data: requestData
       }).done(function (geom) {
@@ -2279,7 +2279,6 @@ $(document).ready(function () {
         'X-APP-USER-ID': storedUserId,
       },
 
-      //  url: config.send_verify_otp + '/v1/get_geom',
       url: config.tamil_nilam_url + '/v1/getgeom',
       data: requestData,
       success: function (geom) {
@@ -2439,9 +2438,10 @@ function clearDependentDropdowns() {
 
 
 $('.district').change(function () {
+  var district = $(this).val();
   clearDependentDropdowns();
-  getTaluk();
-  highlight();
+  getTaluk(district);
+  highlight($(this));
 
 });
 
@@ -2450,28 +2450,79 @@ $('#taluk').change(function () {
   $('.survey').empty().append('<option value="all">Select Survey Number</option>');
   $('#subdivision1').empty().append('<option value="all">Select Subdivision</option>');
   getVillage();
-  highlight();
+  highlight($(this));
 
 });
+
+$('#urban_taluk').change(function () {
+  const $activeTab = $(this).closest('.tab-pane');
+  const districtCode = $activeTab.find('.district').val().toString().padStart(2, '0');
+  getTown(districtCode, $(this).val().toString().padStart(2, '0'));
+  highlight($(this));
+});
+
+$('#Town').change(function () {
+  const $activeTab = $(this).closest('.tab-pane');
+  const districtCode = $activeTab.find('.district').val().toString().padStart(2, '0');
+  const talukCode = $activeTab.find('#urban_taluk').val().toString().padStart(2, '0');
+  getWard(districtCode, talukCode, $(this).val().toString().padStart(2, '0'));
+  
+ urbansurveyhighlight();
+});
+
+
+$('#Ward').change(function () {
+  const $activeTab = $(this).closest('.tab-pane');
+  const districtCode = $activeTab.find('.district').val().toString().padStart(2, '0');
+  const talukCode = $activeTab.find('#urban_taluk').val().toString().padStart(2, '0');
+  const townCode = $activeTab.find('#Town').val().toString().padStart(2, '0');
+  getBlock(districtCode, talukCode, townCode, $(this).val().toString().padStart(2, '0'));
+  debugger
+   urbansurveyhighlight();
+});
+
+
+$('#Block').change(function () {
+  const $activeTab = $(this).closest('.tab-pane');
+  const districtCode = $activeTab.find('.district').val().toString().padStart(2, '0');
+  const talukCode = $activeTab.find('#urban_taluk').val().toString().padStart(2, '0');
+  const townCode = $activeTab.find('#Town').val().toString().padStart(2, '0');
+  const wardCode = $activeTab.find('#Ward').val().toString().padStart(2, '0');
+  getSurveyUrban(districtCode, talukCode, townCode, wardCode, $(this).val().toString().padStart(2, '0'));
+ urbansurveyhighlight();
+});
+
+
+$('#urban_survey').change(function () {
+  const $activeTab = $(this).closest('.tab-pane');
+  const districtCode = $activeTab.find('.district').val().toString().padStart(2, '0');
+  const talukCode = $activeTab.find('#urban_taluk').val().toString().padStart(2, '0');
+  const townCode = $activeTab.find('#Town').val().toString().padStart(2, '0');
+  const wardCode = $activeTab.find('#Ward').val().toString().padStart(2, '0');
+  const blockCode = $activeTab.find('#Block').val().toString().padStart(2, '0');
+  getSubdivisionUrban(districtCode, talukCode, townCode, wardCode, blockCode, $(this).val().toString().padStart(2, '0'));
+ urbansurveyhighlight();
+});
+
 
 $('#village').change(function () {
   $('.survey').empty().append('<option value="all">Select Survey Number</option>');
   $('#subdivision1').empty().append('<option value="all">Select Subdivision</option>');
   getSurveyNo();
-  highlight();
+  highlight($(this));
 
 });
 
 $('.survey').change(function () {
   $('#subdivision1').empty().append('<option value="all">Select Subdivision</option>');
   getSubdivision();
-  highlight();
+
 
 });
 
 $('#subdivision1').change(function () {
   let selectedSubdivision = $(this).val();
-  highlight();
+
   // surveyhighlight();
   if (selectedSubdivision && selectedSubdivision !== "all") {
     responseData.data.sub_division = selectedSubdivision; // Update subdivision value
@@ -2744,6 +2795,103 @@ var dropdownLayer = new ol.layer.Vector({
 map.addLayer(dropdownLayer);
 dropdownLayer.setVisible(false);
 
+/// rural surveyhighlight function
+function urbansurveyhighlight() { 
+debugger
+  let $activeTab = $('#myTabContent .tab-pane.active');
+  var dist_code = $activeTab.find('.district').val();
+  //console("distcode", dist_code);
+  var taluk_code = $('#urban_taluk').val();
+  var town_code = $activeTab.find('.Town').val();
+  var ward_code = $activeTab.find('.Ward').val();
+  var block_code = $activeTab.find('.Block').val();
+
+  var survey_number = $('#urban_survey').val().trim(); // Trim leading/trailing spaces
+  var subdiv = $('#urban_subdivision1').val().trim(); // Trim leading/trailing spaces
+
+  var type = '';
+
+  if (subdiv && subdiv !== 0 && subdiv !== 'select subdivision Number') {
+    type = 'sub_division_number';
+  } else if (survey_number && survey_number !== 0) {
+    type = 'survey_number';
+  } 
+   else if (block_code && block_code !== 0) {
+    type = 'revenue_block';
+  }
+  else if (ward_code && ward_code !== 0) {
+    type = 'revenue_ward';
+  }
+  else if (town_code && town_code !== 0) {
+    type = 'revenue_town';
+  } else if (taluk_code && taluk_code !== 0) {
+    type = 'taluk';
+  } else if (dist_code && dist_code !== 0) {
+    type = 'district';
+  } 
+ 
+
+  else {
+    //console("Invalid input");
+    return;
+  }
+
+  var requestData = {
+    'district_code': dist_code,
+    'taluk_code': taluk_code,
+    'town_code': town_code,
+    'ward_code': ward_code,
+    'block_code': block_code,
+    'sub_division_number': subdiv,
+    'survey_number': survey_number,
+    'case': type,
+    'admin_type': 'urban',
+    'code_type': 'revenue'
+  };
+
+  //console("Request Data in highlight:", requestData);
+
+  // AJAX request to get geometry data based on dropdown selection
+  $.ajax({
+    type: 'POST',
+    headers: {
+      'X-APP-KEY': config.otp_app_key,
+      'X-APP-NAME': config.otp_app_name,
+      'X-APP-USER-ID': storedUserId,
+    },
+    url: config.aregcheck + '/v1/get_geom',
+    data: requestData,
+    success: function (geom) {
+      if (geom.success) {
+        var featureCollection = geom.data;
+        var features = new ol.format.GeoJSON().readFeatures(featureCollection, {
+          dataProjection: 'EPSG:4326',
+          featureProjection: 'EPSG:3857'
+        });
+
+        dropdownSource.clear(); // Clear previous features
+        dropdownSource.addFeatures(features); // Add new features
+        dropdownLayer.setVisible(true);
+        mapClickLayer.setVisible(false);
+        var extent = dropdownLayer.getSource().getExtent();
+        map.getView().fit(extent, { duration: 4000, maxZoom: 20, padding: [30, 30, 30, 30] });
+        // Get the centroid of the highlighted area to place the marker
+        if ((type === 'survey_number') && features.length > 0) {
+          var centroid = ol.extent.getCenter(extent); // Get the center of the extent
+          var lonlatCentroid = ol.proj.toLonLat(centroid, 'EPSG:3857'); // Convert centroid to latitude and longitude
+          mapclick(null, lonlatCentroid[1], lonlatCentroid[0]); // Call mapclick with centroid coordinates
+          // Set marker position
+          markerSource.clear();
+          marker.setGeometry(new ol.geom.Point(centroid));
+          markerSource.addFeature(marker);
+        }
+      } else {
+        console.error(geom.message);
+      }
+    }
+  });
+}
+// end of rural surveyhighlight function
 
 function surveyhighlight() {
   var dist_code = $('#district').val();
@@ -2823,10 +2971,22 @@ function surveyhighlight() {
   });
 }
 
-function highlight() {
-  var dist_code = $('#district').val();
-  //console("distcode", dist_code);
-  var taluk_code = $('#taluk').val();
+
+
+
+function highlight(thiss) {
+
+  console.log("Highlight function called");
+  console.log("Highlight function called");
+
+  let $activeTab = $('#myTabContent .tab-pane.active');
+  let dist_code = $activeTab.find('.district').val();
+  console.log('Selected District Value:', dist_code);
+
+
+  var taluk_code = $activeTab.find('.taluk').val();
+  console.log("taluk_code:", taluk_code);
+
   var village_code = $('#village').val();
   var survey_number = $('.survey').val().trim(); // Trim leading/trailing spaces
   var subdiv = $('#subdivision1').val().trim(); // Trim leading/trailing spaces
@@ -2843,7 +3003,7 @@ function highlight() {
   } else if (dist_code && dist_code !== 'all') {
     type = 'district';
   } else {
-    //console("Invalid input");
+
     return;
   }
 
@@ -2856,8 +3016,6 @@ function highlight() {
     'case': type,
     'code_type': 'revenue'
   };
-
-  //console("Request Data in highlight:", requestData);
 
   // AJAX request to get geometry data based on dropdown selection
   $.ajax({
@@ -2901,6 +3059,10 @@ function highlight() {
     }
   });
 }
+
+
+
+
 
 function tranformProj(obj) {
   return ol.proj.transform(obj.coordinate, 'EPSG:3857', 'EPSG:4326');
@@ -2997,7 +3159,7 @@ function initDB(callback) {
       districtStore.createIndex('district_lgd_code', 'district_lgd_code', { unique: false });
     }
 
-       if (!db.objectStoreNames.contains('taluk')) {
+    if (!db.objectStoreNames.contains('taluk')) {
       const talukStore = db.createObjectStore('taluk', { keyPath: 'unique_id' }); // composite key
       talukStore.createIndex('district_code', 'district_code', { unique: false });
     }
@@ -3054,7 +3216,7 @@ function fetchDistrictsFromAPI(db) {
           store.put({
             district_code: d.district_code,
             district_name: d.district_name
-          
+
           });
         });
 
@@ -3085,17 +3247,20 @@ function populateDistrictDropdown(districts) {
 
 
 // Load Taluk Dropdown
-function getTaluk() {
-  const selectedDistrictCode = $(this).closest('form').find('.district').val();
+function getTaluk(district_code) {
+  const selectedDistrictCode = district_code;
   console.log('Selected District Code:', selectedDistrictCode);
   initDB(function (db) {
     const tx = db.transaction('taluk', 'readonly');
     const store = tx.objectStore('taluk');
     const index = store.index('district_code');
     const request = index.getAll(IDBKeyRange.only(selectedDistrictCode));
+    console.log(request);
+
 
     request.onsuccess = function () {
       const taluks = request.result;
+      console.log('Taluks:', taluks);
       if (taluks.length > 0) {
         populateTalukDropdown(taluks);
       } else {
@@ -3147,7 +3312,8 @@ function populateTalukDropdown(taluks) {
   taluks.forEach(t => {
     html += `<option value="${t.taluk_code}">${t.taluk_name}</option>`;
   });
-  $(this).closest('form').find('.taluk').empty().append(html);
+  let $activeTab = $('#myTabContent .tab-pane.active');
+  $activeTab.find('.taluk').empty().append(html);
 }
 
 
@@ -3155,4 +3321,295 @@ function populateTalukDropdown(taluks) {
 $('.box2').click(function () {
   districtDropDown();
 });
+function getTown(district_code, taluk_code) {
+  const requestData = {
+    request_type: 'town',
+    district_code: district_code,
+    taluk_code: taluk_code
+  };
 
+  $.ajax({
+    type: 'GET',
+    headers: { 'X-APP-NAME': 'demo' },
+    url: 'https://tngis.tnega.org/generic_api/v2/admin_master_revenue_town',
+    data: requestData,
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 1 && Array.isArray(result.data)) {
+        let html = '<option value="all">Select Town</option>';
+        result.data.forEach(t => {
+          html += `<option value="${t.town_code}">${t.town_english_name}</option>`;
+        });
+
+        $('#Town').empty().append(html);
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: '',
+          text: `No data found for Towns`,
+          showConfirmButton: true
+        });
+        $('#Town').empty().append('<option value="all">Select Town</option>');
+      }
+    },
+    error: function (err) {
+      swal.fire({
+        icon: 'error',
+        title: '',
+        text: `Error fetching Town data`,
+        showConfirmButton: true
+      });
+      console.error('API error:', err);
+      $('#Town').empty().append('<option value="all">Select Town</option>');
+    }
+  });
+}
+
+
+
+
+function getWard(district_code, taluk_code, town_code) {
+  const requestData = {
+    request_type: 'ward',
+    district_code: district_code,
+    taluk_code: taluk_code,
+    town_code: town_code
+  };
+
+
+  $.ajax({
+    type: 'GET',
+    headers: { 'X-APP-NAME': 'demo' },
+    url: 'https://tngis.tnega.org/generic_api/v2/admin_master_revenue_ward',
+    data: requestData,
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 1 && Array.isArray(result.data)) {
+        let html = '<option value="all">Select Ward</option>';
+        result.data.forEach(t => {
+          html += `<option value="${t.ward_code}">${t.ward_english_name}</option>`;
+        });
+
+        $('#Ward').empty().append(html);
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: '',
+          text: `No data found for Wards`,
+          showConfirmButton: true
+        });
+        $('#Ward').empty().append('<option value="all">Select Ward</option>');
+      }
+    },
+    error: function (err) {
+      swal.fire({
+        icon: 'error',
+        title: '',
+        text: `Error fetching Ward data`,
+        showConfirmButton: true
+      });
+      console.error('API error:', err);
+      $('#Ward').empty().append('<option value="all">Select Ward</option>');
+    }
+  });
+}
+
+
+function getBlock(district_code, taluk_code, town_code, ward_code) {
+  const requestData = {
+    request_type: 'revenue_block',
+    district_code: district_code,
+    taluk_code: taluk_code,
+    town_code: town_code,
+    ward_code: ward_code
+  };
+
+
+  $.ajax({
+    type: 'GET',
+    headers: { 'X-APP-NAME': 'demo' },
+    url: 'https://tngis.tnega.org/generic_api/v2/admin_master_revenue_block',
+    data: requestData,
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 1 && Array.isArray(result.data)) {
+        let html = '<option value="all">Select Block</option>';
+        result.data.forEach(t => {
+          html += `<option value="${t.block_code}">${t.block_english_name}</option>`;
+        });
+
+        $('#Block').empty().append(html);
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: '',
+          text: `No data found for Blocks`,
+          showConfirmButton: true
+        });
+        $('#Block').empty().append('<option value="all">Select Block</option>');
+      }
+    },
+    error: function (err) {
+      swal.fire({
+        icon: 'error',
+        title: '',
+        text: `Error fetching Block data`,
+        showConfirmButton: true
+      });
+      console.error('API error:', err);
+      $('#Block').empty().append('<option value="all">Select Block</option>');
+    }
+  });
+}
+
+
+function getSurveyUrban(district_code, taluk_code, town_code, ward_code, block_code) {
+  const requestData = {
+    request_type: 'survey_number',
+    district_code: district_code,
+    taluk_code: taluk_code,
+    town_code: town_code,
+    ward_code: ward_code,
+    block_code: block_code,
+    area_type: 'urban'
+  };
+
+
+  $.ajax({
+    type: 'GET',
+    headers: { 'X-APP-NAME': 'demo' },
+    url: 'https://tngis.tnega.org/generic_api/v2/admin_master_survey_number',
+    data: requestData,
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 1 && Array.isArray(result.data)) {
+        let html = '<option value="all">Select Survey Number</option>';
+        result.data.forEach(t => {
+          html += `<option value="${t.survey_number}">${t.survey_number}</option>`;
+        });
+
+        $('#urban_survey').empty().append(html);
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: '',
+          text: `No data found for Blocks`,
+          showConfirmButton: true
+        });
+        $('#urban_survey').empty().append('<option value="all">Select Survey Number</option>');
+      }
+    },
+    error: function (err) {
+      swal.fire({
+        icon: 'error',
+        title: '',
+        text: `Error fetching Block data`,
+        showConfirmButton: true
+      });
+      console.error('API error:', err);
+      $('#urban_survey').empty().append('<option value="all">Select Survey Number</option>');
+    }
+  });
+}
+
+
+
+function getSubdivisionUrban(district_code, taluk_code, town_code, ward_code, block_code, survey_number) {
+  const requestData = {
+    request_type: 'survey_number',
+    district_code: district_code,
+    taluk_code: taluk_code,
+    town_code: town_code,
+    ward_code: ward_code,
+    block_code: block_code,
+    area_type: 'urban',
+    survey_number: survey_number,
+    sub_division_number: 'jjj' // Placeholder for subdivision number
+  };
+
+  $.ajax({
+    type: 'GET',
+    // headers: { 'X-APP-NAME': 'demo' },
+    url: config.aregcheck + '/v1/check_Areg',
+    headers: {
+      'X-APP-USER-ID': storedUserId, // Replace with your app NAME
+      'X-APP-NAME': 'T@mi!_nill@m^&'
+    },
+    data: requestData,
+    dataType: 'json',
+    success: function (result) {
+      if (result.success === 2 && Array.isArray(result.data)) {
+        let html = '<option value="all">Select subdivision Number</option>';
+        result.data.forEach(t => {
+          html += `<option value="${t.subdiv_no}">${t.subdiv_no}</option>`;
+        });
+
+        $('#urban_subdivision1').empty().append(html);
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: '',
+          text: `No data found for Subdivisions`,
+          showConfirmButton: true
+        });
+        $('#urban_subdivision1').empty().append('<option value="all">Select subdivision Number</option>');
+      }
+    },
+    error: function (err) {
+      swal.fire({
+        icon: 'error',
+        title: '',
+        text: `Error fetching Block data`,
+        showConfirmButton: true
+      });
+      console.error('API error:', err);
+      $('#urban_subdivision1').empty().append('<option value="all">Select subdivision Number</option>');
+    }
+  });
+}
+
+
+
+function getdatafromadmin_master_revenue_ward(type, data) {
+
+  $.ajax({
+    type: 'GET',
+    headers: { 'X-APP-NAME': 'demo' },
+    url: '  https://tngis.tnega.org/generic_api/v2/admin_master_revenue_town',
+    data: data,
+    dataType: 'json',
+    success: function (result) {
+      if (result.success == 1) {
+        return result.data;
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: '',
+          text: `No data found for ${type}`,
+          showConfirmButton: true
+        });
+        return [];
+      }
+    },
+    error: function (err) {
+      swal.fire({
+        icon: 'error',
+        title: '',
+        text: `Error fetching data for ${type}`,
+        showConfirmButton: true
+      });
+      console.error('API error:', err);
+    }
+  });
+  return []; // Return an empty array if the request fails
+}
+
+function dropdown(fieldName, data, value, text, appendLocation) {
+
+  let html = `<option value="all">Select ${fieldName}</option>`;
+  data.forEach(t => {
+    html += `<option value="${t[value]}">${t[text]}</option>`;
+  });
+  $(appendLocation).empty().append(html);
+
+}
